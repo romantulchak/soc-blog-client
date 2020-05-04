@@ -1,0 +1,23 @@
+<section>
+    <div class="section__profile">
+        <nav>
+            <ul>
+                <li class="profile__link_card card__color_profile"  ><a routerLink="/profile/user/{{currentUser.id}}">Profile</a></li>
+                <li class="profile__link_card card__color_post"><a routerLink="/profile/create-post">Create post</a></li>
+                <li class="profile__link_card card__color_settings"><a routerLink="/profile/settings">Settings</a></li>
+                <button *ngIf="currentUser != null" (click)="logout()">LogOut</button>
+            </ul>
+        
+        </nav>
+ 
+
+        
+        
+
+
+        <router-outlet style="display: none;"></router-outlet>
+    </div>
+</section>
+
+
+
