@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { Country } from 'src/app/model/country.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,18 +18,22 @@ export class RegisterComponent implements OnInit {
   public isSignUpFailed = false;
   public errorMessage = '';
   
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService, private router: Router) { 
 
   }
   ngOnInit(): void {
-    this.getCountries();
+
   }
 
   register(){
+    console.log(this.user);
     this.authService.register(this.user).subscribe(
       res=>{
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        setTimeout(() => {
+          this.router.navigateByUrl('/');
+        }, 500);
       },
       err=>{
         this.errorMessage = err.error.message;
@@ -36,11 +41,5 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-  getCountries(){
-    this.authService.getCountries().subscribe(
-      res=>{
-        this.countries = res;
-      }
-    );
-  }
+  
 }

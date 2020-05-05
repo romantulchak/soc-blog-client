@@ -15,10 +15,18 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SettingsComponent } from './profile/settings/settings.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { SetAvatarComponent } from './set-avatar/set-avatar.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +36,8 @@ import { UserProfileComponent } from './profile/user-profile/user-profile.compon
     NotFoundComponent,
     SettingsComponent,
     CreatePostComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SetAvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +48,14 @@ import { UserProfileComponent } from './profile/user-profile/user-profile.compon
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule,
+    ImageCropperModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatButtonToggleModule
   ],
   providers: [authInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]

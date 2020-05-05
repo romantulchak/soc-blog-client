@@ -1,0 +1,9 @@
+
+
+.user__avatar{
+    width: 250px;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+    border-radius: 8px;
+}

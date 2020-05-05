@@ -1,1 +1,18 @@
-<p>user-profile works!</p>
+<section>
+    <div class="user__profile_loader">
+        <div class="spiner" *ngIf="loadingService.loading">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="user__profile" *ngIf="currentUser != null">
+            <h2>{{currentUser?.firstName | titlecase}} {{currentUser?.lastName | titlecase}}</h2>
+            <h3>Country: {{currentUser?.country | titlecase}} | City: {{currentUser?.city | titlecase}}</h3>
+            <h2>Birth day: {{currentUser?.birthDay | date}} | Sex:{{currentUser?.gender | titlecase}}</h2>
+          
+          
+            <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
+            <button (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>
+        
+        </div>
+    </div>
+
+</section>

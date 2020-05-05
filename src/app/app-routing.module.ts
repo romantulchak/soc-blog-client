@@ -9,15 +9,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { SettingsComponent } from './profile/settings/settings.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { User } from './model/user.model';
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'registration', component: RegisterComponent, canActivate:[CheckGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard],children:[
-    {path: 'user/:id', component: UserProfileComponent, },
+    {path: 'user/:id', component: UserProfileComponent },
     {path: 'create-post', component: CreatePostComponent},
-    {path: 'settings', component: SettingsComponent},
+    {path: 'settings/:id', component: SettingsComponent},
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
   {path: '**', component: NotFoundComponent},

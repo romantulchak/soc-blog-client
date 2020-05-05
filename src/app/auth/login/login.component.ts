@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   public isLoginFailed = false;
   public errorMessage = '';
   public roles: string[] = [];
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private rotuer: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
+        this.user = this.tokenStorage.getUser();
         this.reloadPage();
       },
       err => {
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit {
   reloadPage(){
     setTimeout(() => {
       window.location.reload();
-     
     }, 1500);
   }
 

@@ -24,7 +24,5 @@ export class AuthService{
         return this.http.post<any>(API_URL + 'auth/signup', user, httpOptions);
     }
 
-    getCountries(): Observable<Country[]>{
-        return this.http.get<Country[]>("../../assets/json/countries.json");
-    }
+
 }

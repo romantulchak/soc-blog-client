@@ -15,10 +15,25 @@ export class ProfileComponent implements OnInit {
   public currentUser: User;
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-    this.router.navigate(['/profile/user/' + this.currentUser.id]);
+    if(this.currentUser != null){
+      this.getUserData();
+      this.router.navigate(['/profile/user/' + this.currentUser.id]);
+    }
   }
 
- 
+  getUserData(){
+    console.log(this.currentUser.id);
+    
+    this.profileService.getUserData(this.currentUser.id).subscribe(
+      res=>{
+        this.currentUser = res;
+        this.profileService.user.next(res);
+        if(res.new){
+          this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
+        }
+      }
+    );
+  }
 
 
   logout(){

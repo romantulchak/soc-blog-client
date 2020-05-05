@@ -2,7 +2,7 @@
   <div class="login__card">
     <h2 *ngIf="!isLoggedIn" class="login__title">Login</h2>
     <div *ngIf="isLoggedIn">
-        <img class="login__user_avatar" src="https://www.w3schools.com/howto/img_avatar.png" [alt]="user.username">
+        <img class="login__user_avatar" [src]="user?.avatar != null ? user.avatar :'../../../assets/images/img_avatar.png'" [alt]="user.username">
         <h2 class="login__title">Hello {{user.username}}!</h2>
   
     </div>
