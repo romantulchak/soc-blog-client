@@ -27,6 +27,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     SettingsComponent,
     CreatePostComponent,
     UserProfileComponent,
-    SetAvatarComponent
+    SetAvatarComponent,
   ],
   imports: [
     BrowserModule,

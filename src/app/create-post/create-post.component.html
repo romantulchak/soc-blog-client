@@ -1,1 +1,24 @@
-<p>create-post works!</p>
+<form action="" (ngSubmit)="createPost()">
+
+    <div>
+        <h4>Name</h4>
+        <input type="text" name="name" [(ngModel)]="post.name">
+    </div>
+
+    <div>
+        <h4>Name</h4>
+        <input type="text" name="text" [(ngModel)]="post.text">
+    </div>
+
+
+    <div>
+        <h4>Name</h4>
+        <input type="text" name="images" [(ngModel)]="post.images">
+    </div>
+
+    <select multiple name="tag" id="" [(ngModel)]="post.tags">
+        <option  *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>
+    </select>
+
+    <button type="submit">Create</button>
+</form>

@@ -1,4 +1,7 @@
-
+@font-face{
+    font-family: OpenSansRegular;
+    src: url('../../../assets/fonts/OpenSans-Regular.ttf');
+}
 
 .user__avatar{
     width: 250px;
@@ -6,4 +9,67 @@
     user-select: none;
     pointer-events: none;
     border-radius: 8px;
+}
+.spiner{
+    z-index: 9999;
+}
+.user__profile_loader{
+    font-family: OpenSansRegular;
+
+}
+.user__followers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* width: 12em; */
+    word-break: break-all;
+    align-items: center;
+    text-align: center;
+    grid-gap: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+.followers__card{
+    padding: 1em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.42);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 6px;
+    width: 20em;
+    justify-self: center;
+}
+.followers__card > h4{
+    color: #423c42;
+}
+.user__profile{
+    display: grid;
+    grid-template-columns: 17em 1fr 1fr;
+    align-items: center;
+}
+.user__data{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 100%;
+    align-items: center;
+}
+
+.user__follow{
+    justify-self: center;
+}
+.user__follow > button{
+    padding: .5em;
+    border-radius: 8px;
+    border: none;
+    width: 6em;
+    font-weight: 900;
+    font-size: 35px;
+    color: #fff;
+    outline: none;
+    -webkit-text-stroke: 1px black;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #f6cef6, #dfc5f7, #c3bdf8, #a0b7f7, #75b1f2);
+}
+.user__name{
+    font-size: 2em;
+    color: #3e3232;
+    text-shadow: 1px 1px 2px black;
 }

@@ -12,6 +12,9 @@ const API_URL = environment.apiUrl;
 export class ProfileService{
     public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
    
+    public updateUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public userId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+    public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{
@@ -30,4 +33,10 @@ export class ProfileService{
         return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text'});
     }
 
+    getUsers(): Observable<User[]>{
+        return this.http.get<User[]>(API_URL + 'profile/users');
+    }
+    getUserById(userId: number): Observable<User>{
+        return this.http.get<User>(API_URL + 'profile/userById/' + userId);
+    }
 }

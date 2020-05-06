@@ -18,7 +18,7 @@
         
             <div>
                 <h3>Choose your country</h3>
-                <select name="city" [(ngModel)]="countryName" (change)="changeCitiesByCountry()">
+                <select name="country" [(ngModel)]="countryName" (change)="changeCitiesByCountry()">
                     <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
                 </select>
             </div>
@@ -31,14 +31,14 @@
             </div>
             <mat-form-field class="example-full-width">
                 <mat-label>Choose a date</mat-label>
-                <input name="date" matInput [matDatepicker]="picker" (dateInput)="onDateChange($event.value)">
+                <input name="date" matInput [matDatepicker]="picker" [value]="currentUser.birthDay" (dateInput)="onDateChange($event.value)">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker></mat-datepicker>
               </mat-form-field>
               <div>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle (change)="setGender('1')" value="1">Female</mat-button-toggle>
-                    <mat-button-toggle (change)="setGender('2')" value="2">Male</mat-button-toggle>
+                    <mat-button-toggle [checked]="currentUser.gender === 'Female'" (change)="setGender('1')" value="1">Female</mat-button-toggle>
+                    <mat-button-toggle [checked]="currentUser.gender === 'Male'" (change)="setGender('2')" value="2">Male</mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div>

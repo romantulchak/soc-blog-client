@@ -52,3 +52,9 @@
     background: -webkit-linear-gradient(to right, #24FE41, #FDFC47);
     background: linear-gradient(to right, #3f51b5, #ff40819e);
 }
+
+.main__search{
+    padding: 1em;
+    box-shadow: 1px 1px 2px 0px #000000b0;
+    text-align: center;
+}

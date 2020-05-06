@@ -1,3 +1,5 @@
+import { Post } from './post.model';
+
 export class User{
     id?: number;
     firstName:string;
@@ -10,7 +12,8 @@ export class User{
     gender?: string;
     country?:string;
     password: string;
-    new?: boolean;
+    isNew?: boolean;
     email?: string;
     roles?: string[];
+    posts?: Post[];
 }

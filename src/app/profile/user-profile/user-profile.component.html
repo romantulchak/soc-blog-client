@@ -1,18 +1,58 @@
+<div class="user__profile_loader">
 <section>
-    <div class="user__profile_loader">
+ 
         <div class="spiner" *ngIf="loadingService.loading">
             <mat-spinner></mat-spinner>
         </div>
         <div class="user__profile" *ngIf="currentUser != null">
-            <h2>{{currentUser?.firstName | titlecase}} {{currentUser?.lastName | titlecase}}</h2>
-            <h3>Country: {{currentUser?.country | titlecase}} | City: {{currentUser?.city | titlecase}}</h3>
-            <h2>Birth day: {{currentUser?.birthDay | date}} | Sex:{{currentUser?.gender | titlecase}}</h2>
-          
-          
-            <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
-            <button (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>
-        
+            <div style="position: relative;">
+                <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
+                <button style="position: absolute; left: 0;" *ngIf="thisUser.id === currentUser.id" (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>    
+                
+           
+            </div>
+            <div class="user__data">
+                <h1 class="user__name">{{currentUser?.firstName | titlecase}} {{currentUser?.lastName | titlecase}}</h1>
+                <h3>Birth day: {{currentUser?.birthDay | date}} </h3>
+                <h3>Sex:{{currentUser?.gender | titlecase}}</h3>
+                <h3>Country: {{currentUser?.country | titlecase}} | City: {{currentUser?.city | titlecase}}</h3>
+              
+            </div>
+            <div class="user__follow">
+                <button *ngIf="thisUser.id != currentUser.id" >Follow</button>    
+            </div>
+    
+
+
+    <div class="user__followers">
+        <div class="followers__card">
+            <h4>350 followers </h4>
+        </div>
+        <div class="followers__card">
+            <h4>150 following</h4>
+        </div>
+        <div class="followers__card">
+            <h4>13 posts</h4>
         </div>
     </div>
 
+    </div>
 </section>
+
+
+
+<section style="height: 50vh;">
+    <h2>There will be a graphic</h2>
+</section>
+
+<section style="height:50vh;">
+    <div class="post__card" *ngFor="let post of currentUser?.posts">
+        <h2>{{post.name}}</h2>
+    </div>
+</section>
+
+
+<div *ngFor="let user of users">
+    <a routerLink="/profile/user/{{user.username}}"(click)="getUserById(user.id)">{{user.username}}</a>
+</div>
+</div>

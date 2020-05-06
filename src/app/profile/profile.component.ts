@@ -22,13 +22,14 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserData(){
-    console.log(this.currentUser.id);
-    
+   
     this.profileService.getUserData(this.currentUser.id).subscribe(
       res=>{
         this.currentUser = res;
         this.profileService.user.next(res);
-        if(res.new){
+        console.log(res);
+        
+        if(res.isNew){
           this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
         }
       }

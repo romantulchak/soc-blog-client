@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit {
   public cities: any;
   public citiesByCountry: any;
   public countryName: string = 'Afghanistan';
-  public cityName: string = 'Baku';
+  public cityName: string = 'Herat';
  
   constructor(private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, public loadingService: LoadingService) { }
   
@@ -52,7 +52,11 @@ export class SettingsComponent implements OnInit {
       res=>{
         this.cities = res;
         this.citiesByCountry = res['Afghanistan'];
-        
+        if(this.currentUser.country != null){
+          this.countryName = this.currentUser.country;
+          this.citiesByCountry = res[this.countryName];
+          this.cityName = this.currentUser.city;
+        }
       }
     );
   }
@@ -65,9 +69,7 @@ export class SettingsComponent implements OnInit {
   updateProfile(){
     this.currentUser.country = this.countryName;
     this.currentUser.city = this.cityName;
-    console.log(this.currentUser);
-    
-    
+    this.currentUser.isNew = false;
     this.profileService.updateUserData(this.currentUser).subscribe(
       res=>{
         this.notificationSerivce.success(res);

@@ -16,9 +16,11 @@ const routes: Routes = [
   {path: '', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'registration', component: RegisterComponent, canActivate:[CheckGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard],children:[
+    {path:'', redirectTo: 'not-found', pathMatch:'full'},
     {path: 'user/:id', component: UserProfileComponent },
     {path: 'create-post', component: CreatePostComponent},
     {path: 'settings/:id', component: SettingsComponent},
+    {path: 'not-found', component:NotFoundComponent}
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
   {path: '**', component: NotFoundComponent},
