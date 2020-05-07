@@ -14,6 +14,7 @@ export class ProfileService{
    
     public updateUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public userId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+    public currentUserId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     constructor(private http: HttpClient){
     }
@@ -36,7 +37,13 @@ export class ProfileService{
     getUsers(): Observable<User[]>{
         return this.http.get<User[]>(API_URL + 'profile/users');
     }
-    getUserById(userId: number): Observable<User>{
-        return this.http.get<User>(API_URL + 'profile/userById/' + userId);
+    getUserById(userId: number, currentUserId: number): Observable<User>{
+        return this.http.get<User>(API_URL + 'profile/userById/' + userId + '/' + currentUserId);
+    }
+    startFollowing(userId: number, currentUserId: number){
+        return this.http.put(API_URL + 'profile/startFollowing/' + userId + '/' + currentUserId, null, {responseType: 'text'});
+    }
+    stopFollowing(userId: number, currentUserId: number){
+        return this.http.put(API_URL + 'profile/stopFollowing/' + userId + '/' + currentUserId,null, {responseType:'text'});
     }
 }

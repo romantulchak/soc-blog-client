@@ -17,10 +17,9 @@
     font-family: OpenSansRegular;
 
 }
+
+/*
 .user__followers{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* width: 12em; */
     word-break: break-all;
     align-items: center;
     text-align: center;
@@ -40,6 +39,8 @@
 .followers__card > h4{
     color: #423c42;
 }
+
+*/
 .user__profile{
     display: grid;
     grid-template-columns: 17em 1fr 1fr;

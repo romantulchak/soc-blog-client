@@ -1,0 +1,23 @@
+.user__grid{
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.user__card{
+    display: grid;
+    justify-content: center;
+    border-radius: 8px;
+    height: 27em;
+    box-shadow: 1px 1px 3px #0000008f;
+    text-align: center;
+}
+
+.user__card_avatar{
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1em;
+    background-position: center;
+    height: 200px;
+    background-size: cover;
+}

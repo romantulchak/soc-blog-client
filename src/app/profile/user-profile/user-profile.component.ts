@@ -18,13 +18,18 @@ export class UserProfileComponent implements OnInit {
   public thisUser: User;
   public users:User[];
   public userId: number;
-  constructor(public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService) { }
+  
+  public test: number;
+
+  constructor(public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService) { 
+      this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
     this.getUserData();
     this.getUsers();
-
+    this.getUserById(this.test, this.currentUser.id);
 
 
     this.profileService.updateUser.subscribe(
@@ -33,8 +38,18 @@ export class UserProfileComponent implements OnInit {
           this.profileService.userId.subscribe(
             id=>{
               if(id === this.userId){
-                this.getUserById(id);
-                this.profileService.updateUser.next(false);
+                console.log("ID SOCKET: "+id);
+                if(id != null){
+                  this.profileService.currentUserId.subscribe(
+                    cur=>{
+                      console.log("CURRENT ID: "+id);
+                     if(cur != null){
+                      this.getUserById(id, cur);
+                      this.profileService.updateUser.next(false);
+                     }
+                    }
+                  );
+                }  
               }
             }
           );
@@ -48,6 +63,7 @@ export class UserProfileComponent implements OnInit {
       res=>{
         if(res != null){
           this.currentUser = res;
+         
           this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
             this.router.navigateByUrl(`/profile/settings/${this.thisUser.id}`);
@@ -58,11 +74,16 @@ export class UserProfileComponent implements OnInit {
     );
   }
  
-  getUserById(userId: number){
-    this.userId = userId;
-    this.profileService.getUserById(userId).subscribe(
+  getUserById(userId: number, currentUserId?:number){
+
+    
+    
+    this.profileService.getUserById(userId, currentUserId).subscribe(
       res=>{
         if(res != null){
+          window.scrollTo(0, 0);
+          this.loadingService.showLoader();
+          this.userId = userId;
           this.currentUser = res;
         }
       }
@@ -76,6 +97,19 @@ export class UserProfileComponent implements OnInit {
       );
   }
   
-  
+  startFollowing(){
+    this.profileService.startFollowing(this.currentUser.id, this.thisUser.id).subscribe(
+      res=>{
+        this.notificationService.success(res);
+      }
+    );
+  }
+  stopFollowing(){
+    this.profileService.stopFollowing(this.currentUser.id, this.thisUser.id).subscribe(
+      res=>{
+        this.notificationService.success(res);
+      }
+    );
+  }
 
 }

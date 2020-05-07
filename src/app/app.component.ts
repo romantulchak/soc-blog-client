@@ -18,10 +18,14 @@ export class AppComponent {
               console.log(parseToJson);
               switch(parseToJson.title){
                 case 'updatePosts':
-                  this.profileService.updateUser.next(true);
-                  this.profileService.userId.next(parseToJson.userId);
+                    this.profileService.updateUser.next(true);
+                    this.profileService.userId.next(parseToJson.userId);
                   break;
-                 
+                 case 'startFollowing':
+                    this.profileService.updateUser.next(true);
+                    this.profileService.userId.next(parseToJson.userId);
+                    this.profileService.currentUserId.next(parseToJson.currentUserId);
+                  break;
               }
 
 

@@ -1,0 +1,51 @@
+.user__followers_small{
+    display: grid;
+    grid-template-columns: 5em 5em 5em;
+    /* width: 12em; */
+    word-break: break-all;
+    align-items: center;
+    text-align: center;
+    grid-gap: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+.user__followers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* width: 12em; */
+    word-break: break-all;
+    align-items: center;
+    text-align: center;
+    grid-gap: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+.followers__card_always{
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.42);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 6px;
+}
+.followers__card{
+    padding: 1em;
+    width: 20em;
+    justify-self: center;
+}
+.followers__card > h4{
+    color: #423c42;
+}
+.small{
+    width: 4em;
+    height: 2em;
+    display: grid;
+    align-self: center;
+    padding: .5em;
+
+}
+.small > h4{
+    font-size: 10px;
+    word-break: break-word;
+    align-self: center;
+}

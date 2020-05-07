@@ -1,0 +1,12 @@
+<div [class.user__followers]="size === 'full'" [class.user__followers_small]="size === 'small'">
+    <div class="followers__card_always" [class.followers__card]="size === 'full'" [class.small]="size === 'small'">
+        <h4><a routerLink="subscriptions">{{user.subscribersCounter}} followers </a></h4>
+    </div>
+    <div class="followers__card_always" [class.small]="size === 'small'" [class.followers__card]="size === 'full'">
+        <h4>{{user.subscriptionsCounter}} following</h4>
+    </div>
+    <div class="followers__card_always" [class.small]="size === 'small'"  [class.followers__card]="size === 'full'">
+        <h4>{{user.postsCounter}} posts</h4>
+    </div>
+
+</div>

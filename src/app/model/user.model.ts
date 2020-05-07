@@ -16,4 +16,10 @@ export class User{
     email?: string;
     roles?: string[];
     posts?: Post[];
+    subscribers?: User[];
+    subscriptions?: User[];
+    subscribersCounter: number;
+    subscriptionsCounter: number;
+    isSubscribe: boolean;
+    postsCounter: number;
 }

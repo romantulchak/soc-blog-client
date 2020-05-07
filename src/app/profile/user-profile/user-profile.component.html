@@ -19,22 +19,13 @@
               
             </div>
             <div class="user__follow">
-                <button *ngIf="thisUser.id != currentUser.id" >Follow</button>    
+                <button *ngIf="thisUser.id != currentUser.id && !currentUser.isSubscribe" (click)="startFollowing()">Follow</button>    
+                <button *ngIf="thisUser.id != currentUser.id && currentUser.isSubscribe" (click)="stopFollowing()">Unfollow</button>    
+            
             </div>
     
 
-
-    <div class="user__followers">
-        <div class="followers__card">
-            <h4>350 followers </h4>
-        </div>
-        <div class="followers__card">
-            <h4>150 following</h4>
-        </div>
-        <div class="followers__card">
-            <h4>13 posts</h4>
-        </div>
-    </div>
+            <app-user-stats [user]="currentUser"></app-user-stats>
 
     </div>
 </section>
@@ -53,6 +44,6 @@
 
 
 <div *ngFor="let user of users">
-    <a routerLink="/profile/user/{{user.username}}"(click)="getUserById(user.id)">{{user.username}}</a>
+    <a routerLink="/profile/user/{{user.id}}"(click)="getUserById(user.id, currentUser.id)">{{user.username}}</a>
 </div>
 </div>

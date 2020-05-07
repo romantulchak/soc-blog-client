@@ -1,0 +1,13 @@
+<div class="user__grid">
+    <div class="user__card" *ngFor="let user of users">
+        <div class="user__card_padding">
+            <img class="user__card_avatar" [ngStyle]="{'background-image':user.avatar != null ? 'url( '+ user.avatar +'  )' : 'url(' + '../../../assets/images/img_avatar.png' +' )'  }" [style.backgroundImage]="">
+            <h2> <a routerLink="/profile/user/{{user.id}}">{{user.firstName | titlecase}} {{user.lastName | titlecase}}</a></h2>
+            <app-user-stats [size]="'small'" [user]="user"></app-user-stats>
+            <div class="user__follow">
+                <button *ngIf="currentUser.id != user.id && !user.isSubscribe">Follow</button>    
+                <button *ngIf="currentUser.id != user.id && user.isSubscribe">Unfollow</button>    
+            </div>
+        </div>
+    </div>
+</div>
