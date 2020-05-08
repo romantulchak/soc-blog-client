@@ -12,8 +12,8 @@
     border-radius: 7px;
     font-family: sans-serif;
 
-    width: 8em;
-    height: 6em;
+    width: 7em;
+    height: 4em;
     box-shadow: 1px 1px 4px #674343;
     margin-bottom: 1em;
     transition: 1s all;
@@ -24,9 +24,12 @@
 .profile__link_card > a{
     font-weight: 900;
     text-align: center;
-    font-size: 25px;
+    font-size: 16px;
+    word-break: break-all;
     display: grid;
     align-content: center;
+    border-radius: 6px;
+    cursor: pointer;
     height: 100%;
     text-shadow: 1px 1px 1px black;
     color: #fff;
@@ -52,9 +55,27 @@
     background: -webkit-linear-gradient(to right, #24FE41, #FDFC47);
     background: linear-gradient(to right, #3f51b5, #ff40819e);
 }
-
+.card__color_notifications{
+    background-image: linear-gradient(to right bottom, #a187dc, #8b6fc1, #7557a6, #5f418c, #4a2b73);
+}
 .main__search{
     padding: 1em;
     box-shadow: 1px 1px 2px 0px #000000b0;
     text-align: center;
+}
+
+.notifications{
+    position: relative;
+}
+.notifciation__counter{
+    position: absolute;
+    border-radius: 50%;
+    width: 2em;
+    display: flex;
+    height: 2em;
+    justify-content: center;
+    align-items: center;
+    right: -1em;
+    top: -.8em;
+    background: rgba(49, 183, 15, 0.51);
 }

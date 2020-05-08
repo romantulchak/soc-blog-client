@@ -4,6 +4,7 @@ import { User } from '../model/user.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Country } from '../model/country.model';
+import { NotificationBox } from '../model/notificationBox.model';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -16,6 +17,8 @@ export class ProfileService{
     public userId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public currentUserId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    public notificationBox: BehaviorSubject<NotificationBox> = new BehaviorSubject<NotificationBox>(null);
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{
@@ -45,5 +48,11 @@ export class ProfileService{
     }
     stopFollowing(userId: number, currentUserId: number){
         return this.http.put(API_URL + 'profile/stopFollowing/' + userId + '/' + currentUserId,null, {responseType:'text'});
+    }
+    getNotificationsForUser(userId: number): Observable<NotificationBox>{
+        return this.http.get<NotificationBox>(API_URL + 'profile/getNotificationsForUser/' + userId);
+    }
+    readNotification(notificationBoxId: number, notificationId: number): Observable<NotificationBox>{
+        return this.http.put<NotificationBox>(API_URL + 'profile/readNotification/' + notificationBoxId + '/' + notificationId, null);
     }
 }

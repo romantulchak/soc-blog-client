@@ -22,4 +22,5 @@ export class User{
     subscriptionsCounter: number;
     isSubscribe: boolean;
     postsCounter: number;
+    
 }

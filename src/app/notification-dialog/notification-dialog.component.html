@@ -1,0 +1,12 @@
+<section class="notifications">
+    <div class="notifciations__grid">
+        <div class="notification__card" (mouseenter)="readNotification(notification)" [class.notRead]="!notification.isRead" *ngFor="let notification of notifications">
+            <img class="notifications__avatar" src="{{notification.user.avatar}}" alt="">
+            <h3>{{notification.user.username}}</h3>
+            <h4>{{notification.message}}</h4>
+        </div>
+        <div *ngIf="notifications.length === 0">
+            <h1>Nothing</h1>
+        </div>
+    </div>
+</section>

@@ -20,13 +20,4 @@ export class UserCardComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
   }
-  getUserById(userId: number, currentUserId?:number){
-   
- 
-      console.log('uraa');
-      this.userChilde.getUserById(userId, currentUserId);
-    
-    
-  
-  }
 }

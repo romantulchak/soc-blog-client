@@ -12,7 +12,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class SetAvatarComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA)private userId:number, private profileService: ProfileService, private notificationService: NotificationService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) private userId:number, private profileService: ProfileService, private notificationService: NotificationService) { }
   @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
 
   imageChangedEvent: any = '';

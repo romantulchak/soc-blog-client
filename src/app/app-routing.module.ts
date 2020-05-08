@@ -13,6 +13,7 @@ import { User } from './model/user.model';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
 
 
+
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'registration', component: RegisterComponent, canActivate:[CheckGuard]},

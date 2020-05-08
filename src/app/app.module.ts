@@ -30,6 +30,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { UserCardComponent } from './user-card/user-card.component';
     SubscribtionsComponent,
     UserStatsComponent,
     UserCardComponent,
+    NotificationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     MatProgressSpinnerModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    RichTextEditorAllModule,
   ],
   providers: [authInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]

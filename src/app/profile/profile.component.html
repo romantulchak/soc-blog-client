@@ -9,8 +9,10 @@
             <ul>
                 <li class="profile__link_card card__color_profile"  ><a routerLink="/profile/user/{{currentUser.id}}" (click)="getUserData()">Profile</a></li>
                 <li class="profile__link_card card__color_post"><a routerLink="/profile/create-post/">Create post</a></li>
-                <li class="profile__link_card card__color_settings"><a routerLink="/profile/settings/{{currentUser.id}}">Settings</a></li>
                 <li class="profile__link_card card__color_myposts"><a routerLink="/profile/posts/{{currentUser.id}}">My posts</a></li>
+                <li class="profile__link_card card__color_notifications notifications" (click)="openNotificationDialog()"><a>Notifications <span class="notifciation__counter">{{notificationCounter}}</span></a></li>
+                <li class="profile__link_card card__color_settings"><a routerLink="/profile/settings/{{currentUser.id}}">Settings</a></li>
+
                 <button *ngIf="currentUser != null" (click)="logout()">LogOut</button>
             </ul>
         </nav>

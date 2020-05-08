@@ -27,10 +27,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
+    this.getNotificationsForUser();
     this.getUserData();
     this.getUsers();
-    this.getUserById(this.test, this.currentUser.id);
 
+    
 
     this.profileService.updateUser.subscribe(
       res=>{
@@ -64,6 +65,7 @@ export class UserProfileComponent implements OnInit {
         if(res != null){
           this.currentUser = res;
          
+          this.getUserById(this.test, this.currentUser.id);
           this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
             this.router.navigateByUrl(`/profile/settings/${this.thisUser.id}`);
@@ -111,5 +113,23 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
+
+
+
+
+
+
+/* */
+ public getNotificationsForUser(){
+   this.profileService.getNotificationsForUser(this.thisUser.id).subscribe(
+     res=>{
+
+       this.profileService.notificationCounter.next(res.notificationCounter);
+       this.profileService.notificationBox.next(res);
+     }
+   );
+ } 
+
+
 
 }
