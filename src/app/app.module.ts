@@ -32,6 +32,7 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
     UserStatsComponent,
     UserCardComponent,
     NotificationDialogComponent,
+    SubscribersComponent,
   ],
   imports: [
     BrowserModule,

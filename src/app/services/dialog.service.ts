@@ -24,9 +24,9 @@ export class DialogService{
         );
     }
 
-    notificationDialog(notificationBox: NotificationBox){
+    notificationDialog(userId:number){
         this.dialog.open(NotificationDialogComponent, {
-            data:notificationBox
+            data: userId
         })
     }
 }

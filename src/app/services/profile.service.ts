@@ -19,6 +19,8 @@ export class ProfileService{
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     public notificationBox: BehaviorSubject<NotificationBox> = new BehaviorSubject<NotificationBox>(null);
+    public updateNotifciationCounter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public notificationCounterForAnotherUser: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{

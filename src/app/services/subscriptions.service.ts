@@ -14,7 +14,11 @@ export class SubscriptionsService{
 
     }
   
+    
     getSubscriptions(userId:number, currentUserId: number): Observable<User[]>{
         return this.http.get<User[]>(API_URL + 'profile/subscriptions/' + userId + '/' + currentUserId);
+    }
+    getSubscribers(userId: number, currentUserId: number): Observable<User[]>{
+        return this.http.get<User[]>(API_URL + 'profile/subscribers/' + userId + '/' + currentUserId);
     }
 }

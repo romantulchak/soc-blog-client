@@ -11,6 +11,7 @@ import { SettingsComponent } from './profile/settings/settings.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 import { User } from './model/user.model';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 
 
@@ -24,6 +25,8 @@ const routes: Routes = [
     {path: 'create-post', component: CreatePostComponent},
     {path: 'settings/:id', component: SettingsComponent},
     {path: 'user/:id/subscriptions', component: SubscribtionsComponent},
+    {path: 'user/:id/subscribers', component: SubscribersComponent},
+  
     {path: 'not-found', component:NotFoundComponent}
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},

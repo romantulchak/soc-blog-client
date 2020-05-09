@@ -13,7 +13,6 @@ import { UserProfileComponent } from '../profile/user-profile/user-profile.compo
 export class UserCardComponent implements OnInit {
 
   @Input() users: User[];
-  @ViewChild(UserProfileComponent) userChilde: UserProfileComponent;
   public currentUser: User;
   constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService, private loadingService: LoadingService) { }
 
