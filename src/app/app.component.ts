@@ -25,12 +25,17 @@ export class AppComponent {
                     this.profileService.userId.next(parseToJson.userId);
                   break;
                  case 'startFollowing':
-                    this.profileService.updateUser.next(true);
-                    this.profileService.userId.next(parseToJson.userId);
-                    this.profileService.currentUserId.next(parseToJson.currentUserId);
+                 //   this.profileService.updateUser.next(true);
+                   // this.profileService.userId.next(parseToJson.userId);
+                    //this.profileService.currentUserId.next(parseToJson.currentUserId);
                     this.profileService.notificationCounterForAnotherUser.next(parseToJson.notificationCounter);
                     
                     this.profileService.updateNotifciationCounter.next(true);
+                  break;
+                  case 'stopFollowing':
+                 // this.profileService.updateUser.next(true);
+                 // this.profileService.userId.next(parseToJson.userId);
+                  //this.profileService.currentUserId.next(parseToJson.currentUserId);
                   break;
               }
         })

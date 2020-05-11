@@ -17,18 +17,22 @@ export class SetAvatarComponent implements OnInit {
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  private fullFile:File;
   ngOnInit(): void {
   }
 
 
   fileChangeEvent(event: any): void {
+      
+    this.fullFile = event.target.files[0];
+      
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
   cropIt() {
-    this.profileService.setAvatar(this.croppedImage, this.userId).subscribe(
+    this.profileService.setAvatar(this.croppedImage, this.userId, this.fullFile).subscribe(
       res=>{
         this.notificationService.success(res);
       }

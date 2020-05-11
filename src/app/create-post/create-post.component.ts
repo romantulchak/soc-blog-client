@@ -16,7 +16,7 @@ import { NgModel } from '@angular/forms';
 })
 export class CreatePostComponent implements OnInit {
 
-  public post: Post = new Post();
+  public post: Post;
   public tags: Tag[];
   public user:User;
   constructor(private storageToken: TokenStorageService, private tagService: TagService, private postService: PostService, private notificationService: NotificationService) { }
@@ -34,6 +34,7 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageToken.getUser();
+    this.post = new Post();
     this.getTags();
   }
 

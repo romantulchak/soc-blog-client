@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -32,8 +32,12 @@ export class ProfileService{
     getCitiesForCountry(): Observable<any>{
         return this.http.get<any>("../../assets/json/countries.min.json");
     }
-    setAvatar(image:any, userId: number){
-        return this.http.put(API_URL + 'profile/setAvatar/' +userId ,image, {responseType:'text'} );
+    setAvatar(image:any, userId: number, file: File){
+        const uploadFile = new FormData();
+        uploadFile.append('file', file);
+        uploadFile.append('avatar', image);
+
+        return this.http.put(API_URL + 'profile/setAvatar/' +userId ,uploadFile, {responseType:'text'} );
     }
     updateUserData(user: User){
         return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text'});

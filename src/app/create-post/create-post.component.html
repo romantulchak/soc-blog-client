@@ -7,7 +7,7 @@
 
     <div>
         <h4>Text</h4>
-            <ejs-richtexteditor #fromRTE [(value)]='post.text' required name="name" [(ngModel)]="post.text" [toolbarSettings]='tools'
+            <ejs-richtexteditor #fromRTE [(value)]="post.text" required name="name" [(ngModel)]="post.text" [toolbarSettings]='tools'
             (created)="rteCreated()" (toolbarClick)='onToolbarClick($event)'></ejs-richtexteditor>
         </div>
 

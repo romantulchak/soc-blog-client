@@ -36,31 +36,28 @@ export class UserProfileComponent implements OnInit {
       }
     );
 
-
+/*
     this.profileService.updateUser.subscribe(
       res=>{
         if(res === true){
           this.profileService.userId.subscribe(
             id=>{
               if(id === this.userId){
-                console.log("ID SOCKET: "+id);
-                if(id != null){
-                  this.profileService.currentUserId.subscribe(
-                    cur=>{
-                      console.log("CURRENT ID: "+id);
-                     if(cur != null){
-                      this.getUserById(id, cur);
+                console.log('THIS USER ID: ' + this.userId);
+                console.log('THIS ID FROM WEBSOCKET: ' + id);
+                
+                      this.getUserById(id, this.thisUser.id);
                       this.profileService.updateUser.next(false);
-                     }
-                    }
-                  );
-                }  
+                    
+               
+                
               }
             }
           );
         }
       }
     );
+    */
   }
  
   getUserData(){
@@ -81,12 +78,17 @@ export class UserProfileComponent implements OnInit {
   }
  
   getUserById(userId: number, currentUserId?:number){
+    
+    console.log('ERRRRRRRRRRRRRRRRRRRRRRRRRr');
+    this.userId = userId;
     this.profileService.getUserById(userId, currentUserId).subscribe(
       res=>{
+        console.log(res);
+        
         if(res != null){
           window.scrollTo(0, 0);
           this.loadingService.showLoader();
-          this.userId = userId;
+          
           this.currentUser = res;
         }
       }
@@ -111,6 +113,7 @@ export class UserProfileComponent implements OnInit {
   stopFollowing(){
     this.profileService.stopFollowing(this.currentUser.id, this.thisUser.id).subscribe(
       res=>{
+        this.getUserById(this.currentUser.id,this.thisUser.id);
         this.notificationService.success(res);
       }
     );
