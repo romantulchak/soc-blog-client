@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
   }
   reloadPage(){
     setTimeout(() => {
-      window.location.reload();
+      
+      window.location.href='/profile/user/'+this.user.id;
+
     }, 1500);
   }
 

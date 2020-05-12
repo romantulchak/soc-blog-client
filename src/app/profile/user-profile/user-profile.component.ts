@@ -6,11 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { SafeHtml } from 'src/app/pipes/safeHtml.pipe';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
+  providers:[SafeHtml]
 })
 export class UserProfileComponent implements OnInit {
 
@@ -79,7 +81,6 @@ export class UserProfileComponent implements OnInit {
  
   getUserById(userId: number, currentUserId?:number){
     
-    console.log('ERRRRRRRRRRRRRRRRRRRRRRRRRr');
     this.userId = userId;
     this.profileService.getUserById(userId, currentUserId).subscribe(
       res=>{

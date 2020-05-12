@@ -1,4 +1,4 @@
-<form action="" (ngSubmit)="createPost()">
+<form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data">
 
     <div>
         <h4>Name</h4>
@@ -7,19 +7,44 @@
 
     <div>
         <h4>Text</h4>
-            <ejs-richtexteditor #fromRTE [(value)]="post.text" required name="name" [(ngModel)]="post.text" [toolbarSettings]='tools'
-            (created)="rteCreated()" (toolbarClick)='onToolbarClick($event)'></ejs-richtexteditor>
-        </div>
-
+        <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [(ngModel)]="post.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools'></ejs-richtexteditor>
+     </div>
 
     <div>
         <h4>Name</h4>
-        <input type="text" name="images" [(ngModel)]="post.images">
+        <input type="file" name="image" (change)="fileUpload($event)">
     </div>
 
+    <!--
     <select multiple name="tag" id="" [(ngModel)]="post.tags">
         <option  *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>
     </select>
+-->
+    <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            *ngFor="let fruit of taggs"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New tag..."
+            #fruitInput
+            [formControl]="fruitCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let tag of filterTags | async" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
     <button type="submit">Create</button>
 </form>

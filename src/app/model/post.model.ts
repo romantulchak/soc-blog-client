@@ -6,6 +6,10 @@ export class Post{
     name:string;
     text:string;
     tags: Tag[];
-    images: string[];
+    imagePath: string;
     user:User;
+    constructor(){
+        this.user = new User();
+        this.tags = [];
+    }   
 }

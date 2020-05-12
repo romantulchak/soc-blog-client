@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     this.userLoggedIn = this.tokenStorage.getUser();
     this.currentUser = this.tokenStorage.getUser();
     if(this.currentUser != null){
-      this.router.navigate(['/profile/user/' + this.currentUser.id]);
+      //this.router.navigate(['/profile/user/' + this.currentUser.id]);
       this.getUserData();
       
       this.getNotificationsForUser();

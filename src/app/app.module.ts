@@ -30,10 +30,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { UserCardComponent } from './user-card/user-card.component';
-import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
-
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { SafeHtml } from './pipes/safeHtml.pipe';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,7 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
     UserCardComponent,
     NotificationDialogComponent,
     SubscribersComponent,
+    SafeHtml,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +71,13 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
     MatNativeDateModule,
     MatDatepickerModule,
     MatButtonToggleModule,
-    RichTextEditorAllModule,
+    RichTextEditorModule,
+    MatChipsModule,
+    MatIconModule
+    
+    
   ],
-  providers: [authInterceptorProviders, AuthGuard],
+  providers: [authInterceptorProviders, AuthGuard, SafeHtml, MatChipsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

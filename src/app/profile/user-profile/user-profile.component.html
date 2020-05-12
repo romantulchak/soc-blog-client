@@ -23,7 +23,7 @@
                 <button *ngIf="thisUser.id != currentUser.id && currentUser.isSubscribe" (click)="stopFollowing()">Unfollow</button>    
             
             </div>
-    
+
 
             <app-user-stats [user]="currentUser"></app-user-stats>
 
@@ -31,15 +31,15 @@
 </section>
 
 
-
-<section style="height: 50vh;">
+<section>
     <h2>There will be a graphic</h2>
 </section>
 
-<section style="height:50vh;">
+<section>
     <div class="post__card" *ngFor="let post of currentUser?.posts">
         <h2>{{post.name}}</h2>
-        <span [innerHTML]="post.text"></span>
+        <div [innerHTML]="post.text | safeHtml"></div>
+        <img [src]="post.imagePath" width="250px" height="250px" alt="">
     </div>
 </section>
 

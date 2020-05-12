@@ -1,4 +1,5 @@
 import { Post } from './post.model';
+import { Image } from './image.model';
 
 export class User{
     id?: number;
@@ -22,5 +23,6 @@ export class User{
     subscriptionsCounter: number;
     isSubscribe: boolean;
     postsCounter: number;
+    images: Image[];
     
 }
