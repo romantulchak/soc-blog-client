@@ -1,20 +1,24 @@
-<form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data">
+<form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
 
     <div>
         <h4>Name</h4>
-        <input type="text" name="name" [(ngModel)]="post.name">
+        <input type="text" name="name" [(ngModel)]="post.name" required>
     </div>
 
     <div>
         <h4>Text</h4>
-        <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [(ngModel)]="post.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools'></ejs-richtexteditor>
+        <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [(ngModel)]="post.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools' (change)="setSmallDescription()" required></ejs-richtexteditor>
      </div>
 
     <div>
         <h4>Name</h4>
-        <input type="file" name="image" (change)="fileUpload($event)">
+        <input type="file" name="image" (change)="fileUpload($event)" required>
     </div>
 
+    <div>
+      <h4>Small description</h4>
+      <textarea name="smallDescription" maxlength="250" [disabled]="!allowChangeSmallDescription"  [(ngModel)]="post.smallDescription" id="" cols="30" rows="10"></textarea>
+    </div>
     <!--
     <select multiple name="tag" id="" [(ngModel)]="post.tags">
         <option  *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>

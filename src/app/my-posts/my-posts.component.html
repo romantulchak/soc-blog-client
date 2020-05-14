@@ -1,0 +1,9 @@
+<div
+  class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="10"
+  (scrolled)="onScroll()"
+>
+    <app-post [posts]="posts"></app-post>
+</div>

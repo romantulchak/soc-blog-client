@@ -1,0 +1,55 @@
+.post__image{
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px 8px 0px 0px;
+    position: relative;
+    overflow: hidden;
+}
+.post__card{
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 0px rgba(123, 102, 102, 0.61);
+    margin-bottom: 1em;
+
+}
+.post__text{
+    padding: 1em;
+}
+
+.post__name{
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.post__name > h2{
+    width: 100%;
+    text-align: center;
+    background: #ffffff78;
+    font-family: sans-serif;
+    letter-spacing: 3px;
+    z-index: 15;
+    padding: 1em;
+    /* border-bottom: 1px solid #00000061; */
+    border-radius: 8px 8px 0px 0px;
+}
+.post__author{
+    position: absolute;
+    background: #08080857;
+    border-radius: 8px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.post__author > img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1em;
+}

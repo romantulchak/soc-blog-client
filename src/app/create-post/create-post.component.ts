@@ -26,16 +26,16 @@ export class CreatePostComponent implements OnInit {
   public user:User;
   public image: File;
   public imageSettings: any;
+  public allowChangeSmallDescription: boolean = false;
 
 
-
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filterTags: Observable<string[]>;
-  taggs: string[] = [];
-  tagNames: string[] = [];
+  public selectable = true;
+  public removable = true;
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
+  public fruitCtrl = new FormControl();
+  public filterTags: Observable<string[]>;
+  public taggs: string[] = [];
+  public tagNames: string[] = [];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -145,5 +145,16 @@ export class CreatePostComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.tagNames.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  public setSmallDescription(){
+    
+    setTimeout(() => {
+      this.post.smallDescription = this.post.text.replace(/<[^>]*>/g, '').slice(0, 500).toString();
+      this.notificationService.success('Small description was created but you can change it');
+    console.log(this.post.smallDescription);
+    this.allowChangeSmallDescription = true;
+    
+    }, 500);
   }
 }

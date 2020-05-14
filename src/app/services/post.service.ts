@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Post } from '../model/post.model';
+import { User } from '../model/user.model';
+import { Observable } from 'rxjs';
+import { PostPageable } from '../model/postPageable.model';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -16,10 +19,20 @@ export class PostService{
         headers.append('Content-Type', 'multipart/form-data');
         data.append('image', image);
         data.append('postDTO', JSON.stringify(post));
-
-
-        
        return this.http.post(API_URL + 'posts/createPost', data, {responseType:'text', headers: headers});
+    }
+
+    getMyPosts(userId:number, page: number): Observable<PostPageable>{
+        let params = new HttpParams();
+        params = params.append('page', page.toString());
+
+        return this.http.get<PostPageable>(API_URL + 'posts/myPosts/' + userId, {params: params});
+    }
+
+    getPostBySubscribtions(user: User, page: number): Observable<PostPageable>{
+        let params = new HttpParams();
+        params = params.append('page', page.toString());
+        return this.http.get<PostPageable>(API_URL + 'posts/news/' + user.id, {params: params});
     }
     
 }

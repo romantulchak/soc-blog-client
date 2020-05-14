@@ -36,6 +36,11 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { SafeHtml } from './pipes/safeHtml.pipe';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
+import { LoggedIn } from './guards/loggedin.guard';
+import { PostComponent } from './post/post.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MyPostsComponent } from './my-posts/my-posts.component';
+import { NewsComponent } from './news/news.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,13 +58,16 @@ import {MatIconModule} from '@angular/material/icon';
     NotificationDialogComponent,
     SubscribersComponent,
     SafeHtml,
+    PostComponent,
+    MyPostsComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
@@ -73,11 +81,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonToggleModule,
     RichTextEditorModule,
     MatChipsModule,
-    MatIconModule
-    
+    MatIconModule,
+    InfiniteScrollModule,
     
   ],
-  providers: [authInterceptorProviders, AuthGuard, SafeHtml, MatChipsModule],
+  providers: [authInterceptorProviders, AuthGuard, LoggedIn],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

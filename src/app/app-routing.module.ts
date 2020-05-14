@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -9,27 +9,30 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { SettingsComponent } from './profile/settings/settings.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
-import { User } from './model/user.model';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { LoggedIn } from './guards/loggedin.guard';
+import { MyPostsComponent } from './my-posts/my-posts.component';
+import { NewsComponent } from './news/news.component';
 
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'registration', component: RegisterComponent, canActivate:[CheckGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard],children:[
-    {path:'', redirectTo: 'not-found', pathMatch:'full'},
-    {path: 'user/:id', component: UserProfileComponent },
-    {path: 'userr/:id', component: UserProfileComponent},
-    {path: 'create-post', component: CreatePostComponent},
-    {path: 'settings/:id', component: SettingsComponent},
-    {path: 'user/:id/subscriptions', component: SubscribtionsComponent},
-    {path: 'user/:id/subscribers', component: SubscribersComponent},
-  
+  {path: 'profile', component: ProfileComponent, data: { animation: 'isLeft' }, canActivate:[AuthGuard],children:[
+    {path:'', component: ProfileComponent, canActivate: [LoggedIn]},
+    {path: 'user/:id', component: UserProfileComponent, data: { animation: 'isLeft' } },
+    {path: 'userr/:id', component: UserProfileComponent, data:{animation: 'isRight'}},
+    {path: 'create-post', component: CreatePostComponent, data:{animation: 'isLeft'}},
+    {path: 'settings/:id', component: SettingsComponent, data:{animation: 'isRight'}},
+    {path: 'user/:id/subscriptions', component: SubscribtionsComponent, data:{animation: 'isRight'}},
+    {path: 'user/:id/subscribers', component: SubscribersComponent, data:{animation: 'isRight'}},
+    {path: 'my-posts', component: MyPostsComponent, data:{animation: 'isRight'}},
     {path: 'not-found', component:NotFoundComponent}
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
+  {path: 'news', component: NewsComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

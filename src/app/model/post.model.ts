@@ -8,6 +8,8 @@ export class Post{
     tags: Tag[];
     imagePath: string;
     user:User;
+    createdDate: Date;
+    smallDescription: string;
     constructor(){
         this.user = new User();
         this.tags = [];

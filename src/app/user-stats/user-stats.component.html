@@ -6,7 +6,7 @@
         <h4><a routerLink="subscribers">{{user.subscriptionsCounter}} following</a> </h4>
     </div>
     <div class="followers__card_always" [class.small]="size === 'small'"  [class.followers__card]="size === 'full'">
-        <h4>{{user.postsCounter}} posts</h4>
+        <h4>  <a routerLink="/profile/my-posts">{{user.postsCounter}} posts</a></h4>
     </div>
 
 </div>

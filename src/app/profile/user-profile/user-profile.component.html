@@ -35,16 +35,20 @@
     <h2>There will be a graphic</h2>
 </section>
 
-<section>
-    <div class="post__card" *ngFor="let post of currentUser?.posts">
-        <h2>{{post.name}}</h2>
-        <div [innerHTML]="post.text | safeHtml"></div>
-        <img [src]="post.imagePath" width="250px" height="250px" alt="">
+<section id="posts" style="padding: 1em;">
+    <div
+  class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="10"
+  (scrolled)="onScroll()"
+>
+    <app-post [posts]="posts"></app-post>
     </div>
 </section>
 
 
 <div *ngFor="let user of users">
-    <a routerLink="/profile/user/{{user.id}}"(click)="getUserById(user.id, currentUser.id)">{{user.username}}</a>
+    <a routerLink="/profile/user/{{user.id}}">{{user.username}}</a>
 </div>
 </div>

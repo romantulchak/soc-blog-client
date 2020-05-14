@@ -58,6 +58,9 @@
 .card__color_notifications{
     background-image: linear-gradient(to right bottom, #a187dc, #8b6fc1, #7557a6, #5f418c, #4a2b73);
 }
+.card__color_news{
+    background-image: linear-gradient(to right bottom, #e5dc6d, #f3d079, #f9c589, #f5be9a, #eabaa9);
+}
 .main__search{
     padding: 1em;
     box-shadow: 1px 1px 2px 0px #000000b0;
