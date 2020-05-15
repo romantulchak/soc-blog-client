@@ -14,6 +14,7 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
 import { LoggedIn } from './guards/loggedin.guard';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { NewsComponent } from './news/news.component';
+import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
 
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'news', component: NewsComponent},
+  {path: 'posts-by-tag/:name', component: PostsByTagComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

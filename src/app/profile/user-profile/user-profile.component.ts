@@ -76,7 +76,7 @@ export class UserProfileComponent implements OnInit {
         if(res != null){
           this.currentUser = res;
          
-          this.getUserById(this.test, this.currentUser);
+          //this.getUserById(this.test, this.currentUser);
           this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
             this.router.navigateByUrl(`/profile/settings/${this.thisUser.id}`);

@@ -12,6 +12,7 @@ ul{
 html{
     scroll-behavior: smooth;
 }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spiner{
@@ -51,4 +52,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     -ms-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
+}
+.tag__link{
+    color: #827ffe;
+    text-decoration: underline;
 }

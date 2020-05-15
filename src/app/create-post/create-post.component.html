@@ -1,4 +1,7 @@
-<form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
+<section>
+
+
+  <form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
 
     <div>
         <h4>Name</h4>
@@ -52,3 +55,22 @@
 
     <button type="submit">Create</button>
 </form>
+
+
+<div *ngIf="user.accountLvl >= 10;else mustBe10">
+  <h2>Didn't you find the tag you need? You can create your own</h2>
+  <form (ngSubmit)="createTag()">
+    <div>
+      <h3>Tag name</h3>
+      <input type="text" name="name" [(ngModel)]="tag.name">
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+<ng-template #mustBe10>
+  <h1>If you want to create tags, your account must have level 10 </h1>
+</ng-template>
+</section>

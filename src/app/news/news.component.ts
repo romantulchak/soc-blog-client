@@ -18,7 +18,12 @@ export class NewsComponent implements OnInit {
   public posts: Post[];
   public currentPage: number = 0;
   ngOnInit(): void {
-    this.user = this.tokenStorage.currentUser;
+    if(this.tokenStorage.globalCurrentUser != null){
+    this.user = this.tokenStorage.globalCurrentUser;
+    }else{
+      this.user = this.tokenStorage.getUser();
+    }
+    
     this.getNews();
   }
 
@@ -27,7 +32,7 @@ export class NewsComponent implements OnInit {
     this.postService.getPostBySubscribtions(this.user, 0).subscribe(
       res=>{
         this.posts = res.posts;
-        console.log(this.posts);
+        console.log(res.posts);
         
       }
     );

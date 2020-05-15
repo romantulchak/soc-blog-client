@@ -24,5 +24,8 @@ export class User{
     isSubscribe: boolean;
     postsCounter: number;
     images: Image[];
+    accountLvl: number;
+    currentExperience: number;
+    experienceToNextLevel: number;
     
 }

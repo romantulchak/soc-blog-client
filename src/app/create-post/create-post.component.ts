@@ -28,6 +28,7 @@ export class CreatePostComponent implements OnInit {
   public imageSettings: any;
   public allowChangeSmallDescription: boolean = false;
 
+  public tag: Tag = new Tag();
 
   public selectable = true;
   public removable = true;
@@ -72,7 +73,13 @@ export class CreatePostComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.user = this.storageToken.getUser();
+    if(this.storageToken.globalCurrentUser != null){
+    this.user = this.storageToken.globalCurrentUser;
+    }else{
+      this.user = this.storageToken.getUser();
+    }
+
+    
     this.getTags();
   }
 
@@ -147,8 +154,7 @@ export class CreatePostComponent implements OnInit {
     return this.tagNames.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  public setSmallDescription(){
-    
+  public setSmallDescription(){    
     setTimeout(() => {
       this.post.smallDescription = this.post.text.replace(/<[^>]*>/g, '').slice(0, 500).toString();
       this.notificationService.success('Small description was created but you can change it');
@@ -156,5 +162,19 @@ export class CreatePostComponent implements OnInit {
     this.allowChangeSmallDescription = true;
     
     }, 500);
+  }
+  
+  public createTag(){
+
+     this.tag.user = new User();
+    this.tag.name = this.tag.name.replace(/\s/g, "");
+    this.tag.user.id = this.user.id;
+    
+    this.tagService.createTag(this.tag).subscribe(
+      res=>{
+        this.getTags();
+        this.notificationService.success(res);
+      }
+    ); 
   }
 }

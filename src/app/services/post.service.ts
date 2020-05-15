@@ -34,5 +34,14 @@ export class PostService{
         params = params.append('page', page.toString());
         return this.http.get<PostPageable>(API_URL + 'posts/news/' + user.id, {params: params});
     }
+
+    getPostsByTag(tagName: string, page:number): Observable<PostPageable>{
+        let params = new HttpParams();
+        params = params.append('page', page.toString());
+
+
+        return this.http.get<PostPageable>(API_URL + 'posts/postsByTag/' + tagName, {params: params});
+
+    }
     
 }

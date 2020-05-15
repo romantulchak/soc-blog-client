@@ -12,11 +12,19 @@
            
             </div>
             <div class="user__data">
-                <h1 class="user__name">{{currentUser?.firstName | titlecase}} {{currentUser?.lastName | titlecase}}</h1>
-                <h3>Birth day: {{currentUser?.birthDay | date}} </h3>
-                <h3>Sex:{{currentUser?.gender | titlecase}}</h3>
-                <h3>Country: {{currentUser?.country | titlecase}} | City: {{currentUser?.city | titlecase}}</h3>
-              
+                <div class="full__info">
+                    <h1 class="user__name">{{currentUser?.firstName | titlecase}} {{currentUser?.lastName | titlecase}}</h1>
+                    <h3>Birth day: {{currentUser?.birthDay | date}} </h3>
+                    <h3>Sex:{{currentUser?.gender | titlecase}}</h3>
+                    <h3>Country: {{currentUser?.country | titlecase}} | City: {{currentUser?.city | titlecase}}</h3>    
+                </div>
+                <div class="user__expirience full__info">
+                    <h1 
+                        [matTooltip]="currentUser.accountLvl != 10 ? ' At level 10 you can create your own tags ' : ''"    
+                        aria-label="Button that displays a tooltip when focused or hovered over">Account level: {{currentUser.accountLvl}}</h1>
+                    <h3>Current Experience: {{currentUser.currentExperience}}</h3>
+                    <h3>Experience to next level: {{currentUser.experienceToNextLevel}}</h3>
+                </div>
             </div>
             <div class="user__follow">
                 <button *ngIf="thisUser.id != currentUser.id && !currentUser.isSubscribe" (click)="startFollowing()">Follow</button>    

@@ -41,6 +41,9 @@ import { PostComponent } from './post/post.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { NewsComponent } from './news/news.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { LinkifyPipe } from './pipes/linkify.pipe';
+import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,8 @@ import { NewsComponent } from './news/news.component';
     PostComponent,
     MyPostsComponent,
     NewsComponent,
+    LinkifyPipe,
+    PostsByTagComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +88,7 @@ import { NewsComponent } from './news/news.component';
     MatChipsModule,
     MatIconModule,
     InfiniteScrollModule,
+    MatTooltipModule
     
   ],
   providers: [authInterceptorProviders, AuthGuard, LoggedIn],

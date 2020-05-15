@@ -64,12 +64,11 @@ export class ProfileComponent implements OnInit {
 
   getUserData(){
     if(this.userLoggedIn != null){
-      console.log(this.userLoggedIn);
       
       this.profileService.getUserData(this.userLoggedIn.id).subscribe(
         res=>{
           this.currentUser = res;
-  
+          this.tokenStorage.globalCurrentUser = res;
           this.profileService.user.next(res);
           if(res.isNew){
             this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);

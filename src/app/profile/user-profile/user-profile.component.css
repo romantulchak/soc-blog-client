@@ -43,14 +43,14 @@
 */
 .user__profile{
     display: grid;
-    grid-template-columns: 17em 1fr 1fr;
+    grid-template-columns: 17em 2fr 1fr;
     align-items: center;
 }
 .user__data{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
     height: 100%;
     align-items: center;
+    grid-template-columns: 1fr 1fr;
 }
 
 .user__follow{
@@ -73,4 +73,10 @@
     font-size: 2em;
     color: #3e3232;
     text-shadow: 1px 1px 2px black;
+}
+.full__info{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 100%;
+    align-items: center;
 }

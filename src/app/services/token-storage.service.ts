@@ -9,6 +9,7 @@ const USER_KEY = 'auth-user';
 export class TokenStorageService{
     public isLoggedIn = false;
     public currentUser: User = null;
+    public globalCurrentUser: User;
     constructor(){
         this.logged();
     }

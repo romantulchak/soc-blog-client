@@ -39,7 +39,7 @@ export class AppComponent {
                   break;
               }
         })
-        clearInterval(this.interval);
+        window.clearInterval(this.interval);
     }, 
     error=>{
       if(error != null){
