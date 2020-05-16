@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/model/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -14,7 +14,7 @@ import { Post } from 'src/app/model/post.model';
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
-  providers:[SafeHtml]
+  providers:[SafeHtml],
 })
 export class UserProfileComponent implements OnInit {
 
@@ -28,6 +28,16 @@ export class UserProfileComponent implements OnInit {
 
   public test: number;
 
+
+  public primaryXAxis: Object;
+  public postsForChar: any;
+  public primaryYAxis: Object;
+  public legendSettings: Object;
+  public marker: Object;
+  public title: string;
+  public tooltip: Object;
+  public zoom: Object;
+
   constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
   }
@@ -36,6 +46,17 @@ export class UserProfileComponent implements OnInit {
     this.thisUser = this.tokenStorage.getUser();
     this.getUserData();
     this.getUsers();
+
+    
+    this.getPostsForChart(this.thisUser.id);
+  
+
+
+
+
+
+
+
 
     this.activeRoute.params.subscribe(
       params=>{
@@ -70,6 +91,44 @@ export class UserProfileComponent implements OnInit {
     */
   }
  
+  private getPostsForChart(currentUser: number){
+    this.postService.getPostsForChart(currentUser).subscribe(
+      res=>{
+        console.log(res);
+        
+        this.postsForChar = res;
+        this.chart();
+      }
+    );
+  }
+
+
+
+  private chart(){
+    
+    this.primaryXAxis = {  
+      valueType: 'DateTimeCategory',
+      title: 'Created posts',
+      edgeLablePlacment: 'Shift',
+      intervalType: 'Days',
+
+    };
+    this.primaryYAxis = {
+        labelFormat: 'n'
+    };
+    this.legendSettings = {
+        visible: true
+    };
+    this.tooltip = { enable: true, header: 'Posts', format: '<b>Number of posts : ${point.y}</b>' };
+    this.marker = { visible: true, width: 10, height: 10 };
+    this.title = 'Posts';
+  
+    this.zoom = {
+      enableSelectionZooming: true,
+    };
+  
+  }
+
   private getUserData(){
     this.profileService.user.subscribe(
       res=>{

@@ -43,5 +43,10 @@ export class PostService{
         return this.http.get<PostPageable>(API_URL + 'posts/postsByTag/' + tagName, {params: params});
 
     }
+
+    getPostsForChart(currentUser:number): Observable<any>{
+        return this.http.get<any>(API_URL + 'posts/postsForChart/' + currentUser );
+
+    }
     
 }

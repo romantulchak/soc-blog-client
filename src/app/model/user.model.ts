@@ -27,5 +27,6 @@ export class User{
     accountLvl: number;
     currentExperience: number;
     experienceToNextLevel: number;
+    createdUser: Date;
     
 }

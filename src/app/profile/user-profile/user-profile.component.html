@@ -39,8 +39,13 @@
 </section>
 
 
-<section>
-    <h2>There will be a graphic</h2>
+<section *ngIf="postsForChar != null">
+    <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'  [tooltip]='tooltip' [legendSettings]='legendSettings' [title]='title' [zoomSettings]='zoom'>
+        <e-series-collection>
+            <e-series [dataSource]='postsForChar' type='Line' xName='createdDate' yName='numberOfCreatedPost' name='Posts per day' [marker]='marker' tooltipFormat='{{postsForChar.numberOfCreatedPost}}'></e-series>
+        </e-series-collection>
+    </ejs-chart>
+ 
 </section>
 
 <section id="posts" style="padding: 1em;">

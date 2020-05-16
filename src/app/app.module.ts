@@ -44,6 +44,9 @@ import { NewsComponent } from './news/news.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { LinkifyPipe } from './pipes/linkify.pipe';
 import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
+
+import { ChartModule, LineSeriesService, DataLabelService, TooltipService, LegendService, CategoryService, StripLineService, DateTimeCategoryService, DateTimeService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +68,7 @@ import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
     MyPostsComponent,
     NewsComponent,
     LinkifyPipe,
-    PostsByTagComponent
+    PostsByTagComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,10 +91,11 @@ import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
     MatChipsModule,
     MatIconModule,
     InfiniteScrollModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ChartModule,
     
   ],
-  providers: [authInterceptorProviders, AuthGuard, LoggedIn],
+  providers: [authInterceptorProviders, AuthGuard, LoggedIn,CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService, DateTimeService, LineSeriesService, DateTimeCategoryService, StripLineService,ColumnSeriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
