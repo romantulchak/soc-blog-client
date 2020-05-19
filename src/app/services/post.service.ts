@@ -48,5 +48,9 @@ export class PostService{
         return this.http.get<any>(API_URL + 'posts/postsForChart/' + currentUser );
 
     }
+
+    getPostById(postId: number): Observable<Post>{
+        return this.http.get<Post>(API_URL + 'posts/getPostById/' + postId);
+    }
     
 }

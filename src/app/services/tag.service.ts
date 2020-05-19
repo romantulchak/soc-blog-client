@@ -18,7 +18,7 @@ export class TagService{
         return this.http.get<Tag[]>(API_URL + 'tags/getTags');
     }
 
-    createTag(tag: Tag){
-        return this.http.post(API_URL + 'tags/createTag', tag, {responseType:'text'});
+    createTag(tag: Tag, userId: number){
+        return this.http.post(API_URL + 'tags/createTag/' + userId, tag, {responseType:'text'});
     }
 }

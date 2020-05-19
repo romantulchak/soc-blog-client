@@ -46,7 +46,8 @@ import { LinkifyPipe } from './pipes/linkify.pipe';
 import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
 
 import { ChartModule, LineSeriesService, DataLabelService, TooltipService, LegendService, CategoryService, StripLineService, DateTimeCategoryService, DateTimeService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
-
+import { PostDetailsComponent } from './post-details/post-details.component';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { ChartModule, LineSeriesService, DataLabelService, TooltipService, Legen
     NewsComponent,
     LinkifyPipe,
     PostsByTagComponent,
+    PostDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,7 @@ import { ChartModule, LineSeriesService, DataLabelService, TooltipService, Legen
     InfiniteScrollModule,
     MatTooltipModule,
     ChartModule,
+    MatButtonModule
     
   ],
   providers: [authInterceptorProviders, AuthGuard, LoggedIn,CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService, DateTimeService, LineSeriesService, DateTimeCategoryService, StripLineService,ColumnSeriesService],

@@ -1,11 +1,16 @@
-<section>
+<section class="create__post_section">
 
 
-  <form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
+  <form method="POST" enctype="multipart/form-data" novalidate>
 
     <div>
-        <h4>Name</h4>
-        <input type="text" name="name" [(ngModel)]="post.name" required>
+     
+
+        <mat-form-field appearance="outline">
+          <mat-label>Post title</mat-label>
+          <input matInput placeholder="Post title" name="name" [(ngModel)]="post.name">
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
     </div>
 
     <div>
@@ -14,14 +19,18 @@
      </div>
 
     <div>
-        <h4>Name</h4>
+        <h4>Main image</h4>
         <input type="file" name="image" (change)="fileUpload($event)" required>
     </div>
 
     <div>
       <h4>Small description</h4>
-      <textarea name="smallDescription" maxlength="250" [disabled]="!allowChangeSmallDescription"  [(ngModel)]="post.smallDescription" id="" cols="30" rows="10"></textarea>
+      <mat-form-field class="example-full-width">
+        <mat-label>Small description</mat-label>
+        <textarea matInput placeholder="Something that clearly describes your post" maxlength="250" [disabled]="!allowChangeSmallDescription" name="smallDescription" [(ngModel)]="post.smallDescription"></textarea>
+      </mat-form-field>
     </div>
+  
     <!--
     <select multiple name="tag" id="" [(ngModel)]="post.tags">
         <option  *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>
@@ -65,7 +74,7 @@
       <input type="text" name="name" [(ngModel)]="tag.name">
     </div>
     <div>
-      <button type="submit">Submit</button>
+      <button type="submit" (ngSubmit)="createPost()" >Submit</button>
     </div>
   </form>
 </div>

@@ -20,6 +20,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
+
   public htmlContent = '';
   public post: Post = new Post();
   public tags: Tag[];
@@ -122,12 +123,11 @@ export class CreatePostComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
+
     if ((value || '').trim()) {
       this.taggs.push(value.trim());
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
@@ -170,7 +170,7 @@ export class CreatePostComponent implements OnInit {
     this.tag.name = this.tag.name.replace(/\s/g, "");
     this.tag.user.id = this.user.id;
     
-    this.tagService.createTag(this.tag).subscribe(
+    this.tagService.createTag(this.tag, this.user.id).subscribe(
       res=>{
         this.getTags();
         this.notificationService.success(res);

@@ -1,0 +1,35 @@
+<section>
+    <div class="container">
+  
+        <div class="icons__post_info">
+
+            <div class="icons">
+                <h2>sadsad</h2>
+            </div>
+
+
+
+
+            <div>
+                <img [src]="post.imagePath" alt="">
+            </div>
+        
+            <div class="post__tags">
+                <span *ngFor="let tag of post.tags">
+                    <a routerLink="/posts-by-tag/{{tag.name}}">#{{tag.name}}</a>
+                </span>
+            </div>
+            <div class="post__title">
+                <h1>{{post.name}}</h1>
+            </div>
+
+            <div class="post__text">
+                <div [innerHTML]="post.text | safeHtml"></div>
+            </div>
+            
+
+
+        </div>
+
+    </div>
+</section>

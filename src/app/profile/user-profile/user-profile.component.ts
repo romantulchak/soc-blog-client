@@ -62,8 +62,10 @@ export class UserProfileComponent implements OnInit {
       params=>{
         this.getUserById(params.id, this.thisUser);
         this.getMyPosts(params.id);
-        console.log('IDDDDDDDD:' + params.id);
+      
         
+        this.getPostsForChart(params.id);
+  
       }
     );
 
@@ -94,10 +96,9 @@ export class UserProfileComponent implements OnInit {
   private getPostsForChart(currentUser: number){
     this.postService.getPostsForChart(currentUser).subscribe(
       res=>{
-        console.log(res);
         
         this.postsForChar = res;
-        this.chart();
+        this.chart(); 
       }
     );
   }

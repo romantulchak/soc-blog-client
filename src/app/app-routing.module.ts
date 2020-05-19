@@ -15,6 +15,7 @@ import { LoggedIn } from './guards/loggedin.guard';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { NewsComponent } from './news/news.component';
 import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
   {path: 'news', component: NewsComponent},
   {path: 'posts-by-tag/:name', component: PostsByTagComponent},
+  {path: 'post/:id', component: PostDetailsComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
