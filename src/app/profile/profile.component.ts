@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
 
       this.activeRouter.params.subscribe(
         res=>{
+        
+          
           this.getUserData();
         }
       );
@@ -30,23 +32,19 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     if(this.currentUser != null){
       //this.router.navigate(['/profile/user/' + this.currentUser.id]);
-      this.getUserData();
-      this.rxStompService.watch('/topic/notification').subscribe(obj =>{
-          console.log(JSON.parse(obj.body));
-          if(this.userLoggedIn.id === JSON.parse(obj.body)){
-            this.getNotificationsForUser();
-          }
-      })
+     // this.getUserData();
+     
       this.getNotificationsForUser();
     }
-
     this.profileService.notificationCounter.subscribe(
       res=>{
         this.notificationCounter = res;
       }
     );
     
+    this.updateNotifications();
 
+/*
     this.profileService.updateNotifciationCounter.subscribe(
       res=>{
         if(res === true){
@@ -64,8 +62,17 @@ export class ProfileComponent implements OnInit {
           )
         }
       }
-    );
+    );*/
 
+  }
+
+  private updateNotifications(){
+      this.rxStompService.watch('/topic/notification').subscribe(obj =>{
+        console.log(JSON.parse(obj.body));
+        if(this.userLoggedIn.id === JSON.parse(obj.body)){
+          this.getNotificationsForUser();
+        }
+    });
   }
 
   getUserData(){

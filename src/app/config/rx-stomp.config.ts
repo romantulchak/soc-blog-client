@@ -13,7 +13,7 @@ export const RxStompConfig: InjectableRxStompConfig = {
     passcode: 'guest'
   },
   reconnectDelay: 4000,
-  debug: (msg: string): void => {
+ /* debug: (msg: string): void => {
     console.log(new Date(), msg);
-  }
+  }*/
 }

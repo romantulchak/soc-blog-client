@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { Post } from '../model/post.model';
+import { CommentService } from '../services/comment.service';
 
 @Component({
   selector: 'app-post-details',
@@ -12,12 +13,14 @@ export class PostDetailsComponent implements OnInit {
 
   private postId: number;
   public post: Post;
-  constructor(private activetedRoute: ActivatedRoute, private postService: PostService) {
+  
+  constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService) {
     this.postId = Number.parseInt(this.activetedRoute.snapshot.paramMap.get('id'));
    }
 
   ngOnInit(): void {
     this.getPostById();
+    this.getCommentsForPost();
   }
 
   private getPostById(){
@@ -27,4 +30,14 @@ export class PostDetailsComponent implements OnInit {
       }
     );
   }
+  private getCommentsForPost(){
+    this.commentService.getCommentsForPost(this.postId).subscribe(
+      res=>{
+        console.log(res);
+        
+      }
+    );
+
+  }
 }
+
