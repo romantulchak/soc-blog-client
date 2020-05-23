@@ -48,6 +48,10 @@ import { PostsByTagComponent } from './posts-by-tag/posts-by-tag.component';
 import { ChartModule, LineSeriesService, DataLabelService, TooltipService, LegendService, CategoryService, StripLineService, DateTimeCategoryService, DateTimeService, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+
+import { RxStompConfig } from './config/rx-stomp.config';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,10 +99,34 @@ import {MatButtonModule} from '@angular/material/button';
     InfiniteScrollModule,
     MatTooltipModule,
     ChartModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
     
   ],
-  providers: [authInterceptorProviders, AuthGuard, LoggedIn,CategoryService, LegendService, TooltipService, DataLabelService, LineSeriesService, DateTimeService, LineSeriesService, DateTimeCategoryService, StripLineService,ColumnSeriesService],
+  providers: [authInterceptorProviders,
+     AuthGuard,
+      LoggedIn,
+      CategoryService,
+      LegendService,
+       TooltipService,
+        DataLabelService,
+         LineSeriesService,
+          DateTimeService,
+           LineSeriesService,
+            DateTimeCategoryService,
+             StripLineService,
+             ColumnSeriesService,
+             {
+              provide: InjectableRxStompConfig,
+              useValue: RxStompConfig
+            },
+            {
+              provide: RxStompService,
+              useFactory: rxStompServiceFactory,
+              deps: [InjectableRxStompConfig]
+            }
+            
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

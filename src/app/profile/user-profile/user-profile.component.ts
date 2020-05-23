@@ -9,6 +9,8 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { SafeHtml } from 'src/app/pipes/safeHtml.pipe';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
+import { RxStompService } from '@stomp/ng2-stompjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -38,7 +40,10 @@ export class UserProfileComponent implements OnInit {
   public tooltip: Object;
   public zoom: Object;
 
-  constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService) { 
+  private message: string[];
+  private topicSubscription: Subscription;
+
+  constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
   }
 
@@ -49,11 +54,8 @@ export class UserProfileComponent implements OnInit {
 
     
     this.getPostsForChart(this.thisUser.id);
-  
-
-
-
-
+ 
+    
 
 
 
@@ -68,29 +70,6 @@ export class UserProfileComponent implements OnInit {
   
       }
     );
-
-/*
-    this.profileService.updateUser.subscribe(
-      res=>{
-        if(res === true){
-          this.profileService.userId.subscribe(
-            id=>{
-              if(id === this.userId){
-                console.log('THIS USER ID: ' + this.userId);
-                console.log('THIS ID FROM WEBSOCKET: ' + id);
-                
-                      this.getUserById(id, this.thisUser.id);
-                      this.profileService.updateUser.next(false);
-                    
-               
-                
-              }
-            }
-          );
-        }
-      }
-    );
-    */
   }
  
   private getPostsForChart(currentUser: number){
@@ -159,8 +138,6 @@ export class UserProfileComponent implements OnInit {
     this.userId = userId;
     this.profileService.getUserById(userId, currentUserId.id).subscribe(
       res=>{
-        console.log(res);
-        
         if(res != null){
           window.scrollTo(0, 0);
           this.loadingService.showLoader();
@@ -180,10 +157,13 @@ export class UserProfileComponent implements OnInit {
   }
   
   public startFollowing(){
+  
     this.profileService.startFollowing(this.currentUser.id, this.thisUser.id).subscribe(
       res=>{
         this.getUserById(this.currentUser.id,this.thisUser);
         this.notificationService.success(res);
+        this.rxStompService.publish({destination:'/app/startFollow/', body: this.currentUser.id.toString() })
+  
       }
     );
   }
@@ -201,8 +181,7 @@ export class UserProfileComponent implements OnInit {
     this.postService.getMyPosts(currentUser, this.page).subscribe(
       posts=>{
         if(posts != null){
-          console.log(posts);
-          
+
           this.posts = posts.posts;
           this.page = posts.currentPage;
         }

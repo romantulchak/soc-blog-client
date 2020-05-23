@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 import { User } from '../model/user.model';
 import { ProfileService } from '../services/profile.service';
 import { DialogService } from '../services/dialog.service';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ import { DialogService } from '../services/dialog.service';
 export class ProfileComponent implements OnInit {
 
 
-  constructor(private tokenStorage: TokenStorageService,private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService) {
+  constructor(private tokenStorage: TokenStorageService,private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
 
       this.activeRouter.params.subscribe(
         res=>{
@@ -30,7 +31,12 @@ export class ProfileComponent implements OnInit {
     if(this.currentUser != null){
       //this.router.navigate(['/profile/user/' + this.currentUser.id]);
       this.getUserData();
-      
+      this.rxStompService.watch('/topic/notification').subscribe(obj =>{
+          console.log(JSON.parse(obj.body));
+          if(this.userLoggedIn.id === JSON.parse(obj.body)){
+            this.getNotificationsForUser();
+          }
+      })
       this.getNotificationsForUser();
     }
 

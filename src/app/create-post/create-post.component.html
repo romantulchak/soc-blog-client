@@ -1,7 +1,7 @@
 <section class="create__post_section">
 
 
-  <form method="POST" enctype="multipart/form-data" novalidate>
+  <form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
 
     <div>
      
@@ -61,6 +61,7 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+    
 
     <button type="submit">Create</button>
 </form>
@@ -74,7 +75,7 @@
       <input type="text" name="name" [(ngModel)]="tag.name">
     </div>
     <div>
-      <button type="submit" (ngSubmit)="createPost()" >Submit</button>
+      <button type="submit" >Submit</button>
     </div>
   </form>
 </div>

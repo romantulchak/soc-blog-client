@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
     "@kolkov/angular-editor": "^1.1.2",
+    "@stomp/ng2-stompjs": "^7.2.0",
     "@syncfusion/ej2-angular-base": "^18.1.52",
     "@syncfusion/ej2-angular-charts": "^18.1.52",
     "@syncfusion/ej2-angular-richtexteditor": "^18.1.48",

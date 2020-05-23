@@ -38,6 +38,7 @@ export class CreatePostComponent implements OnInit {
   public filterTags: Observable<string[]>;
   public taggs: string[] = [];
   public tagNames: string[] = [];
+  
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -119,6 +120,7 @@ export class CreatePostComponent implements OnInit {
   public fileUpload(event:any){
     this.image = event.target.files[0];    
   }
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -145,6 +147,7 @@ export class CreatePostComponent implements OnInit {
   }
   selected(event: MatAutocompleteSelectedEvent): void {
     this.taggs.push(event.option.viewValue);
+   
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }

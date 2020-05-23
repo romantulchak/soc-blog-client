@@ -12,6 +12,7 @@ export class WebSocketService{
     public connect(){
         let socket = new SockJs(SOCKET);
         let stompClient = Stomp.over(socket);
+     
         return stompClient;
     }
 }

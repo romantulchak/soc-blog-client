@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebSocketService } from './services/webSocket.service';
 import { ProfileService } from './services/profile.service';
+import { RxStompService } from '@stomp/ng2-stompjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'ScoblogFrontEnd';
   private interval: any;
-  constructor(private webSocketService: WebSocketService, private profileService: ProfileService){
-    this.connection();
+  constructor(private webSocketService: WebSocketService, private profileService: ProfileService, private rxStompService: RxStompService){
+    //this.connection();
   }
-  private connection(){
+ 
+ /* private connection(){
     let stompClient = this.webSocketService.connect();
+   
     stompClient.connect( {},frame=>{
       stompClient.subscribe('/topic/update', res => {
               let parseToJson = JSON.parse(res.body);
+            
               console.log(parseToJson);
               switch(parseToJson.title){
                 case 'updatePosts':
@@ -39,19 +44,17 @@ export class AppComponent {
                   break;
               }
         })
-        window.clearInterval(this.interval);
-    }, 
-    error=>{
-      if(error != null){
-        
-        this.interval = setInterval(()=>{
-          console.log('Reconnect');
-          this.connection();
-          
-        },10000);
-       }
-    }
-    );
+    });
 
+  }*/
+  private topicSubscription: Subscription;
+  ngOnInit(){
+    this.topicSubscription = this.rxStompService.watch('/topic/update').subscribe(obj =>{
+      console.log(obj);
+      
+    })
   }
+
+ 
+
 }
