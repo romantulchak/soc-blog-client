@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WebSocketService } from './services/webSocket.service';
 import { ProfileService } from './services/profile.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { Subscription } from 'rxjs';
+import { User } from './model/user.model';
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,49 +14,32 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'ScoblogFrontEnd';
   private interval: any;
-  constructor(private webSocketService: WebSocketService, private profileService: ProfileService, private rxStompService: RxStompService){
-    //this.connection();
+  constructor(private tokenStorage: TokenStorageService, private rxStompService: RxStompService, private profileService: ProfileService){
+
   }
  
- /* private connection(){
-    let stompClient = this.webSocketService.connect();
-   
-    stompClient.connect( {},frame=>{
-      stompClient.subscribe('/topic/update', res => {
-              let parseToJson = JSON.parse(res.body);
-            
-              console.log(parseToJson);
-              switch(parseToJson.title){
-                case 'updatePosts':
-                    this.profileService.updateUser.next(true);
-                    this.profileService.userId.next(parseToJson.userId);
-                  break;
-                 case 'startFollowing':
-                 //   this.profileService.updateUser.next(true);
-                   // this.profileService.userId.next(parseToJson.userId);
-                    //this.profileService.currentUserId.next(parseToJson.currentUserId);
-                    this.profileService.notificationCounterForAnotherUser.next(parseToJson.notificationCounter);
-                    
-                    this.profileService.updateNotifciationCounter.next(true);
-                  break;
-                  case 'stopFollowing':
-                 // this.profileService.updateUser.next(true);
-                 // this.profileService.userId.next(parseToJson.userId);
-                  //this.profileService.currentUserId.next(parseToJson.currentUserId);
-                  break;
-              }
-        })
-    });
 
-  }*/
   private topicSubscription: Subscription;
+  private currentUser: User;
   ngOnInit(){
-    this.topicSubscription = this.rxStompService.watch('/topic/update').subscribe(obj =>{
-      console.log(obj);
-      
-    })
+    this.currentUser = this.tokenStorage.getUser();
+    if(this.currentUser != null){
+      this.setOnline();
+    }
+    this.topicSubscription = this.rxStompService.watch('/topic/online').subscribe(obj =>{
+      this.currentUser.isOnline = JSON.parse(obj.body).online;
+
+        
+    });
   }
 
+  private setOnline(){
+   this.rxStompService.publish({destination: '/app/setOnline/' + this.currentUser.id, body: 'true'})
+  }
+
+
+
+  
  
 
 }

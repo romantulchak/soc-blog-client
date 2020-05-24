@@ -40,8 +40,7 @@ export class UserProfileComponent implements OnInit {
   public tooltip: Object;
   public zoom: Object;
 
-  private message: string[];
-  private topicSubscription: Subscription;
+
 
   constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
@@ -49,14 +48,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
+   
     this.getUserData();
     this.getUsers();
 
     
     this.getPostsForChart(this.thisUser.id);
- 
     
-
 
 
 
@@ -70,6 +68,9 @@ export class UserProfileComponent implements OnInit {
   
       }
     );
+
+  
+      
   }
  
   private getPostsForChart(currentUser: number){
@@ -114,7 +115,7 @@ export class UserProfileComponent implements OnInit {
       res=>{
         if(res != null){
           this.currentUser = res;
-         
+      
           //this.getUserById(this.test, this.currentUser);
           this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
@@ -132,7 +133,6 @@ export class UserProfileComponent implements OnInit {
 
 
 
-
   getUserById(userId: number, currentUserId?:User){
     
     this.userId = userId;
@@ -143,6 +143,7 @@ export class UserProfileComponent implements OnInit {
           this.loadingService.showLoader();
           
           this.currentUser = res;
+ 
         }
       }
     );

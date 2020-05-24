@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { Post } from '../model/post.model';
 import { CommentService } from '../services/comment.service';
+import { Comment } from '../model/commnet.model';
 
 @Component({
   selector: 'app-post-details',
@@ -13,7 +14,8 @@ export class PostDetailsComponent implements OnInit {
 
   private postId: number;
   public post: Post;
-  
+  public page: number = 0;
+  public comments: Comment[];
   constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService) {
     this.postId = Number.parseInt(this.activetedRoute.snapshot.paramMap.get('id'));
    }
@@ -26,15 +28,16 @@ export class PostDetailsComponent implements OnInit {
   private getPostById(){
     this.postService.getPostById(this.postId).subscribe(
       res=>{
-        this.post = res;
+        if(res != null)
+          this.post = res;
       }
     );
   }
   private getCommentsForPost(){
-    this.commentService.getCommentsForPost(this.postId).subscribe(
+    this.commentService.getCommentsForPost(this.postId, this.page).subscribe(
       res=>{
-        console.log(res);
-        
+        if(res != null)
+          this.comments = res.comments;  
       }
     );
 

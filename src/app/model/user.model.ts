@@ -28,5 +28,6 @@ export class User{
     currentExperience: number;
     experienceToNextLevel: number;
     createdUser: Date;
+    isOnline: boolean;
     
 }

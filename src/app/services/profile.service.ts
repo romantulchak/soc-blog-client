@@ -13,14 +13,10 @@ const API_URL = environment.apiUrl;
 export class ProfileService{
     public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
    
-    public updateUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    public userId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-    public currentUserId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-    public notificationBox: BehaviorSubject<NotificationBox> = new BehaviorSubject<NotificationBox>(null);
-    public updateNotifciationCounter: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    public notificationCounterForAnotherUser: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    public isOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{

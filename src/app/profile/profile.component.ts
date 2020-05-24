@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 import { User } from '../model/user.model';
@@ -11,7 +11,7 @@ import { RxStompService } from '@stomp/ng2-stompjs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
 
   constructor(private tokenStorage: TokenStorageService,private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
     if(this.currentUser != null){
       //this.router.navigate(['/profile/user/' + this.currentUser.id]);
-     // this.getUserData();
+      this.getUserData();
      
       this.getNotificationsForUser();
     }
@@ -83,6 +83,8 @@ export class ProfileComponent implements OnInit {
           this.currentUser = res;
           this.tokenStorage.globalCurrentUser = res;
           this.profileService.user.next(res);
+          console.log(res);
+          
           if(res.isNew){
             this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
           }
@@ -94,6 +96,10 @@ export class ProfileComponent implements OnInit {
 
 
   logout(){
+
+    this.rxStompService.publish({destination: '/app/setOnline/' + this.currentUser.id, body: 'false'})
+
+    
     this.tokenStorage.signOut();
     window.location.reload();
     this.router.navigate(['/']);
@@ -113,4 +119,9 @@ export class ProfileComponent implements OnInit {
         this.dialogService.notificationDialog(this.userLoggedIn.id);
   }
 
+  ngOnDestroy(){
+    this.rxStompService.publish({destination: '/app/setOnline/' + this.currentUser.id, body: 'false'})
+    
+
+  }
 }
