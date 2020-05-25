@@ -2,40 +2,36 @@
 
 
   <form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
-
-    <div>
-     
-
+  
+    <div class="btn__upload_file">
+        <div class="upload__btn">
+          <h4>Preview image</h4>
+          <input type="file" name="image" (change)="fileUpload($event)" required>
+        </div>
+     </div>
+      <img [src]="imagePathPreview" class="image__preview"  accept='image/*' alt="" >
+    
+    <div class="form__shadows">
+      <div class="post__title">
         <mat-form-field appearance="outline">
           <mat-label>Post title</mat-label>
           <input matInput placeholder="Post title" name="name" [(ngModel)]="post.name">
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
     </div>
 
-    <div>
-        <h4>Text</h4>
+    <div class="post__description">
+        <h2>Text</h2>
         <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [(ngModel)]="post.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools' (change)="setSmallDescription()" required></ejs-richtexteditor>
      </div>
 
-    <div>
-        <h4>Main image</h4>
-        <input type="file" name="image" (change)="fileUpload($event)" required>
-    </div>
 
     <div>
-      <h4>Small description</h4>
       <mat-form-field class="example-full-width">
         <mat-label>Small description</mat-label>
         <textarea matInput placeholder="Something that clearly describes your post" maxlength="250" [disabled]="!allowChangeSmallDescription" name="smallDescription" [(ngModel)]="post.smallDescription"></textarea>
       </mat-form-field>
     </div>
   
-    <!--
-    <select multiple name="tag" id="" [(ngModel)]="post.tags">
-        <option  *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>
-    </select>
--->
     <mat-form-field class="example-chip-list">
         <mat-chip-list #chipList aria-label="Fruit selection">
           <mat-chip
@@ -61,7 +57,7 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-    
+    </div>
 
     <button type="submit">Create</button>
 </form>

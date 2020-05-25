@@ -27,7 +27,9 @@ export class AppComponent implements OnInit{
       this.setOnline();
     }
     this.topicSubscription = this.rxStompService.watch('/topic/online').subscribe(obj =>{
-      this.currentUser.isOnline = JSON.parse(obj.body).online;
+      if(obj.body != null){
+        this.currentUser.isOnline = JSON.parse(obj.body);
+      }
 
         
     });

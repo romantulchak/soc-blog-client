@@ -52,5 +52,8 @@ export class PostService{
     getPostById(postId: number): Observable<Post>{
         return this.http.get<Post>(API_URL + 'posts/getPostById/' + postId);
     }
+    deletePost(postId: number, userId: number){
+        return this.http.delete(API_URL + 'posts/deletePost/' + postId + '/' + userId, {responseType:'text'});
+    }
     
 }

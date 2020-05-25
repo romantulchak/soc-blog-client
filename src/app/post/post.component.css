@@ -10,6 +10,7 @@
     border-radius: 8px;
     box-shadow: 1px 1px 6px 0px rgba(123, 102, 102, 0.61);
     margin-bottom: 1em;
+    position: relative;
 
 }
 .post__text{
@@ -53,4 +54,21 @@
     height: 100px;
     border-radius: 50%;
     margin-bottom: 1em;
+}
+.post__remove_btn{
+    position: absolute;
+    z-index: 1155;
+    right: -7px;
+    top: -8px;
+    border-radius: 31px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: red;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+    font-family: sans-serif;
 }

@@ -69,7 +69,13 @@ export class UserProfileComponent implements OnInit {
       }
     );
 
-  
+      this.profileService.isOnline.subscribe(
+        res=>{
+          if(res.userId != this.currentUser.id){
+            this.currentUser.isOnline = res.online;
+          }
+        }
+      );
       
   }
  

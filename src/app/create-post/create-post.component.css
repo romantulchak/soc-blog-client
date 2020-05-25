@@ -5,3 +5,40 @@
     width: 900px;
     margin: 0 auto;
 }
+.image__preview{
+    width: 100%;
+}
+.btn__upload_file{
+    position: relative;
+}
+.upload__btn{
+    position: absolute;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+.post__title{
+    text-align: center;
+    margin-top: 2em;
+}
+.post__description > h2{
+    text-align: center;
+    font-family: sans-serif;
+    margin-bottom: .5em;
+
+}
+mat-form-field{
+    width: 100% !important; 
+}
+
+.form__shadows{
+    padding: 1em;
+    /* border: 1px solid; */
+    margin-top: 2em;
+    box-shadow: aliceblue;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: 1em;
+}

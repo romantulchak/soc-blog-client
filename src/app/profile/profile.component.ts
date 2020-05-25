@@ -44,31 +44,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     
     this.updateNotifications();
 
-/*
-    this.profileService.updateNotifciationCounter.subscribe(
-      res=>{
-        if(res === true){
-          this.profileService.userId.subscribe(
-            id=>{
-              if(id === this.userLoggedIn.id){
-                this.profileService.notificationCounterForAnotherUser.subscribe(
-                  counter =>{
-                    this.notificationCounter = counter;
-                    this.profileService.updateNotifciationCounter.next(false);
-                  }
-                );
-              }
-            }
-          )
-        }
-      }
-    );*/
 
   }
 
   private updateNotifications(){
       this.rxStompService.watch('/topic/notification').subscribe(obj =>{
-        console.log(JSON.parse(obj.body));
         if(this.userLoggedIn.id === JSON.parse(obj.body)){
           this.getNotificationsForUser();
         }

@@ -52,6 +52,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 
 import { RxStompConfig } from './config/rx-stomp.config';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +76,7 @@ import { RxStompConfig } from './config/rx-stomp.config';
     LinkifyPipe,
     PostsByTagComponent,
     PostDetailsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

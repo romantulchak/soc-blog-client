@@ -1,7 +1,9 @@
 
 
 <div class="post__card" *ngFor="let post of posts">
-
+    <div class="post__remove_btn" (click)="deletePost(post.id)" *ngIf="post.user.id == currentUser.id">
+      <span>X</span>
+    </div>
     <div class="post__image" [ngStyle]="{'background-image':post.imagePath != null ? 'url( '+ post.imagePath +'  )' : 'url(' + '../../../assets/images/img_avatar.png' +' )'  }">
       
       <div *ngIf="post.user.id != currentUser.id" class="post__author">
@@ -19,4 +21,7 @@
       </ng-container>  
     </div>
     <div class="post__text"> {{post.smallDescription}}</div>
+
+
+
 </div>

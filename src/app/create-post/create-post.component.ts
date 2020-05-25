@@ -31,6 +31,7 @@ export class CreatePostComponent implements OnInit {
 
   public tag: Tag = new Tag();
 
+  public imagePathPreview;
   public selectable = true;
   public removable = true;
   public separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -118,7 +119,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   public fileUpload(event:any){
-    this.image = event.target.files[0];    
+    this.image = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.image); 
+    reader.onload = (_event) => { 
+      this.imagePathPreview = reader.result; 
+    }
+    
   }
 
   add(event: MatChipInputEvent): void {
