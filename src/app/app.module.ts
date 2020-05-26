@@ -53,6 +53,7 @@ import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '
 
 import { RxStompConfig } from './config/rx-stomp.config';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PostDialogComponent } from './post-dialog/post-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +78,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     PostsByTagComponent,
     PostDetailsComponent,
     NavbarComponent,
+    PostDialogComponent,
   ],
   imports: [
     BrowserModule,

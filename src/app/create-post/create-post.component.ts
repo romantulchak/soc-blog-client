@@ -14,6 +14,7 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 RichTextEditor.Inject(Toolbar, Link, HtmlEditor, Image, QuickToolbar); 
 import {map, startWith} from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { RxStompService } from '@stomp/ng2-stompjs';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -53,7 +54,7 @@ export class CreatePostComponent implements OnInit {
 
 
 
-  constructor(private storageToken: TokenStorageService, private tagService: TagService, private postService: PostService, private notificationService: NotificationService) { 
+  constructor(private storageToken: TokenStorageService, private tagService: TagService, private postService: PostService, private notificationService: NotificationService, private rxStompService: RxStompService) { 
     this.imageSettings = { 
       saveFormat: "Base64" 
       };
@@ -94,6 +95,8 @@ export class CreatePostComponent implements OnInit {
     });
     this.postService.createPost(this.post, this.image).subscribe(
       res=>{
+        this.rxStompService.publish({destination:'/app/updatePost/', body: this.user.id.toString()});
+        
         this.notificationService.success(res);
       }
     );

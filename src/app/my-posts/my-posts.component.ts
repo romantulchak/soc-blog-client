@@ -21,14 +21,14 @@ export class MyPostsComponent implements OnInit {
     this.getMyPosts();
   }
   private getMyPosts(){
-    this.postService.getMyPosts(this.user.id, 0).subscribe(
+    this.postService.getMyPosts(this.user.id, 0, this.user.id).subscribe(
       res=>{
         this.posts = res.posts;
       }
     );
   }
   public onScroll() {
-    this.postService.getMyPosts(this.user.id, this.page + 1).subscribe(
+    this.postService.getMyPosts(this.user.id, this.page + 1, this.user.id).subscribe(
       posts=>{
         if(posts != null){
           this.page = posts.currentPage;

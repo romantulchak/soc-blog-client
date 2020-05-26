@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
   public page: number = 0;
 
   public test: number;
-
+  public currentId: number;
 
   public primaryXAxis: Object;
   public postsForChar: any;
@@ -48,7 +48,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
-   
+    
+
+
+
+
+    
+
     this.getUserData();
     this.getUsers();
 
@@ -60,6 +66,7 @@ export class UserProfileComponent implements OnInit {
 
     this.activeRoute.params.subscribe(
       params=>{
+        this.currentId = params.id;  
         this.getUserById(params.id, this.thisUser);
         this.getMyPosts(params.id);
       
@@ -69,6 +76,14 @@ export class UserProfileComponent implements OnInit {
       }
     );
 
+    this.rxStompService.watch('/topic/updatePost').subscribe(
+      res=>{
+        if(Number.parseInt(res.body) == this.currentId){
+          this.getMyPosts(this.currentId);
+        }
+      }
+    );
+      
       this.profileService.isOnline.subscribe(
         res=>{
           if(res.userId != this.currentUser.id){
@@ -185,10 +200,11 @@ export class UserProfileComponent implements OnInit {
 
   private getMyPosts(currentUser:number){
     this.page = 0;
-    this.postService.getMyPosts(currentUser, this.page).subscribe(
+    this.postService.getMyPosts(currentUser, this.page, this.thisUser.id).subscribe(
       posts=>{
         if(posts != null){
-
+          console.log(posts.posts);
+          
           this.posts = posts.posts;
           this.page = posts.currentPage;
         }
@@ -197,7 +213,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onScroll() {
-    this.postService.getMyPosts(this.currentUser.id, this.page + 1).subscribe(
+    this.postService.getMyPosts(this.currentUser.id, this.page + 1, this.thisUser.id).subscribe(
       posts=>{
         if(posts != null){
           this.page = posts.currentPage;

@@ -1,0 +1,13 @@
+<ng-container *ngIf="dialogData.action == 'delete'">
+    <h1>Are you sure that you want to delete post: {{dialogData.postName}}</h1>
+    <div>
+
+        <button (click)="dialog.closeAll()">Close</button>
+        <button (click)="deletePost()">Delete</button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="dialogData.action == 'edit'">
+    <h1>Edit</h1>
+</ng-container>
+

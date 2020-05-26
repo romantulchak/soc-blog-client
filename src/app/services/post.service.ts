@@ -22,11 +22,11 @@ export class PostService{
        return this.http.post(API_URL + 'posts/createPost', data, {responseType:'text', headers: headers});
     }
 
-    getMyPosts(userId:number, page: number): Observable<PostPageable>{
+    getMyPosts(userId:number, page: number, currentUser:number): Observable<PostPageable>{
         let params = new HttpParams();
         params = params.append('page', page.toString());
 
-        return this.http.get<PostPageable>(API_URL + 'posts/myPosts/' + userId, {params: params});
+        return this.http.get<PostPageable>(API_URL + 'posts/myPosts/' + userId + '/' + currentUser, {params: params});
     }
 
     getPostBySubscribtions(user: User, page: number): Observable<PostPageable>{
@@ -35,12 +35,12 @@ export class PostService{
         return this.http.get<PostPageable>(API_URL + 'posts/news/' + user.id, {params: params});
     }
 
-    getPostsByTag(tagName: string, page:number): Observable<PostPageable>{
+    getPostsByTag(tagName: string, page:number, currentUserId: number): Observable<PostPageable>{
         let params = new HttpParams();
         params = params.append('page', page.toString());
 
 
-        return this.http.get<PostPageable>(API_URL + 'posts/postsByTag/' + tagName, {params: params});
+        return this.http.get<PostPageable>(API_URL + 'posts/postsByTag/' + tagName + '/' + currentUserId, {params: params});
 
     }
 
