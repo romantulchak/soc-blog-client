@@ -48,52 +48,39 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
-    
-
-
-
-
-    
-
     this.getUserData();
     this.getUsers();
-
-    
     this.getPostsForChart(this.thisUser.id);
-    
-
-
-
     this.activeRoute.params.subscribe(
       params=>{
         this.currentId = params.id;  
         this.getUserById(params.id, this.thisUser);
         this.getMyPosts(params.id);
-      
-        
         this.getPostsForChart(params.id);
-  
       }
     );
 
+      this.updatePosts();
+  }
+ 
+
+  private updatePosts(){
     this.rxStompService.watch('/topic/updatePost').subscribe(
       res=>{
-        if(Number.parseInt(res.body) == this.currentId){
-          this.getMyPosts(this.currentId);
+        if(res != null){
+          this.posts.unshift(JSON.parse(res.body));
         }
       }
     );
-      
-      this.profileService.isOnline.subscribe(
-        res=>{
-          if(res.userId != this.currentUser.id){
-            this.currentUser.isOnline = res.online;
-          }
+    this.rxStompService.watch('/topic/updatePost/delete').subscribe(
+      res=>{
+        if(res != null){
+          this.getMyPosts(this.currentUser.id);
         }
-      );
-      
+      }
+    );
   }
- 
+
   private getPostsForChart(currentUser: number){
     this.postService.getPostsForChart(currentUser).subscribe(
       res=>{

@@ -4,7 +4,7 @@
     <div class="post__remove_btn" (click)="deletePost(post)" *ngIf="post.user.id == currentUser.id">
       <span>X</span>
     </div>
-    <div class="post__image" [ngStyle]="{'background-image':post.imagePath != null ? 'url( '+ post.imagePath +'  )' : 'url(' + '../../../assets/images/img_avatar.png' +' )'  }">
+    <div class="post__image" [ngStyle]="{'background-image':post.image != null ? 'url( '+ post.image +'  )' : 'url(' + '../../../assets/images/img_avatar.png' +' )'  }">
       
       <div *ngIf="post.user.id != currentUser.id" class="post__author">
         <img [src]="post.user?.avatar != null ? post.user.avatar :'../../../assets/images/img_avatar.png'" alt="">
@@ -22,6 +22,15 @@
     </div>
     <div class="post__text"> {{post.smallDescription}}</div>
 
-
-
+    <div class="post__date_likes">
+      <div class="post__likes">
+        <span (click)="setLike(post)" [class.liked]="post.meLiked" [class.unliked]="!post.meLiked" class="material-icons">
+          favorite
+          </span>
+          <h1>{{post.likesCounter}}</h1>
+        </div>
+        <div class="post__created_date">
+          <h4>{{post.createdDate | date}}</h4>
+        </div>
+    </div>
 </div>

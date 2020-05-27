@@ -5,16 +5,17 @@ import { User } from '../model/user.model';
 import { ProfileService } from '../services/profile.service';
 import { DialogService } from '../services/dialog.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit {
 
 
-  constructor(private tokenStorage: TokenStorageService,private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
+  constructor(private tokenStorage: TokenStorageService,private postService: PostService, private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
 
       this.activeRouter.params.subscribe(
         res=>{
@@ -31,9 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userLoggedIn = this.tokenStorage.getUser();
     this.currentUser = this.tokenStorage.getUser();
     if(this.currentUser != null){
-      //this.router.navigate(['/profile/user/' + this.currentUser.id]);
       this.getUserData();
-     
       this.getNotificationsForUser();
     }
     this.profileService.notificationCounter.subscribe(
@@ -43,9 +42,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
     );
     
     this.updateNotifications();
-
-
+    this.checkLikes();
   }
+
+
+
+  private checkLikes(){
+    this.rxStompService.watch('/topic/like/').subscribe(
+      res=>{
+        if(res != null){
+          this.postService.updatePost.next(JSON.parse(res.body));
+        }
+      }
+    );
+    this.rxStompService.watch('/topic/myLike/').subscribe(
+      res=>{
+        if(res != null){
+          this.postService.currentUserId.next(Number.parseInt(res.body)); 
+        }
+      }
+    );
+  }
+
 
   private updateNotifications(){
       this.rxStompService.watch('/topic/notification').subscribe(obj =>{
@@ -60,10 +78,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       
       this.profileService.getUserData(this.userLoggedIn.id).subscribe(
         res=>{
-          this.currentUser = res;
-          this.tokenStorage.globalCurrentUser = res;
-          this.profileService.user.next(res);
-          console.log(res);
+          //this.currentUser = res;
+          //this.tokenStorage.globalCurrentUser = res;
+          //this.profileService.user.next(res);
           
           if(res.isNew){
             this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
@@ -76,10 +93,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
   logout(){
-
-    this.rxStompService.publish({destination: '/app/setOnline/' + this.currentUser.id, body: 'false'})
-
-    
     this.tokenStorage.signOut();
     window.location.reload();
     this.router.navigate(['/']);
@@ -99,9 +112,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.dialogService.notificationDialog(this.userLoggedIn.id);
   }
 
-  ngOnDestroy(){
-    this.rxStompService.publish({destination: '/app/setOnline/' + this.currentUser.id, body: 'false'})
-    
 
-  }
 }

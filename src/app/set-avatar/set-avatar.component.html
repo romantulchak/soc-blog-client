@@ -1,5 +1,5 @@
 <input type="file" (change)="fileChangeEvent($event)" />
-
+<div class="cropper-container">
 <image-cropper
     [imageChangedEvent]="imageChangedEvent"
     [maintainAspectRatio]="true"
@@ -12,7 +12,6 @@
     (cropperReady)="cropperReady()"
     (loadImageFailed)="loadImageFailed()"
 ></image-cropper>
-
-<!--<img [src]="croppedImage" />-->
+</div>
 
 <button type="button" (click)="cropIt()">save cropped image in Base64 </button>

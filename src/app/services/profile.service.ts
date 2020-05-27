@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Country } from '../model/country.model';
 import { NotificationBox } from '../model/notificationBox.model';
+import { Post } from '../model/post.model';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -16,7 +17,6 @@ export class ProfileService{
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     public isOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{

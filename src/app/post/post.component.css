@@ -14,6 +14,7 @@
 
 }
 .post__text{
+    background: lavender;
     padding: 1em;
     word-break: break-all;
 }
@@ -71,4 +72,31 @@
     font-weight: 900;
     cursor: pointer;
     font-family: sans-serif;
+}
+.liked{
+    color: red;
+   
+}
+.material-icons{
+    transition: .5s ease-in;
+}
+
+.unliked{
+
+    color: rgb(110, 109, 109);
+}
+.post__date_likes{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2em;
+    margin-right: 2em;
+    padding: 1em;
+}
+.post__likes{
+    display: flex;
+    align-items: center;
+}
+.post__created_date{
+    font-family: monospace;
+    font-size: 16px;
 }

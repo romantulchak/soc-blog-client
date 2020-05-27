@@ -95,8 +95,6 @@ export class CreatePostComponent implements OnInit {
     });
     this.postService.createPost(this.post, this.image).subscribe(
       res=>{
-        this.rxStompService.publish({destination:'/app/updatePost/', body: this.user.id.toString()});
-        
         this.notificationService.success(res);
       }
     );

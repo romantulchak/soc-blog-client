@@ -6,10 +6,12 @@ export class Post{
     name:string;
     text:string;
     tags: Tag[];
-    imagePath: string;
+    image: string;
     user:User;
     createdDate: Date;
     smallDescription: string;
+    likesCounter: number;
+    meLiked: boolean;
     constructor(){
         this.user = new User();
         this.tags = [];

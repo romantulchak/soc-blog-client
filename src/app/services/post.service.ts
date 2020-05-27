@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Post } from '../model/post.model';
 import { User } from '../model/user.model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { PostPageable } from '../model/postPageable.model';
 
 const API_URL = environment.apiUrl;
@@ -13,6 +13,8 @@ const API_URL = environment.apiUrl;
 export class PostService{
     constructor(private http:HttpClient){}
     
+    public updatePost: BehaviorSubject<Post> = new BehaviorSubject<Post>(null);
+    public currentUserId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     createPost(post: Post, image: File){
         const data = new FormData();
         const headers = new HttpHeaders();

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Post } from '../model/post.model';
 import { TokenStorageService } from '../services/token-storage.service';
 import { User } from '../model/user.model';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogModel } from '../model/dialog.model';
 import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 import { DialogService } from '../services/dialog.service';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-post',
@@ -19,14 +20,39 @@ export class PostComponent implements OnInit {
   @Input() posts: Post[];
 
   public currentUser: User;
-  constructor(private tokenService: TokenStorageService, private postService: PostService, private dialogService: DialogService) { }
-
+  constructor(private tokenService: TokenStorageService,private postService: PostService,  private rxStompService: RxStompService, private dialogService: DialogService) { }
   ngOnInit(): void {
     this.currentUser = this.tokenService.getUser();
+    this.updateLikes();
   }
+
+
+
+  private updateLikes(){
+    this.postService.updatePost.subscribe(
+      res=>{
+        if(res != null){
+         this.posts.find(item=>item.id === res.id).likesCounter = res.likesCounter;
+         this.postService.currentUserId.subscribe(
+           id=>{
+            if(res != null && this.currentUser.id === id){
+              this.posts.find(item=>item.id === res.id).meLiked = res.meLiked;
+            }
+          }
+         );
+         this.postService.updatePost.next(null);
+        }
+      }
+    );
+  }
+
+
   public deletePost(post: Post){
     this.dialogService.deletePost(post);
    
+  }
+  public setLike(post: Post){
+    this.rxStompService.publish({destination: '/app/setLike/' + this.currentUser.id + '/' + post.id});
   }
   
 }
