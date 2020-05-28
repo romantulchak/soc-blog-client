@@ -80,3 +80,42 @@
     height: 100%;
     align-items: center;
 }
+.user__gallery{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
+.gallery__image_card{
+    height: 75px;
+    width: 75px;
+}
+.gallery__image_card img{
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.avatar{
+    justify-self: center;
+}
+.mat-dialog-container {
+    padding: 0 !important;
+
+}
+
+mat-dialog-content{
+    width: 400px;
+    height: auto;
+    max-height: fit-content;
+    margin: 0 0;
+    padding: 0 0;
+    overflow: auto;
+}
+.image__viewer{
+    max-width: 100%;
+    height: auto;
+}
+.mat-dialog-container {
+    padding: 0px !important;
+}

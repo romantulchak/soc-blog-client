@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, TemplateRef } from '@angular/core';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/model/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -11,6 +11,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-profile',
@@ -39,10 +40,11 @@ export class UserProfileComponent implements OnInit {
   public title: string;
   public tooltip: Object;
   public zoom: Object;
+  public imageViewerPath: string;
 
 
 
-  constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService) { 
+  constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
   }
 
@@ -123,8 +125,7 @@ export class UserProfileComponent implements OnInit {
       res=>{
         if(res != null){
           this.currentUser = res;
-      
-          //this.getUserById(this.test, this.currentUser);
+          
           this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
             this.router.navigateByUrl(`/profile/settings/${this.thisUser.id}`);
@@ -149,6 +150,7 @@ export class UserProfileComponent implements OnInit {
         if(res != null){
           window.scrollTo(0, 0);
           this.loadingService.showLoader();
+          console.log(res);
           
           this.currentUser = res;
  
@@ -212,6 +214,13 @@ export class UserProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  public avatarViewer(imagePath: string, templateRef: TemplateRef<any>){ 
+    this.imageViewerPath = imagePath;
+    this.dialogFromTemplate.open(templateRef, {
+      panelClass: 'image__viewer_container'
+    });
   }
 
 

@@ -19,8 +19,6 @@ export class ProfileComponent implements OnInit {
 
       this.activeRouter.params.subscribe(
         res=>{
-        
-          
           this.getUserData();
         }
       );
@@ -78,8 +76,8 @@ export class ProfileComponent implements OnInit {
       
       this.profileService.getUserData(this.userLoggedIn.id).subscribe(
         res=>{
-          //this.currentUser = res;
-          //this.tokenStorage.globalCurrentUser = res;
+          this.currentUser = res;
+          this.tokenStorage.globalCurrentUser = res;
           //this.profileService.user.next(res);
           
           if(res.isNew){

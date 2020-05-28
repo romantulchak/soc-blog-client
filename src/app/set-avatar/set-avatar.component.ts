@@ -4,6 +4,8 @@ import { ProfileService } from '../services/profile.service';
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { NotificationService } from '../services/notification.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
+import { CompressImage } from '../services/compressImage.service';
 
 @Component({
   selector: 'app-set-avatar',
@@ -12,7 +14,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class SetAvatarComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) private userId:number, private profileService: ProfileService, private notificationService: NotificationService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) private userId:number,private compressImage: CompressImage, private imageCompress: NgxImageCompressService,  private profileService: ProfileService, private notificationService: NotificationService) { }
   @ViewChild(ImageCropperComponent) imageCropper: ImageCropperComponent;
 
   imageChangedEvent: any = '';
@@ -25,7 +27,22 @@ export class SetAvatarComponent implements OnInit {
   fileChangeEvent(event: any): void {
       
     this.fullFile = event.target.files[0];
-      
+    let orientation: DOC_ORIENTATION;
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fullFile);
+    reader.onload = () => {
+      this.imageCompress.compressFile(reader.result,orientation,80, 90 ).then(
+        result=>{
+        
+          this.fullFile = new File([this.compressImage.b64toBlob(result)], 'avatar.jpg');
+          console.log(this.fullFile);
+          
+        }
+      ); 
+    };
+
+   
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {

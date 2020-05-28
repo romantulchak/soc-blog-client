@@ -5,11 +5,16 @@
             <mat-spinner></mat-spinner>
         </div>
         <div class="user__profile" *ngIf="currentUser != null">
-            <div style="position: relative;">
-                <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
-                <button style="position: absolute; left: 0;" *ngIf="thisUser.id === currentUser.id" (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>    
-                
-           
+            <div class="avatar">
+                <div style="position: relative;">
+                    <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
+                    <button style="position: absolute; left: 0;" *ngIf="thisUser.id === currentUser.id" (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>    
+                </div>
+                <div class="user__gallery">
+                    <div class="gallery__image_card" *ngFor="let img of currentUser.images">
+                        <img (click)="avatarViewer(img.imagePath, imageViewer)" [src]="img.imagePath" alt="">
+                    </div>
+                </div>
             </div>
             <div class="user__data">
                 <div class="full__info">
@@ -73,3 +78,9 @@
     <a routerLink="/profile/user/{{user.id}}">{{user.username}}</a>
 </div>
 </div>
+
+<ng-template #imageViewer>
+    <mat-dialog-content>
+        <img class="image__viewer" src="{{imageViewerPath}}" alt="">
+    </mat-dialog-content>
+  </ng-template>

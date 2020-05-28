@@ -57,3 +57,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #827ffe;
     text-decoration: underline;
 }
+.image__viewer_container .mat-dialog-container{
+     padding: 0;
+}

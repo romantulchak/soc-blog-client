@@ -15,6 +15,8 @@ RichTextEditor.Inject(Toolbar, Link, HtmlEditor, Image, QuickToolbar);
 import {map, startWith} from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { RxStompService } from '@stomp/ng2-stompjs';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { CompressImage } from '../services/compressImage.service';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -54,7 +56,7 @@ export class CreatePostComponent implements OnInit {
 
 
 
-  constructor(private storageToken: TokenStorageService, private tagService: TagService, private postService: PostService, private notificationService: NotificationService, private rxStompService: RxStompService) { 
+  constructor(private compressImage:CompressImage,  private storageToken: TokenStorageService,private imageCompress: NgxImageCompressService, private tagService: TagService, private postService: PostService, private notificationService: NotificationService) { 
     this.imageSettings = { 
       saveFormat: "Base64" 
       };
@@ -93,6 +95,11 @@ export class CreatePostComponent implements OnInit {
     this.taggs.forEach(t=>{
       this.post.tags.push(this.tags.find(x=>x.name === t));
     });
+
+ 
+
+
+
     this.postService.createPost(this.post, this.image).subscribe(
       res=>{
         this.notificationService.success(res);
@@ -120,14 +127,16 @@ export class CreatePostComponent implements OnInit {
   }
 
   public fileUpload(event:any){
-    this.image = event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.image); 
-    reader.onload = (_event) => { 
-      this.imagePathPreview = reader.result; 
-    }
-    
+    this.imageCompress.uploadFile().then(({image, orientation})=>{
+      this.imageCompress.compressFile(image,orientation,80, 90 ).then(
+        result=>{
+          this.imagePathPreview = image;
+          this.image = new File([this.compressImage.b64toBlob(result)], 'post__main_image.jpg');
+        }
+      )
+    });
   }
+
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

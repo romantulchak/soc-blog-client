@@ -3,7 +3,7 @@
     <div class="spiner" *ngIf="loadingService.loading">
         <mat-spinner></mat-spinner>
     </div>
-    <div *ngIf="!loadingService.loading">
+    <div *ngIf="currentUser != null">
         <form (ngSubmit)="updateProfile()" enctype="multipart/form-data">
     
             <div>

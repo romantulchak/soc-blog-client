@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { User } from '../model/user.model';
 import { TokenStorageService } from '../services/token-storage.service';
 
@@ -8,15 +8,12 @@ import { TokenStorageService } from '../services/token-storage.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public user: User;
-  constructor(private tokenStorage: TokenStorageService) { }
+  @Input() user: User;
+  constructor() { }
 
   ngOnInit(): void {
-    if(this.tokenStorage.globalCurrentUser != null){
-      this.user = this.tokenStorage.globalCurrentUser;
-      }else{
-        this.user = this.tokenStorage.getUser();
-      }
+    
   }
+
 
 }

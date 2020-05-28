@@ -7,6 +7,7 @@ import { SetAvatarComponent } from 'src/app/set-avatar/set-avatar.component';
 import { DialogService } from 'src/app/services/dialog.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,15 +22,16 @@ export class SettingsComponent implements OnInit {
   public citiesByCountry: any;
   public countryName: string = 'Afghanistan';
   public cityName: string = 'Herat';
- 
-  constructor(private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, public loadingService: LoadingService) { }
+  public userId: number;
+  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, public loadingService: LoadingService) { 
+    this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
+  }
   
   ngOnInit(): void {
     this.getUserData(); 
   }
   getUserData(){
-    this.loadingService.showLoader();
-    this.profileService.user.subscribe(
+    this.profileService.getUserData(this.userId).subscribe(
       res=>{
         if(res != null){
           this.currentUser = res;

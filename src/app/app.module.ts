@@ -54,6 +54,8 @@ import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '
 import { RxStompConfig } from './config/rx-stomp.config';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
+
+import {NgxImageCompressService} from 'ngx-image-compress';
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +106,8 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
     MatTooltipModule,
     ChartModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+  
     
   ],
   providers: [authInterceptorProviders,
@@ -116,6 +119,7 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
         DataLabelService,
          LineSeriesService,
           DateTimeService,
+          NgxImageCompressService,
            LineSeriesService,
             DateTimeCategoryService,
              StripLineService,
