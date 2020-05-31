@@ -1,0 +1,2 @@
+<button class="follow__btn_all follow" *ngIf="thisUser.id != currentUser.id && !currentUser.isSubscribe" (click)="startFollowing()">Follow</button>    
+<button class="follow__btn_all stop_follow" *ngIf="thisUser.id != currentUser.id && currentUser.isSubscribe" (click)="stopFollowing()">Following</button>    

@@ -3,3 +3,23 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1em;
 }
+.create__post_link{
+    width: 50px;
+    display: block;
+    border-radius: 50%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s ease-in;
+    display: flex;
+    margin-bottom: 1em;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.43);
+}
+.create__post_link:hover{
+    background: aliceblue;
+}
+.create__post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

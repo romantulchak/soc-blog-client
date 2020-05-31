@@ -30,7 +30,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { SubscribtionsComponent } from './subscribtions/subscribtions.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { UserCardComponent } from './user-card/user-card.component';
-import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { SafeHtml } from './pipes/safeHtml.pipe';
@@ -54,8 +53,10 @@ import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '
 import { RxStompConfig } from './config/rx-stomp.config';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
-
 import {NgxImageCompressService} from 'ngx-image-compress';
+import { ExploreComponent } from './explore/explore.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { FollowButtonComponent } from './follow-button/follow-button.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,6 @@ import {NgxImageCompressService} from 'ngx-image-compress';
     SubscribtionsComponent,
     UserStatsComponent,
     UserCardComponent,
-    NotificationDialogComponent,
     SubscribersComponent,
     SafeHtml,
     PostComponent,
@@ -81,6 +81,9 @@ import {NgxImageCompressService} from 'ngx-image-compress';
     PostDetailsComponent,
     NavbarComponent,
     PostDialogComponent,
+    ExploreComponent,
+    GalleryComponent,
+    FollowButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,7 +110,7 @@ import {NgxImageCompressService} from 'ngx-image-compress';
     ChartModule,
     MatButtonModule,
     MatSelectModule,
-  
+ 
     
   ],
   providers: [authInterceptorProviders,

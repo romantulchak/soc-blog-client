@@ -27,8 +27,7 @@ export class SubscribtionsComponent implements OnInit {
   private getSubscriptions(){
     this.subscriptionsService.getSubscriptions(this.userId, this.currentUser.id).subscribe(
       res=>{
-          console.log(res);
-          
+     
           this.users = res;
       }
     );

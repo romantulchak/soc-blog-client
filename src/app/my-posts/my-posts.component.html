@@ -1,9 +1,12 @@
+<div class="create__post">
+    <a class="create__post_link" routerLink="/profile/create-post/">+</a>
+</div>
 <div
-  class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="10"
-  (scrolled)="onScroll()"
+class="search-results"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="10"
+(scrolled)="onScroll()"
 >
-    <app-post class="grid__posts" [posts]="posts"></app-post>
+<app-post [posts]="posts"></app-post>
 </div>

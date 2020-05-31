@@ -3,6 +3,6 @@ import { User } from './user.model';
 
 export class NotificationBox{
     id:number;
-    notifications: Notification[];
+    notificationDTOS: Notification[];
     notificationCounter: number;
 }

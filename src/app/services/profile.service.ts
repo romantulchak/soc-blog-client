@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Country } from '../model/country.model';
 import { NotificationBox } from '../model/notificationBox.model';
 import { Post } from '../model/post.model';
+import { FollowButton } from '../model/followButton.model';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -17,6 +18,8 @@ export class ProfileService{
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     public isOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    public userPhotos: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+    public updateFollowButton: BehaviorSubject<FollowButton> = new BehaviorSubject<FollowButton>(null);
     constructor(private http: HttpClient){
     }
     getUserData(userId: number):Observable<User>{

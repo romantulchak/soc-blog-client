@@ -5,4 +5,6 @@ export class Notification{
     message: string;
     isRead: boolean;
     user: User;
+    dateTime: Date;
+    eNotification: string;
 }

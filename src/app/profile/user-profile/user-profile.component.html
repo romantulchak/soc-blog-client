@@ -1,9 +1,6 @@
 <div class="user__profile_loader">
 <section>
- 
-        <div class="spiner" *ngIf="loadingService.loading">
-            <mat-spinner></mat-spinner>
-        </div>
+   
         <div class="user__profile" *ngIf="currentUser != null">
             <div class="avatar">
                 <div style="position: relative;">
@@ -31,12 +28,10 @@
                     <h3>Experience to next level: {{currentUser.experienceToNextLevel}}</h3>
                 </div>
             </div>
+           
             <div class="user__follow">
-                <button *ngIf="thisUser.id != currentUser.id && !currentUser.isSubscribe" (click)="startFollowing()">Follow</button>    
-                <button *ngIf="thisUser.id != currentUser.id && currentUser.isSubscribe" (click)="stopFollowing()">Unfollow</button>    
-            
+                <app-follow-button [thisUser]="thisUser" [currentUser]="currentUser"></app-follow-button>
             </div>
-
 
             <app-user-stats [user]="currentUser"></app-user-stats>
 
@@ -56,21 +51,16 @@
  
 </section>
 
-<div>
-    <h1 style="color: green;">{{currentUser?.isOnline}}</h1>
-</div>
-
-
 <section id="posts" style="padding: 1em;">
-    <div
-  class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="10"
-  (scrolled)="onScroll()"
->
-    <app-post [posts]="posts"></app-post>
+    <div>
+        <nav>
+            <ul>
+                <li><a routerLink="/profile/user/{{currentUser?.id}}"routerLinkActive [routerLinkActiveOptions]="{exact:true}" #rtl="routerLinkActive">Posts</a></li>
+                <li><a routerLink="/profile/user/{{currentUser?.id}}/gallery" (click)="setPhotoToGallery()">Gallery</a></li>
+            </ul>
+        </nav>
     </div>
+    <router-outlet></router-outlet>
 </section>
 
 

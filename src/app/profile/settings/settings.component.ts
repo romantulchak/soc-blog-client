@@ -5,7 +5,6 @@ import { Country } from 'src/app/model/country.model';
 import { MatDialog } from '@angular/material/dialog';
 import { SetAvatarComponent } from 'src/app/set-avatar/set-avatar.component';
 import { DialogService } from 'src/app/services/dialog.service';
-import { LoadingService } from 'src/app/services/loading.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,7 +22,9 @@ export class SettingsComponent implements OnInit {
   public countryName: string = 'Afghanistan';
   public cityName: string = 'Herat';
   public userId: number;
-  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, public loadingService: LoadingService) { 
+
+  public loaded: boolean = false;
+  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService ) { 
     this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
   }
   
@@ -31,6 +32,7 @@ export class SettingsComponent implements OnInit {
     this.getUserData(); 
   }
   getUserData(){
+    this.loaded = false;
     this.profileService.getUserData(this.userId).subscribe(
       res=>{
         if(res != null){
@@ -59,6 +61,9 @@ export class SettingsComponent implements OnInit {
           this.citiesByCountry = res[this.countryName];
           this.cityName = this.currentUser.city;
         }
+        setTimeout(() => {
+          this.loaded = true;
+        }, 1000);
       }
     );
   }

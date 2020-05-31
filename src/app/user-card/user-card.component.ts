@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from '../model/user.model';
 import { TokenStorageService } from '../services/token-storage.service';
 import { ProfileService } from '../services/profile.service';
-import { LoadingService } from '../services/loading.service';
 import { UserProfileComponent } from '../profile/user-profile/user-profile.component';
 
 @Component({
@@ -14,7 +13,7 @@ export class UserCardComponent implements OnInit {
 
   @Input() users: User[];
   public currentUser: User;
-  constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService, private loadingService: LoadingService) { }
+  constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();

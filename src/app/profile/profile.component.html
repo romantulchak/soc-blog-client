@@ -1,18 +1,9 @@
-<section>
-    <app-navbar [user]="currentUser"></app-navbar>
-    <div class="section__profile">
-        <nav>
-            <ul>
-                <li class="profile__link_card card__color_profile"  ><a routerLink="/profile/user/{{currentUser.id}}">Profile</a></li>
-                <li class="profile__link_card card__color_news"><a routerLink="/news/">News</a></li>
-                <li class="profile__link_card card__color_post"><a routerLink="/profile/create-post/">Create post</a></li>
-                <li class="profile__link_card card__color_myposts"><a routerLink="/profile/my-posts/">My posts</a></li>
-                <li class="profile__link_card card__color_notifications notifications" (click)="openNotificationDialog()"><a>Notifications <span class="notifciation__counter">{{notificationCounter}}</span></a></li>
-                <li class="profile__link_card card__color_settings"><a routerLink="/profile/settings/{{currentUser.id}}">Settings</a></li>
-
-                <button *ngIf="currentUser != null" (click)="logout()">LogOut</button>
-            </ul>
-        </nav>
+<div class="spiner" *ngIf="!loaded">
+    <mat-spinner></mat-spinner>
+</div>
+<section *ngIf="loaded">
+    <app-navbar class="profile__navbar" [user]="currentUser"></app-navbar>
+    <div class="section__profile container">
             <router-outlet #outlet="outlet" style="display: none;"></router-outlet>
     </div>
 </section>

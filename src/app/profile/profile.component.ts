@@ -13,7 +13,7 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
+  
 
   constructor(private tokenStorage: TokenStorageService,private postService: PostService, private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
 
@@ -26,21 +26,15 @@ export class ProfileComponent implements OnInit {
    public currentUser: User;
   private userLoggedIn: User;
   public notificationCounter: number;
+  public loaded: boolean = false;
   ngOnInit(): void {
     this.userLoggedIn = this.tokenStorage.getUser();
     this.currentUser = this.tokenStorage.getUser();
     if(this.currentUser != null){
       this.getUserData();
-      this.getNotificationsForUser();
     }
-    this.profileService.notificationCounter.subscribe(
-      res=>{
-        this.notificationCounter = res;
-      }
-    );
-    
-    this.updateNotifications();
     this.checkLikes();
+
   }
 
 
@@ -61,17 +55,12 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+ 
 
 
-  private updateNotifications(){
-      this.rxStompService.watch('/topic/notification').subscribe(obj =>{
-        if(this.userLoggedIn.id === JSON.parse(obj.body)){
-          this.getNotificationsForUser();
-        }
-    });
-  }
 
-  getUserData(){
+  private getUserData(){
+    this.loaded = false;
     if(this.userLoggedIn != null){
       
       this.profileService.getUserData(this.userLoggedIn.id).subscribe(
@@ -83,6 +72,9 @@ export class ProfileComponent implements OnInit {
           if(res.isNew){
             this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
           }
+          setTimeout(() => {
+            this.loaded = true;
+          }, 2000);
         }
       );
   
@@ -90,25 +82,8 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  logout(){
-    this.tokenStorage.signOut();
-    window.location.reload();
-    this.router.navigate(['/']);
-  }
 
-  public getNotificationsForUser(){
-    this.profileService.getNotificationsForUser(this.userLoggedIn.id).subscribe(
-      res=>{
-        this.notificationCounter = res.notificationCounter;
 
-      }
-    );
-  } 
-
-  openNotificationDialog(){
-  
-        this.dialogService.notificationDialog(this.userLoggedIn.id);
-  }
 
 
 }

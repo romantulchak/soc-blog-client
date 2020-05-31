@@ -5,7 +5,6 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DialogService } from 'src/app/services/dialog.service';
-import { LoadingService } from 'src/app/services/loading.service';
 import { SafeHtml } from 'src/app/pipes/safeHtml.pipe';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
@@ -42,9 +41,7 @@ export class UserProfileComponent implements OnInit {
   public zoom: Object;
   public imageViewerPath: string;
 
-
-
-  constructor(private postService: PostService, public loadingService: LoadingService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
+  constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
   }
 
@@ -55,6 +52,7 @@ export class UserProfileComponent implements OnInit {
     this.getPostsForChart(this.thisUser.id);
     this.activeRoute.params.subscribe(
       params=>{
+        
         this.currentId = params.id;  
         this.getUserById(params.id, this.thisUser);
         this.getMyPosts(params.id);
@@ -62,26 +60,26 @@ export class UserProfileComponent implements OnInit {
       }
     );
 
-      this.updatePosts();
+      this.following();
+  }
+  private following(){
+    this.rxStompService.watch('/topic/following').subscribe(
+      res=>{
+        if(res != null){
+   
+         
+          if(JSON.parse(res.body).id == this.currentUser.id){
+           this.currentUser.isSubscribe = JSON.parse(res.body).isSubscribe;
+         
+            
+         }
+        }
+      }
+    );
   }
  
 
-  private updatePosts(){
-    this.rxStompService.watch('/topic/updatePost').subscribe(
-      res=>{
-        if(res != null){
-          this.posts.unshift(JSON.parse(res.body));
-        }
-      }
-    );
-    this.rxStompService.watch('/topic/updatePost/delete').subscribe(
-      res=>{
-        if(res != null){
-          this.getMyPosts(this.currentUser.id);
-        }
-      }
-    );
-  }
+  
 
   private getPostsForChart(currentUser: number){
     this.postService.getPostsForChart(currentUser).subscribe(
@@ -121,17 +119,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   private getUserData(){
+    
     this.profileService.user.subscribe(
       res=>{
         if(res != null){
           this.currentUser = res;
-          
-          this.loadingService.showLoader();
           if(res.isNew && this.thisUser.id === res.id){
             this.router.navigateByUrl(`/profile/settings/${this.thisUser.id}`);
             this.notificationService.success('Let\'s set up your profile');
           }
-          //this.getMyPosts(this.thisUser.id);
           this.getMyPosts(this.test);
         }
       }
@@ -143,17 +139,13 @@ export class UserProfileComponent implements OnInit {
 
 
   getUserById(userId: number, currentUserId?:User){
-    
     this.userId = userId;
     this.profileService.getUserById(userId, currentUserId.id).subscribe(
       res=>{
         if(res != null){
           window.scrollTo(0, 0);
-          this.loadingService.showLoader();
-          console.log(res);
-          
           this.currentUser = res;
- 
+          this.setPhotoToGallery();
         }
       }
     );
@@ -167,35 +159,16 @@ export class UserProfileComponent implements OnInit {
       );
   }
   
-  public startFollowing(){
-  
-    this.profileService.startFollowing(this.currentUser.id, this.thisUser.id).subscribe(
-      res=>{
-        this.getUserById(this.currentUser.id,this.thisUser);
-        this.notificationService.success(res);
-        this.rxStompService.publish({destination:'/app/startFollow/', body: this.currentUser.id.toString() })
-  
-      }
-    );
-  }
-  public stopFollowing(){
-    this.profileService.stopFollowing(this.currentUser.id, this.thisUser.id).subscribe(
-      res=>{
-        this.getUserById(this.currentUser.id,this.thisUser);
-        this.notificationService.success(res);
-      }
-    );
-  }
 
   private getMyPosts(currentUser:number){
     this.page = 0;
     this.postService.getMyPosts(currentUser, this.page, this.thisUser.id).subscribe(
       posts=>{
         if(posts != null){
-          console.log(posts.posts);
           
           this.posts = posts.posts;
           this.page = posts.currentPage;
+
         }
       }
     );
@@ -222,10 +195,13 @@ export class UserProfileComponent implements OnInit {
       panelClass: 'image__viewer_container'
     });
   }
+  public setPhotoToGallery(){
+    this.profileService.userPhotos.next(this.currentUser);
+  }
 
 
 
-/* */
+
 
 
 

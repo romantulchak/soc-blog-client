@@ -5,8 +5,7 @@
             <h2> <a routerLink="/profile/user/{{user.id}}">{{user.firstName | titlecase}} {{user.lastName | titlecase}}</a></h2>
             <app-user-stats [size]="'small'" [user]="user"></app-user-stats>
             <div class="user__follow">
-                <button *ngIf="currentUser.id != user.id && !user.isSubscribe">Follow</button>    
-                <button *ngIf="currentUser.id != user.id && user.isSubscribe">Unfollow</button>    
+                <app-follow-button [thisUser]="currentUser" [currentUser]="user"></app-follow-button>   
             </div>
         </div>
     </div>

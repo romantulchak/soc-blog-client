@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="column" *ngFor="let img of currentUser?.images">
+        <img (click)="avatarViewer(img.imagePath, imageViewer)" [src]="img.imagePath" alt="">
+    </div>
+</div>
+
+<ng-template #imageViewer>
+    <mat-dialog-content>
+        <img class="image__viewer" src="{{imageViewerPath}}" alt="">
+    </mat-dialog-content>
+  </ng-template>

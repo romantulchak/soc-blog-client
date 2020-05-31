@@ -60,3 +60,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .image__viewer_container .mat-dialog-container{
      padding: 0;
 }
+
+.cdk-overlay-container{
+    z-index: 999999;
+}
