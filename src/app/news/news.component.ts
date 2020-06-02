@@ -32,7 +32,7 @@ export class NewsComponent implements OnInit {
     this.postService.getPostBySubscribtions(this.user, 0).subscribe(
       res=>{
         this.posts = res.posts;
-        console.log(res.posts);
+    
         
       }
     );

@@ -29,3 +29,7 @@
     display: block;
     z-index: 999999;
 }
+.hide{
+
+        overflow: hidden;
+}

@@ -59,7 +59,7 @@
                     </ng-container>
                 </div>
             </li>
-            <li routerLinkActive="active" class="profile__link_user navbar__li" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile/user/{{user.id}}"><img class="news__navbar_avatar" [src]="user?.avatar != null ? user.avatar :''" alt=""></a></li>
+            <li [class.active]="router.url === '/profile/user/' + user.id ||router.url === '/profile/user/' + user.id + '/gallery' " class="profile__link_user navbar__li" ><a routerLink="/profile/user/{{user.id}}"><img class="news__navbar_avatar" [src]="user?.avatar != null ? user.avatar :''" alt=""></a></li>
             <li class="navbar__dropdown_menu navbar__li" (click)="isDropDownOpen = !isDropDownOpen"> 
                 <span *ngIf="!isDropDownOpen" class="material-icons">
                     keyboard_arrow_down

@@ -84,6 +84,7 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
     ExploreComponent,
     GalleryComponent,
     FollowButtonComponent,
+
   ],
   imports: [
     BrowserModule,

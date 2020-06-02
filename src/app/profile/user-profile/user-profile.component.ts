@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
   public zoom: Object;
   public imageViewerPath: string;
 
-  constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,private router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
+  constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,public router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
   }
 

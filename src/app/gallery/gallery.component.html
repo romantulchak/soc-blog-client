@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="gallery">
     <div class="column" *ngFor="let img of currentUser?.images">
         <img (click)="avatarViewer(img.imagePath, imageViewer)" [src]="img.imagePath" alt="">
     </div>
