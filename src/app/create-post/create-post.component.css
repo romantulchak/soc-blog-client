@@ -19,6 +19,7 @@
     height: 100%;
     align-items: center;
 }
+
 .post__title{
     text-align: center;
     margin-top: 2em;
@@ -32,7 +33,23 @@
 mat-form-field{
     width: 100% !important; 
 }
-
+.choose__photo{
+    background: white;
+    border: none;
+    padding: .4em;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid silver;
+    font-family: sans-serif;
+    outline: none;
+    font-weight: 900;
+    transition: .5s;
+    margin-bottom: .5em;
+}
+.choose__photo:hover{
+    background-color: royalblue;
+    color: white;
+}
 .form__shadows{
     padding: 1em;
     /* border: 1px solid; */

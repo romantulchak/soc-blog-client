@@ -6,7 +6,7 @@
     <div class="btn__upload_file">
         <div class="upload__btn">
           <h4>Preview image</h4>
-          <input type="button" name="image" (click)="fileUpload($event)" required>
+          <input class="choose__photo" type="button" name="image" (click)="fileUpload($event)" value="Choose a photo" required>
         </div>
      </div>
       <img [src]="imagePathPreview" class="image__preview"  accept='image/*' alt="" >

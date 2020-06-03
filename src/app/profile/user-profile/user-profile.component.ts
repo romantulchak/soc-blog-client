@@ -2,14 +2,13 @@ import { Component, OnInit, ViewEncapsulation, TemplateRef } from '@angular/core
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/model/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute,  NavigationStart, NavigationEnd } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { SafeHtml } from 'src/app/pipes/safeHtml.pipe';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
 import { RxStompService } from '@stomp/ng2-stompjs';
-import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -41,15 +40,33 @@ export class UserProfileComponent implements OnInit {
   public zoom: Object;
   public imageViewerPath: string;
 
+
+  public loadingRouteConfig: boolean;
+
   constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,public router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
-  }
+
+     
+
+  
+    }
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
     this.getUserData();
     this.getUsers();
     this.getPostsForChart(this.thisUser.id);
+
+    this.router.events.subscribe(event=>{
+      if(event instanceof NavigationStart){
+        this.loadingRouteConfig = true;
+      }else if(event instanceof NavigationEnd){
+        setTimeout(() => {
+          this.loadingRouteConfig = false;
+        }, 2000);
+      }
+    });
+
     this.activeRoute.params.subscribe(
       params=>{
         

@@ -22,8 +22,6 @@ export class SettingsComponent implements OnInit {
   public countryName: string = 'Afghanistan';
   public cityName: string = 'Herat';
   public userId: number;
-
-  public loaded: boolean = false;
   constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService ) { 
     this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
   }
@@ -32,7 +30,6 @@ export class SettingsComponent implements OnInit {
     this.getUserData(); 
   }
   getUserData(){
-    this.loaded = false;
     this.profileService.getUserData(this.userId).subscribe(
       res=>{
         if(res != null){
@@ -61,9 +58,6 @@ export class SettingsComponent implements OnInit {
           this.citiesByCountry = res[this.countryName];
           this.cityName = this.currentUser.city;
         }
-        setTimeout(() => {
-          this.loaded = true;
-        }, 1000);
       }
     );
   }

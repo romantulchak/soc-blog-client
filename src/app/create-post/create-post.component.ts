@@ -130,6 +130,8 @@ export class CreatePostComponent implements OnInit {
     this.imageCompress.uploadFile().then(({image, orientation})=>{
       this.imageCompress.compressFile(image,orientation,80, 90 ).then(
         result=>{
+
+          
           this.imagePathPreview = image;
           this.image = new File([this.compressImage.b64toBlob(result)], 'post__main_image.jpg');
         }
