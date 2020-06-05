@@ -42,9 +42,6 @@ export class ProfileService{
         return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text'});
     }
 
-    getUsers(): Observable<User[]>{
-        return this.http.get<User[]>(API_URL + 'profile/users');
-    }
     getUserById(userId: number, currentUserId: number): Observable<User>{
         return this.http.get<User>(API_URL + 'profile/userById/' + userId + '/' + currentUserId);
     }
@@ -59,5 +56,8 @@ export class ProfileService{
     }
     readNotification(notificationBoxId: number, notificationId: number): Observable<NotificationBox>{
         return this.http.put<NotificationBox>(API_URL + 'profile/readNotification/' + notificationBoxId + '/' + notificationId, null);
+    }
+    explorePeople(userId:number):Observable<User[]>{
+        return this.http.get<User[]>(API_URL + 'profile/explore/' + userId);
     }
 }

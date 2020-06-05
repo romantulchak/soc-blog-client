@@ -21,7 +21,6 @@ export class UserProfileComponent implements OnInit {
 
   public currentUser: User;
   public thisUser: User;
-  public users:User[];
   public userId: number;
   public posts: Post[] = [];
 
@@ -54,7 +53,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
     this.getUserData();
-    this.getUsers();
     this.getPostsForChart(this.thisUser.id);
 
     this.router.events.subscribe(event=>{
@@ -168,14 +166,7 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  private getUsers(){
-      this.profileService.getUsers().subscribe(
-        res=>{
-          this.users = res;
-        }
-      );
-  }
-  
+
 
   private getMyPosts(currentUser:number){
     this.page = 0;
