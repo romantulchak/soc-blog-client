@@ -4,6 +4,8 @@ import { PostService } from '../services/post.service';
 import { Post } from '../model/post.model';
 import { CommentService } from '../services/comment.service';
 import { Comment } from '../model/commnet.model';
+import { User } from '../model/user.model';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-post-details',
@@ -15,18 +17,20 @@ export class PostDetailsComponent implements OnInit {
   private postId: number;
   public post: Post;
   public page: number = 0;
+  private user: User;
   public comments: Comment[];
-  constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService) {
+  constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService, private tokenStorageService: TokenStorageService) {
     this.postId = Number.parseInt(this.activetedRoute.snapshot.paramMap.get('id'));
    }
 
   ngOnInit(): void {
+    this.user = this.tokenStorageService.getUser();
     this.getPostById();
     this.getCommentsForPost();
   }
 
   private getPostById(){
-    this.postService.getPostById(this.postId).subscribe(
+    this.postService.getPostById(this.postId, this.user.id).subscribe(
       res=>{
         if(res != null)
           this.post = res;

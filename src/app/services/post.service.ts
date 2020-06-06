@@ -51,11 +51,14 @@ export class PostService{
 
     }
 
-    getPostById(postId: number): Observable<Post>{
-        return this.http.get<Post>(API_URL + 'posts/getPostById/' + postId);
+    getPostById(postId: number, userId:number): Observable<Post>{
+        return this.http.get<Post>(API_URL + 'posts/getPostById/' + postId + '/' + userId);
     }
     deletePost(postId: number, userId: number){
         return this.http.delete(API_URL + 'posts/deletePost/' + postId + '/' + userId, {responseType:'text'});
+    }
+    explorePosts(userId:number): Observable<Post[]>{
+        return this.http.get<Post[]>(API_URL + 'posts/explorePosts/' + userId);
     }
     
 }

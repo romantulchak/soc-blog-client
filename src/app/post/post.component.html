@@ -1,5 +1,4 @@
-
-
+<ng-container *ngIf="!exploer">
 <div class="post__card" *ngFor="let post of posts">
     <div class="post__remove_btn" (click)="deletePost(post)" *ngIf="post.user.id == currentUser.id">
       <span>X</span>
@@ -34,3 +33,34 @@
         </div>
     </div>
 </div>
+</ng-container>
+
+
+<ng-container *ngIf="exploer">
+  <div class="content-wrapper">
+  
+    <div class="news-card" *ngFor="let post of posts">
+      <span class="news-card__card-link"></span>
+      <img  [src]="post.image" alt="" class="news-card__image">
+      <div class="news-card__text-wrapper">
+        <h2 class="news-card__title">{{post.name | titlecase}}</h2>
+        <div class="news-card__post-date">{{post.createdDate | date}}</div>
+        <div class="news-card__details-wrapper">
+          <p class="news-card__excerpt">{{post.smallDescription}}</p>
+          
+         <div class="likes__read_btn">
+          <div class="post__likes">
+            <span (click)="setLike(post)" [class.liked]="post.meLiked" [class.unliked]="!post.meLiked" class="material-icons">
+              favorite
+              </span>
+              <h1>{{post.likesCounter}}</h1>
+            </div>  
+            <a routerLink="/post/{{post.id}}" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+         </div>
+          
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</ng-container>
