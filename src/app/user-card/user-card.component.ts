@@ -11,7 +11,9 @@ import { UserProfileComponent } from '../profile/user-profile/user-profile.compo
 })
 export class UserCardComponent implements OnInit {
 
+  @Input() user: User;
   @Input() users: User[];
+  @Input() slider: boolean = false;
   public currentUser: User;
   constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService) { }
 

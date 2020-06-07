@@ -1,0 +1,47 @@
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.slides {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    position: relative;
+}
+.slides::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+}
+.controls__position{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.slider__btn_left{
+    position: absolute;
+    top: 15em;
+    left: 5px;
+}
+.slider__btn_right{
+    position: absolute;
+    right: 5px;
+    top: 15em;
+}
+.control__btn{
+    border: none;
+    background: #7f7f7f9c;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    border-radius: 50%;
+}

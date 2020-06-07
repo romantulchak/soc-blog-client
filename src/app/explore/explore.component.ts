@@ -13,17 +13,17 @@ import { Post } from '../model/post.model';
 export class ExploreComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private tokenStorageSerivce:TokenStorageService, private postService: PostService) { }
-  private user: User;
+  public currentUser: User;
   public users: User[];
   public posts: Post[];
   ngOnInit(): void {
-    this.user = this.tokenStorageSerivce.getUser();
+    this.currentUser = this.tokenStorageSerivce.getUser();
     this.explorePeople();
     this.explorePosts();
 
   }
   private explorePeople(){
-    this.profileService.explorePeople(this.user.id).subscribe(
+    this.profileService.explorePeople(this.currentUser.id).subscribe(
       res=>{
        if(res != null){
          this.users = res;
@@ -33,7 +33,7 @@ export class ExploreComponent implements OnInit {
     );
   }
   private explorePosts(){
-    this.postService.explorePosts(this.user.id).subscribe(
+    this.postService.explorePosts(this.currentUser.id).subscribe(
       res=>{
         if(res != null){
           this.posts = res;

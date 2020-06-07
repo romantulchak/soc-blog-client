@@ -1,4 +1,14 @@
-<app-user-card [users]="users"></app-user-card>
+
+
+<app-slider>
+
+
+    <div *ngFor="let user of users" class="fl" appSliderItem>
+        <app-user-card [user]="user" [slider]="true"></app-user-card>
+    </div>
+  
+
+</app-slider>
 
 <app-post [posts]="posts" [exploer]="true"></app-post>
 

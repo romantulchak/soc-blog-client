@@ -153,3 +153,15 @@
     text-align: center;
 }
 
+.user__flex{
+  display: flex;
+}
+.card__flex{
+  display: inline-block;
+  margin: 10px 0 0 2%;
+  flex-grow: 1;
+  width: calc(100% * (1/4) - 10px - 1px);
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: none;
+}

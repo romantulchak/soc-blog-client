@@ -57,6 +57,8 @@ import {NgxImageCompressService} from 'ngx-image-compress';
 import { ExploreComponent } from './explore/explore.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
+import { SliderComponent } from './slider/slider.component';
+import { SliderItemDirective } from './directives/sliderItemDirective.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,8 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
     ExploreComponent,
     GalleryComponent,
     FollowButtonComponent,
-
+    SliderComponent,
+    SliderItemDirective
   ],
   imports: [
     BrowserModule,
