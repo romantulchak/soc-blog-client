@@ -6,5 +6,5 @@ export class Tag{
     name:string;
     posts: Post[];
     user: User;
-    
+    myInterest: boolean;
 }

@@ -57,8 +57,10 @@ export class PostService{
     deletePost(postId: number, userId: number){
         return this.http.delete(API_URL + 'posts/deletePost/' + postId + '/' + userId, {responseType:'text'});
     }
-    explorePosts(userId:number): Observable<Post[]>{
-        return this.http.get<Post[]>(API_URL + 'posts/explorePosts/' + userId);
+    explorePosts(userId:number, currentPage:number): Observable<PostPageable>{
+        let param = new HttpParams();
+        param = param.append('page', currentPage.toString());
+        return this.http.get<PostPageable>(API_URL + 'posts/explorePosts/' + userId, {params: param});
     }
     
 }

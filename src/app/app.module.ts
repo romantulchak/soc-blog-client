@@ -59,6 +59,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { SliderComponent } from './slider/slider.component';
 import { SliderItemDirective } from './directives/sliderItemDirective.directive';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +88,8 @@ import { SliderItemDirective } from './directives/sliderItemDirective.directive'
     GalleryComponent,
     FollowButtonComponent,
     SliderComponent,
-    SliderItemDirective
+    SliderItemDirective,
+    
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,7 @@ import { SliderItemDirective } from './directives/sliderItemDirective.directive'
     ChartModule,
     MatButtonModule,
     MatSelectModule,
- 
+    MatCheckboxModule
     
   ],
   providers: [authInterceptorProviders,

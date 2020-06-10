@@ -7,6 +7,7 @@ import { Country } from '../model/country.model';
 import { NotificationBox } from '../model/notificationBox.model';
 import { Post } from '../model/post.model';
 import { FollowButton } from '../model/followButton.model';
+import { Tag } from '../model/tag.model';
 
 const API_URL = environment.apiUrl;
 @Injectable({
@@ -59,5 +60,8 @@ export class ProfileService{
     }
     explorePeople(userId:number):Observable<User[]>{
         return this.http.get<User[]>(API_URL + 'profile/explore/' + userId);
+    }
+    addInterests(tag: Tag, userId: number){
+        return this.http.put(API_URL + 'profile/addInterests/' + userId, tag, {responseType:'text'});
     }
 }

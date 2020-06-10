@@ -1,0 +1,17 @@
+@font-face{
+    font-family: UbuntuRegular;
+    src: url('../../../assets/fonts/Ubuntu-Regular.ttf');
+}
+.settings__input{
+    padding: .8em;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 6px;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    background: none;
+}
+.settings{
+    font-family: UbuntuRegular;
+}

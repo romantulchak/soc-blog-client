@@ -4,14 +4,23 @@
 
 
     <div *ngFor="let user of users" class="fl" appSliderItem>
-        <app-user-card [user]="user" [slider]="true"></app-user-card>
+        <app-user-card class="user__card_explore" [user]="user" [slider]="true"></app-user-card>
     </div>
   
 
 </app-slider>
-
+<div
+class="search-results"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="10"
+(scrolled)="onScroll()"
+>
 <app-post [posts]="posts" [exploer]="true"></app-post>
-
+</div>
+<div style="margin: 0 auto;" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
 
 
 

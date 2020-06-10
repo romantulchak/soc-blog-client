@@ -10,3 +10,6 @@
     flex-grow: 1;
     width: calc(100% * (1/4) - 10px - 1px);
   }
+.user__card_explore{
+  padding: 1em;
+}

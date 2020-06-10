@@ -1,5 +1,6 @@
 import { Post } from './post.model';
 import { Image } from './image.model';
+import { Tag } from './tag.model';
 
 export class User{
     id?: number;
@@ -29,5 +30,5 @@ export class User{
     experienceToNextLevel: number;
     createdUser: Date;
     isOnline: boolean;
-    
+    interests: Tag[];
 }

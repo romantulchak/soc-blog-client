@@ -14,8 +14,8 @@ import { RxStompService } from '@stomp/ng2-stompjs';
 export class MyPostsComponent implements OnInit {
 
   public posts: Post[];
-  private userId:number;
-  private user: User;
+  public userId:number;
+  public user: User;
   private page: number = 0;
   constructor(private postService: PostService, private tokenStorage: TokenStorageService, private activatedRoute: ActivatedRoute, private rxStompService: RxStompService) { 
     

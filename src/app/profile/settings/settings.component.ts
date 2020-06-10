@@ -7,6 +7,9 @@ import { SetAvatarComponent } from 'src/app/set-avatar/set-avatar.component';
 import { DialogService } from 'src/app/services/dialog.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ActivatedRoute } from '@angular/router';
+import { Tag } from 'src/app/model/tag.model';
+import { TagService } from 'src/app/services/tag.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 
 @Component({
@@ -22,18 +25,22 @@ export class SettingsComponent implements OnInit {
   public countryName: string = 'Afghanistan';
   public cityName: string = 'Herat';
   public userId: number;
-  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService ) { 
+  public tags: Tag[];
+  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, private tagService: TagService ) { 
     this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
   }
   
   ngOnInit(): void {
-    this.getUserData(); 
+    this.getUserData();
   }
   getUserData(){
     this.profileService.getUserData(this.userId).subscribe(
       res=>{
         if(res != null){
           this.currentUser = res;
+
+          this.getInterests(); 
+          
           this.getCountries();
         }
       }
@@ -86,5 +93,43 @@ export class SettingsComponent implements OnInit {
         this.currentUser.gender = 'Male';
          break; 
     }
+  }
+
+
+
+
+  private getInterests(){
+    this.tagService.getTags().subscribe(
+      res=>{
+        
+        if(res != null){
+          this.tags = res;
+         if(this.currentUser != null){
+           this.tags.forEach(el=>{
+             for (let index = 0; index < this.currentUser.interests.length; index++) {
+               if(this.currentUser.interests[index].name === el.name){
+                 el.myInterest = true;
+                 break;
+               }
+               
+             }
+           })
+           
+         }
+          
+         
+        }
+      }
+    );
+  }
+
+  public addToInterests(event:MatCheckboxChange, tag: Tag){
+    this.profileService.addInterests(tag, this.userId).subscribe(
+      res=>{
+        this.notificationSerivce.success(res);
+      }
+    );
+    
+    
   }
 }

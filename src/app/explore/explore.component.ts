@@ -16,6 +16,8 @@ export class ExploreComponent implements OnInit {
   public currentUser: User;
   public users: User[];
   public posts: Post[];
+  private currentPage: number = 0;
+  public loading: boolean = false;
   ngOnInit(): void {
     this.currentUser = this.tokenStorageSerivce.getUser();
     this.explorePeople();
@@ -33,12 +35,31 @@ export class ExploreComponent implements OnInit {
     );
   }
   private explorePosts(){
-    this.postService.explorePosts(this.currentUser.id).subscribe(
+    this.postService.explorePosts(this.currentUser.id, this.currentPage).subscribe(
       res=>{
         if(res != null){
-          this.posts = res;
+          this.posts = res.posts;
+          
         }
       }
     );
+  }
+  public onScroll(){
+    this.loading = true;
+    this.postService.explorePosts(this.currentUser.id, this.currentPage+1).subscribe(
+      res=>{
+        if(res != null){
+         setTimeout(() => {
+          this.currentPage = res.currentPage;
+          res.posts.forEach(el=>{
+            this.posts.push(el);
+          });
+          this.loading = false;
+         }, 1500);
+        }
+      }
+    );
+
+  
   }
 }

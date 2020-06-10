@@ -1,28 +1,28 @@
 <section>
    <div class="user__profile_loader">
-    <div *ngIf="currentUser != null">
+    <div *ngIf="currentUser != null" class="settings">
         <form (ngSubmit)="updateProfile()" enctype="multipart/form-data">
     
             <div>
                 <h3>First Name</h3>
-                <input type="text" name="firstName" [value]="currentUser?.firstName" [(ngModel)]="currentUser.firstName">
+                <input class="settings__input" type="text" name="firstName" [value]="currentUser?.firstName" [(ngModel)]="currentUser.firstName">
             </div>
         
             <div>
                 <h3>Last Name</h3>
-                <input type="text" name="lastName" [value]="currentUser?.lastName" [(ngModel)]="currentUser.lastName">
+                <input class="settings__input" type="text" name="lastName" [value]="currentUser?.lastName" [(ngModel)]="currentUser.lastName">
             </div>
         
             <div>
                 <h3>Choose your country</h3>
-                <select name="country" [(ngModel)]="countryName" (change)="changeCitiesByCountry()">
+                <select class="settings__input" name="country" [(ngModel)]="countryName" (change)="changeCitiesByCountry()">
                     <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
                 </select>
             </div>
             
             <div>
                 <h3>Choose your city</h3>
-                <select name="city" [(ngModel)]="cityName" >
+                <select class="settings__input" name="city" [(ngModel)]="cityName" >
                     <option *ngFor="let city of citiesByCountry" value="{{city}}">{{city}}</option>
                 </select>
             </div>
@@ -38,9 +38,13 @@
                     <mat-button-toggle [checked]="currentUser.gender === 'Male'" (change)="setGender('2')" value="2">Male</mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
+              <div *ngFor="let tag of tags">
+
+                <mat-checkbox [checked]="tag.myInterest" (change)="addToInterests($event,tag)">{{tag.name}}</mat-checkbox>
+              </div>
               <div>
                 <h3>Place of Work</h3>
-                <input type="text" name="placeOfWork" [(ngModel)]="currentUser.placeOfWork">
+                <input class="settings__input" type="text" name="placeOfWork" [(ngModel)]="currentUser.placeOfWork">
               </div>
               <button type="submit">Update</button>
 

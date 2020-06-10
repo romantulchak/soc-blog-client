@@ -13,17 +13,14 @@ export class SliderComponent implements AfterContentInit {
 @ViewChild('slides') slidesContainer: ElementRef<HTMLDivElement>;
 
 private slidesIndex = 0;
-
 get currentItem(): ElementRef<HTMLDivElement> {
   return this.items.find((item, index) => index === this.slidesIndex);
 }
 
 ngAfterContentInit() {
-  console.log('items', this.items);
 }
 
 ngAfterViewInit() {
-  console.log('slides', this.slidesContainer);
 }
 
 onClickLeft() {
@@ -40,6 +37,7 @@ onClickRight() {
   if (this.slidesIndex < this.items.length - 1) {
     this.slidesIndex ++;
   }
+
 }
 
 
