@@ -14,4 +14,47 @@
 }
 .settings{
     font-family: UbuntuRegular;
+    padding: 1em;
+}
+::ng-deep .mat-ink-bar {
+    background-color:#babdd0 !important;
+}
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+    background-color: #babdd0;
+    color: black;
+    opacity: 1;
+    letter-spacing: 1px;
+}
+:host /deep/ .mat-tab-group {
+    flex-direction: row;
+  }
+  :host /deep/ .mat-tab-header {
+    border-bottom: none;
+  }
+  :host /deep/ .mat-tab-header-pagination {
+    display: none !important;
+  }
+  :host /deep/ .mat-tab-labels {
+    flex-direction: column;
+  }
+  :host /deep/ .mat-ink-bar {
+    height: 100%;
+    top: 0;
+    left: 98% !important;
+  }
+  :host /deep/ .mat-tab-body-wrapper {
+    flex: 1 1 auto;
+  }
+
+.settings__btn{
+    padding: .5em;
+    border-radius: 6px;
+    background-color: #0095f6;
+    border: 1px solid transparent;
+    color: #fff;
+    font-family: sans-serif;
+    outline: none;
+    font-weight: 900;
+    margin-top: .5em;
 }

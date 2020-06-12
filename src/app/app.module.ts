@@ -60,6 +60,7 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { SliderComponent } from './slider/slider.component';
 import { SliderItemDirective } from './directives/sliderItemDirective.directive';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,7 +117,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ChartModule,
     MatButtonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule
     
   ],
   providers: [authInterceptorProviders,

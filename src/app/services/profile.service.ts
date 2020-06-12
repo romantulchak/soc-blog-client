@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../model/user.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -39,8 +39,10 @@ export class ProfileService{
 
         return this.http.put(API_URL + 'profile/setAvatar/' +userId ,uploadFile, {responseType:'text'} );
     }
-    updateUserData(user: User){
-        return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text'});
+    updateUserData(user: User, username: string){
+        let params = new HttpParams();
+        params = params.append('username', username);
+        return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text', params: params});
     }
 
     getUserById(userId: number, currentUserId: number): Observable<User>{
@@ -63,5 +65,13 @@ export class ProfileService{
     }
     addInterests(tag: Tag, userId: number){
         return this.http.put(API_URL + 'profile/addInterests/' + userId, tag, {responseType:'text'});
+    }
+    changePassword(oldPassword:string, newPassword:string, userId: number){
+        
+
+        let params = new HttpParams();
+
+        params = params.append('old', oldPassword).append('new', newPassword);
+        return this.http.put(API_URL + 'profile/changePassword/' + userId, null, {params: params, responseType:'text'});
     }
 }
