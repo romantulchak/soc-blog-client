@@ -67,11 +67,13 @@ export class ProfileService{
         return this.http.put(API_URL + 'profile/addInterests/' + userId, tag, {responseType:'text'});
     }
     changePassword(oldPassword:string, newPassword:string, userId: number){
-        
-
         let params = new HttpParams();
-
         params = params.append('old', oldPassword).append('new', newPassword);
         return this.http.put(API_URL + 'profile/changePassword/' + userId, null, {params: params, responseType:'text'});
+    }
+    deleteUserPhoto(userId: number, imageId: number){
+        let params = new HttpParams();
+        params = params.append('userId', userId.toString()).append('imageId', imageId.toString());
+        return this.http.delete(API_URL + 'profile/deleteImage', {responseType: 'text', params:params});
     }
 }

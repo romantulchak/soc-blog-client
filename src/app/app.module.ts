@@ -61,6 +61,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderItemDirective } from './directives/sliderItemDirective.directive';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
+import { GalleryPhotoComponent } from './gallery-photo/gallery-photo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +91,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     FollowButtonComponent,
     SliderComponent,
     SliderItemDirective,
+    GalleryPhotoComponent,
     
   ],
   imports: [

@@ -8,12 +8,9 @@
                     <img class="user__avatar" [src]="currentUser?.avatar != null ? currentUser.avatar :'../../../assets/images/img_avatar.png'">
                     <button style="position: absolute; left: 0;" *ngIf="thisUser.id === currentUser.id" (click)="dialog.setAvatar(currentUser.id)">Change avatar</button>    
                 </div>
-                <div class="user__gallery">
-                    <div class="gallery__image_card" *ngFor="let img of currentUser.images.slice(0, 3)">
-                        <div class="image__backgorund_gallery" (click)="avatarViewer(img.imagePath, imageViewer)" [ngStyle]="{'background-image': 'url(' +img.imagePath + ')'}" alt=""></div>
-                    </div>
-                </div>
-                <a *ngIf="currentUser.images.length > 0" [fragment]="'gallery'" class="all__photos_gallery" routerLink="gallery">All photos</a>
+                <gallery-photo-app [min]="true"></gallery-photo-app>
+                <a *ngIf="imageCounter > 0" [fragment]="'gallery'" class="all__photos_gallery" routerLink="gallery">All photos</a>
+
             </div>
             <div class="user__data">
                 <div class="full__info">
@@ -76,9 +73,3 @@
 
 
 </div>
-
-<ng-template #imageViewer>
-    <mat-dialog-content>
-        <img class="image__viewer" src="{{imageViewerPath}}" alt="">
-    </mat-dialog-content>
-  </ng-template>

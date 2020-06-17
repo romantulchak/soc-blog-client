@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1em;
 }
+
 .create__post_link{
     width: 50px;
     display: block;

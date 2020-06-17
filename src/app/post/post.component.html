@@ -16,7 +16,7 @@
     </div>
     <div>
       <ng-container *ngFor="let tag of post.tags">
-          <span> <a class="tag__link" routerLink="/posts-by-tag/{{tag.name}}">#{{tag.name}}</a></span>
+          <span> <a class="tag__link" routerLink="/profile/posts-by-tag/{{tag.name}}">#{{tag.name}}</a></span>
       </ng-container>  
     </div>
     <div class="post__text"> {{post.smallDescription}}</div>

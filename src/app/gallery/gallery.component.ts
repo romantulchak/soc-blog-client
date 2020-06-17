@@ -16,12 +16,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.getUserPhotos();
   }
-  public avatarViewer(imagePath: string, templateRef: TemplateRef<any>){ 
-    this.imageViewerPath = imagePath;
-    this.dialogFromTemplate.open(templateRef, {
-      panelClass: 'image__viewer_container'
-    });
-  }
 
   public getUserPhotos(){
     this.profileService.userPhotos.subscribe(

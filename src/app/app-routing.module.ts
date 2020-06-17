@@ -35,13 +35,12 @@ const routes: Routes = [
     {path: 'user/:id/subscriptions', component: SubscribtionsComponent, data:{animation: 'isRight'}},
     {path: 'user/:id/subscribers', component: SubscribersComponent, data:{animation: 'isRight'}},
     
-    
+    {path: 'posts-by-tag/:name', component: PostsByTagComponent},
     {path: 'news', component: NewsComponent},
     {path: 'explore', component: ExploreComponent},
     {path: 'not-found', component:NotFoundComponent}
   ]},
   {path: 'login', component: LoginComponent, canActivate: [CheckGuard]},
-  {path: 'posts-by-tag/:name', component: PostsByTagComponent},
   {path: 'post/:id', component: PostDetailsComponent},
   {path: '**', component: NotFoundComponent},
 ];

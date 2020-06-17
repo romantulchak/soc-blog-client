@@ -1,0 +1,34 @@
+<ng-container *ngIf="full">
+    <div class="row" id="gallery">
+        <div class="column" *ngFor="let img of images; let i = index">
+            <div *ngIf="i != 0" class="remove__block" (click)="removeImage(img)">
+                <span class="material-icons">
+                    close
+                    </span>
+            </div>
+            <img (click)="avatarViewer(img.imagePath, imageViewer)" [src]="img.imagePath" alt="">
+        </div>
+    </div>
+
+</ng-container>
+
+<ng-container *ngIf="min">
+    <div class="user__gallery" *ngIf="images != null">
+        <div class="gallery__image_card" *ngFor="let img of images.slice(0, 3); let i = index">
+            <div *ngIf="i != 0 && currentUser.id == userInSystem.id" class="remove__block" (click)="removeImage(img)">
+                <span class="material-icons">
+                    close
+                    </span>
+            </div>
+            <div class="image__backgorund_gallery" (click)="avatarViewer(img.imagePath, imageViewer)" [ngStyle]="{'background-image': 'url(' +img.imagePath + ')'}" alt=""></div>
+        </div>
+    </div>
+</ng-container>
+
+
+
+<ng-template #imageViewer>
+    <mat-dialog-content>
+        <img class="image__viewer" src="{{imageViewerPath}}" alt="">
+    </mat-dialog-content>
+  </ng-template>

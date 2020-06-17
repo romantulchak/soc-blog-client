@@ -18,29 +18,7 @@
 
 }
 
-/*
-.user__followers{
-    word-break: break-all;
-    align-items: center;
-    text-align: center;
-    grid-gap: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 1em;
-}
-.followers__card{
-    padding: 1em;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.42);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    border-radius: 6px;
-    width: 20em;
-    justify-self: center;
-}
-.followers__card > h4{
-    color: #423c42;
-}
 
-*/
 .user__profile{
     display: grid;
     grid-template-columns: 17em 2fr 1fr;
@@ -68,23 +46,7 @@
     height: 100%;
     align-items: center;
 }
-.user__gallery{
-    width: 100%;
-    display: flex;
-    margin-bottom: 1em;
-    justify-content: space-around;
-    flex-direction: row-reverse;
-}
-.gallery__image_card{
-    height: 75px;
-    width: 75px;
-}
-.gallery__image_card img{
-    height: 100%;
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
-}
+
 .avatar{
     justify-self: center;
 }
@@ -123,15 +85,7 @@ mat-dialog-content{
 }
 
 /*Добавити цей клас в html замінивши img*/
-.image__backgorund_gallery{
-    width: 100%;
-    height: 100%;
-    display: block;
-    cursor: pointer;
-    background-size: cover;
-    border-radius: 8px;
-    background-position-y: center;
-}
+
 .navbar__posts_gallery{
     display: flex;
 }

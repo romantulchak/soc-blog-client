@@ -10,6 +10,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post.model';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageSerivce } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -39,22 +40,19 @@ export class UserProfileComponent implements OnInit {
   public zoom: Object;
   public imageViewerPath: string;
 
+  public imageCounter: number;
 
   public loadingRouteConfig: boolean;
 
-  constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,public router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog) { 
+  constructor(private postService: PostService, public dialog: DialogService, private notificationService: NotificationService,public router: Router, private activeRoute: ActivatedRoute,  private profileService: ProfileService, private tokenStorage: TokenStorageService,private rxStompService: RxStompService, private dialogFromTemplate: MatDialog, private imageService: ImageSerivce) { 
       this.test = Number.parseInt(this.activeRoute.snapshot.paramMap.get('id'));
-
-     
-
-  
     }
 
   ngOnInit(): void {
     this.thisUser = this.tokenStorage.getUser();
     this.getUserData();
     this.getPostsForChart(this.thisUser.id);
-
+    this.getImageCounter();
     this.router.events.subscribe(event=>{
       if(event instanceof NavigationStart){
         this.loadingRouteConfig = true;
@@ -94,7 +92,13 @@ export class UserProfileComponent implements OnInit {
   }
  
 
-  
+  private getImageCounter(){
+    this.imageService.imageCounter.subscribe(
+      res=>{
+        this.imageCounter = res;
+      }
+    );
+  }  
 
   private getPostsForChart(currentUser: number){
     this.postService.getPostsForChart(currentUser).subscribe(
