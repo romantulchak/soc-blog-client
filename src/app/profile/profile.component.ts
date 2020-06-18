@@ -33,14 +33,14 @@ export class ProfileComponent implements OnInit {
     if(this.currentUser != null){
       this.getUserData();
     }
-    this.checkLikes();
+  //  this.checkLikes();
 
   }
 
 
 
   private checkLikes(){
-    this.rxStompService.watch('/topic/like/').subscribe(
+    /*this.rxStompService.watch('/topic/like/').subscribe(
       res=>{
         if(res != null){
           this.postService.updatePost.next(JSON.parse(res.body));
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
           this.postService.currentUserId.next(Number.parseInt(res.body)); 
         }
       }
-    );
+    );*/
   }
  
 

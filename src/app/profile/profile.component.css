@@ -1,12 +1,6 @@
 .section__profile{
     padding: 1em;
 }
-.container{
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-
 
 .notifications{
     position: relative;

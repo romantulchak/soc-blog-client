@@ -67,3 +67,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .cdk-overlay-container{
     z-index: 999999;
 }
+.container{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.e-rte-image{
+    border-radius: 8px !important;
+}
+.span__text p {
+    font-family: Graphik !important;
+    font-size: 18px;
+}

@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Image } from '../model/image.model';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { retry } from 'rxjs/operators';
 
 const API_URL = environment.apiUrl;
 
@@ -21,6 +22,6 @@ export class ImageSerivce{
         return this.http.get<Image[]>(API_URL + 'images/', {params:params})
     }
     removeImage(imageId: number, userId:number){
-        return this.http.delete(API_URL + 'images/delete/'+ imageId + '/' + userId, {responseType:'text'});
+        return this.http.delete(API_URL + 'images/delete/'+ imageId + '/' + userId, {responseType:'text'}).pipe(retry(5));
     }
 }

@@ -22,12 +22,8 @@
     <div class="post__text"> {{post.smallDescription}}</div>
 
     <div class="post__date_likes">
-      <div class="post__likes">
-        <span (click)="setLike(post)" [class.liked]="post.meLiked" [class.unliked]="!post.meLiked" class="material-icons">
-          favorite
-          </span>
-          <h1>{{post.likesCounter}}</h1>
-        </div>
+        <app-likes-comments [post]="post"></app-likes-comments>
+
         <div class="post__created_date">
           <h4>{{post.createdDate | date}}</h4>
         </div>
@@ -49,12 +45,8 @@
           <p class="news-card__excerpt">{{post.smallDescription}}</p>
           
          <div class="likes__read_btn">
-          <div class="post__likes">
-            <span (click)="setLike(post)" [class.liked]="post.meLiked" [class.unliked]="!post.meLiked" class="material-icons">
-              favorite
-              </span>
-              <h1>{{post.likesCounter}}</h1>
-            </div>  
+         
+            <app-likes-comments [post]="post"></app-likes-comments>
             <a routerLink="/post/{{post.id}}" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
          </div>
           

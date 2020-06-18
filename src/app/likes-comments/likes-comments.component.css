@@ -1,0 +1,40 @@
+.post__likes{
+    display: flex;
+    align-items: center;
+}
+
+.liked{
+    color: red;
+   
+}
+.material-icons{
+    transition: .5s ease-in;
+
+    z-index: 999999999;
+    cursor: pointer;
+}
+
+.unliked{
+
+    color: rgb(110, 109, 109);
+}
+.post__likes_comments{
+    display: flex;
+    align-items: center;
+}
+.post__comments{
+    z-index: 9999999;
+}
+.post__comments>a{
+    margin-left: .5em;
+    text-decoration: underline;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    transition: .5s ease-in;
+}
+.post__comments>a:hover{
+    color: thistle;
+}

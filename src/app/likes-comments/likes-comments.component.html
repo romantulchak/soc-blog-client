@@ -1,0 +1,12 @@
+<div class="post__likes_comments">
+    <div class="post__likes">
+        <span (click)="setLike(post)" [class.liked]="post.meLiked" [class.unliked]="!post.meLiked" class="material-icons">
+          favorite
+          </span>
+          <h1>{{post.likesCounter}}</h1>
+    </div>
+    <div class="post__comments">
+        <a routerLink="/post/{{post.id}}" [fragment]="'comments'">comments: 11</a>
+    </div>
+</div>
+

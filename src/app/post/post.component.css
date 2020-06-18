@@ -73,31 +73,13 @@
     cursor: pointer;
     font-family: sans-serif;
 }
-.liked{
-    color: red;
-   
-}
-.material-icons{
-    transition: .5s ease-in;
 
-    z-index: 999999999;
-    cursor: pointer;
-}
-
-.unliked{
-
-    color: rgb(110, 109, 109);
-}
 .post__date_likes{
     display: flex;
     justify-content: space-between;
     margin-left: 2em;
     margin-right: 2em;
     padding: 1em;
-}
-.post__likes{
-    display: flex;
-    align-items: center;
 }
 .post__created_date{
     font-family: monospace;

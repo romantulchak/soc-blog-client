@@ -53,8 +53,5 @@ export class PostComponent implements OnInit {
     this.dialogService.deletePost(post);
    
   }
-  public setLike(post: Post){
-    this.rxStompService.publish({destination: '/app/setLike/' + this.currentUser.id + '/' + post.id});
-  }
-  
+ 
 }

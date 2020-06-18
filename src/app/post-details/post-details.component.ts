@@ -44,7 +44,12 @@ export class PostDetailsComponent implements OnInit {
           this.comments = res.comments;  
       }
     );
-
   }
+
+
+
+
+
+
 }
 

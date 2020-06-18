@@ -1,40 +1,38 @@
-<section>
-    <div class="container">
-  
-        <div class="icons__post_info">
-
-            <div class="icons">
-                <h2>sadsad</h2>
-            </div>
-
-
-
-
-            <div>
-                <img [src]="post?.image" alt="">
-            </div>
+<section class="post__details_section">
+    <div class="post__main_image">
         
-            <div class="post__tags">
-                <span *ngFor="let tag of post?.tags">
-                    <a routerLink="/posts-by-tag/{{tag.name}}">#{{tag.name}}</a>
-                </span>
-            </div>
-            <div class="post__title">
-                <h1>{{post?.name}}</h1>
-            </div>
+       <img  [src]="post?.image != null ? post.image :'../../assets/images/img_avatar.png'" alt="">
+       <div class="main__image_text">
+         <h1>{{post?.name}}</h1>
+       </div>
+   </div>
 
-            <div class="post__text">
-                <div [innerHTML]="post?.text | safeHtml"></div>
+    <div class="container">
+        <div class="tools">
+            <div class="user__data">
+                <div class="avatar__container">
+                    <img [src]="post.user?.avatar != null ? post.user.avatar :'../../assets/images/img_avatar.png'" alt="">
+                </div>
+                <div class="username__date">
+                    <h4>{{post.user.firstName | titlecase}} {{post.user.lastName | titlecase}}</h4>
+                    <h6>{{post.createdDate}}</h6>
+                </div>
             </div>
-            
-
-
+            <div class="likes__comments">
+                <app-likes-comments [post]="post"></app-likes-comments>
+            </div>
         </div>
-
-    </div>
-    
+        <div class="post__tags">
+            <div class="post__tag" *ngFor="let tag of post.tags">
+                <h4>#{{tag.name}}</h4>
+            </div>
+        </div>
+        <div class="post__text">
+            <span  [innerHTML]="post.text |safeHtml" class="span__text"></span>
+        </div>
+   </div>   
 </section>
-<section class="comments__section">
+<section id="comments" class="comments__section">
     <h1>Comments</h1> 
     <div *ngFor="let comment of comments">
         <h2>{{comment?.user.username}}</h2>

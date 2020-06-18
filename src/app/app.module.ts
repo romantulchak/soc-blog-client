@@ -62,6 +62,7 @@ import { SliderItemDirective } from './directives/sliderItemDirective.directive'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { GalleryPhotoComponent } from './gallery-photo/gallery-photo.component';
+import { LikesCommentsComponent } from './likes-comments/likes-comments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +93,7 @@ import { GalleryPhotoComponent } from './gallery-photo/gallery-photo.component';
     SliderComponent,
     SliderItemDirective,
     GalleryPhotoComponent,
+    LikesCommentsComponent,
     
   ],
   imports: [
