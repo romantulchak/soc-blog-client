@@ -12,6 +12,7 @@ export class Post{
     smallDescription: string;
     likesCounter: number;
     meLiked: boolean;
+    commentsCounter: number;
     constructor(){
         this.user = new User();
         this.tags = [];

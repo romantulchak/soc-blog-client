@@ -11,11 +11,11 @@
         <div class="tools">
             <div class="user__data">
                 <div class="avatar__container">
-                    <img [src]="post.user?.avatar != null ? post.user.avatar :'../../assets/images/img_avatar.png'" alt="">
+                    <img [src]="post?.user.avatar != null ? post?.user.avatar :'../../assets/images/img_avatar.png'" alt="">
                 </div>
                 <div class="username__date">
-                    <h4>{{post.user.firstName | titlecase}} {{post.user.lastName | titlecase}}</h4>
-                    <h6>{{post.createdDate}}</h6>
+                    <h4>{{post?.user.firstName | titlecase}} {{post?.user.lastName | titlecase}}</h4>
+                    <h6>{{post?.createdDate}}</h6>
                 </div>
             </div>
             <div class="likes__comments">
@@ -23,19 +23,72 @@
             </div>
         </div>
         <div class="post__tags">
-            <div class="post__tag" *ngFor="let tag of post.tags">
-                <h4>#{{tag.name}}</h4>
+            <div class="post__tag" *ngFor="let tag of post?.tags">
+                <h4>#{{tag?.name}}</h4>
             </div>
         </div>
         <div class="post__text">
-            <span  [innerHTML]="post.text |safeHtml" class="span__text"></span>
+            <span  [innerHTML]="post?.text |safeHtml" class="span__text"></span>
         </div>
    </div>   
 </section>
-<section id="comments" class="comments__section">
-    <h1>Comments</h1> 
-    <div *ngFor="let comment of comments">
-        <h2>{{comment?.user.username}}</h2>
-        <h3>{{comment?.text}}</h3>
-    </div>
+<section id="comments">
+   
+    <div class="comments-container">
+        <h1>Comments</h1> 
+        <form (submit)="addComment(text.value)">
+            <textarea name="" id="" cols="30" rows="10" #text>            
+            </textarea>
+            <button type="submit">Add comment</button>
+        </form>
+		<ul id="comments-list" class="comments-list">
+			<li>
+                <ng-container *ngFor="let comment of comments">
+				<div class="comment-main-level">
+					<div class="comment-avatar"><img [src]="comment?.user.avatar != null ? comment?.user.avatar :'../../assets/images/img_avatar.png'" [alt]="comment.user.firstName +' ' + comment.user.lastName"></div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<div>
+                                <h6 class="comment-name by-author"><a routerLink="/profile/user/{{comment?.user.id}}">{{comment.user.firstName | titlecase}} {{comment.user.lastName | titlecase}}</a></h6>
+							    <span>{{comment.createdDate | date:'medium'}}</span>
+                            </div>
+                            <div>
+                                <span class="material-icons">
+                                    reply
+                                    </span>
+                                    <span class="material-icons">
+                                        favorite
+                                    </span>
+                            </div>
+						</div>
+						<div class="comment-content">
+                            {{comment.text}}
+                        </div>
+					</div>
+                </div>
+                
+                <ng-container *ngFor="let replay of comment.replays">
+
+                <ul class="comments-list reply-list">
+					<li>
+						<div class="comment-avatar"><img [src]="replay.user.avatar != null ? replay.user.avatar : '../../assets/images/img_avatar.png'" [alt]="replay.user.firstName + ' ' + replay.user.lastName"></div>
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name"><a routerLink="/profile/user/{{comment.user.id}}">{{comment.user.firstName | titlecase}} {{comment.user.lastName | titlecase}}</a></h6>
+								<span>{{replay.createdDate | date:'medium'}}</span>
+							</div>
+							<div class="comment-content">
+                                {{replay.text}}
+                            </div>
+						</div>
+					</li>
+                </ul>
+                </ng-container>
+            </ng-container>
+			</li>
+		</ul>
+	</div>
+
+
+
 </section>

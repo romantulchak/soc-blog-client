@@ -73,8 +73,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .e-rte-image{
     border-radius: 8px !important;
+    margin: 1em auto !important;
 }
 .span__text p {
     font-family: Graphik !important;
     font-size: 18px;
+
 }

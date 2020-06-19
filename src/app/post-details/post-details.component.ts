@@ -33,6 +33,7 @@ export class PostDetailsComponent implements OnInit {
     this.postService.getPostById(this.postId, this.user.id).subscribe(
       res=>{
         if(res != null)
+        
           this.post = res;
       }
     );
@@ -41,12 +42,25 @@ export class PostDetailsComponent implements OnInit {
     this.commentService.getCommentsForPost(this.postId, this.page).subscribe(
       res=>{
         if(res != null)
+        
           this.comments = res.comments;  
       }
     );
   }
 
+  public addComment(text:string){
+    let comment = new Comment();
+    comment.text = text;
 
+    this.commentService.addComments(comment, this.user.id, this.post.id).subscribe(
+      res=>{
+        console.log(res);
+        
+      }
+    );
+
+
+  }
 
 
 

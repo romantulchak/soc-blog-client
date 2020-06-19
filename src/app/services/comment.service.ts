@@ -20,4 +20,7 @@ export class CommentService{
         params = params.append('page', page.toString())
         return this.http.get<CommentPageable>(API_URL + 'comments/commentsByPost/' + postId, {params: params});
     }
+    addComments(comment:Comment, userId: number, postId: number): Observable<Comment>{
+        return this.http.post<Comment>(API_URL + 'comments/createComment/' + userId + '/' + postId, comment);
+    }
 }
