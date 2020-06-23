@@ -6,6 +6,7 @@ import { CommentService } from '../services/comment.service';
 import { Comment } from '../model/commnet.model';
 import { User } from '../model/user.model';
 import { TokenStorageService } from '../services/token-storage.service';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-post-details',
@@ -14,12 +15,15 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class PostDetailsComponent implements OnInit {
 
-  private postId: number;
+  private postId: number; 
   public post: Post;
   public page: number = 0;
   private user: User;
+  public comment: Comment = new Comment();
+ 
+  public commentText: string = null; 
   public comments: Comment[];
-  constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService, private tokenStorageService: TokenStorageService) {
+  constructor(private activetedRoute: ActivatedRoute, private postService: PostService, private commentService: CommentService, private tokenStorageService: TokenStorageService, private rxService: RxStompService) {
     this.postId = Number.parseInt(this.activetedRoute.snapshot.paramMap.get('id'));
    }
 
@@ -27,6 +31,8 @@ export class PostDetailsComponent implements OnInit {
     this.user = this.tokenStorageService.getUser();
     this.getPostById();
     this.getCommentsForPost();
+    this.updateComments();
+    
   }
 
   private getPostById(){
@@ -48,22 +54,35 @@ export class PostDetailsComponent implements OnInit {
     );
   }
 
-  public addComment(text:string){
-    let comment = new Comment();
-    comment.text = text;
-
-    this.commentService.addComments(comment, this.user.id, this.post.id).subscribe(
-      res=>{
-        console.log(res);
-        
+  public addComment(){
+    
+    this.comment.text = this.commentText.trim();
+    this.commentService.addComments(this.comment, this.user.id, this.post.id).subscribe(
+     res=>{
+       this.commentText = '';
+       this.rxService.publish({destination:'/app/updateComments', body:res.id.toString()});
       }
     );
+    
 
 
   }
 
-
-
+  private updateComments(){
+    this.rxService.watch('/topic/updateComments').subscribe(
+      res=>{
+       
+        
+        if(res != null){
+         if(this.post.id === JSON.parse(res.body).post.id){
+           this.comments.unshift(JSON.parse(res.body));
+         }
+        }
+        
+      }
+    );
+  }
+ 
 
 }
 

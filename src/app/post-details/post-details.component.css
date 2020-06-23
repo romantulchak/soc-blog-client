@@ -287,13 +287,28 @@
 	-webkit-border-radius: 0 0 4px 4px;
 	-moz-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
+	word-break: break-word;
+
 }
 
-
-
-/** =====================
- * Responsive
- ========================*/
+textarea{
+	resize: none;
+    width: 100%;
+    padding: 1em;
+    height: 15px;
+    border-top: none;
+    overflow: hidden;
+	border-left: none;
+	font-size: 16px;
+	font-family: Graphik;
+    border-right: none;
+	border-bottom: 2px dashed #7ab3e0;
+	transition: 1s;
+}
+textarea:focus{
+	outline: none;
+	border-bottom: 2px solid palevioletred;
+}
 @media only screen and (max-width: 766px) {
 	.comments-container {
 		width: 480px;

@@ -1,7 +1,7 @@
 <section class="post__details_section">
     <div class="post__main_image">
         
-       <img  [src]="post?.image != null ? post.image :'../../assets/images/img_avatar.png'" alt="">
+       <img  [src]="post?.image != null ? post.image :''" alt="">
        <div class="main__image_text">
          <h1>{{post?.name}}</h1>
        </div>
@@ -36,10 +36,14 @@
    
     <div class="comments-container">
         <h1>Comments</h1> 
-        <form (submit)="addComment(text.value)">
-            <textarea name="" id="" cols="30" rows="10" #text>            
-            </textarea>
-            <button type="submit">Add comment</button>
+        <form (submit)="addComment()">
+            <div>
+                <textarea [(ngModel)]="commentText" name="text" id="" placeholder="Write your comment ..."></textarea>
+               
+            </div>
+            <div>
+                <button type="submit" [disabled]="commentText==null || commentText.trim().length === 0">Add comment</button>
+           </div>
         </form>
 		<ul id="comments-list" class="comments-list">
 			<li>
