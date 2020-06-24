@@ -1,3 +1,15 @@
 <section style="padding: 4em;">
-    <app-post [posts]="posts" [exploer]="true"></app-post>
+
+
+
+    <div
+class="search-results"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="10"
+(scrolled)="onScroll()"
+>
+<app-post [posts]="posts" [exploer]="true"></app-post>
+</div>
+
 </section>

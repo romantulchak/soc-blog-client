@@ -24,7 +24,7 @@
         </div>
         <div class="post__tags">
             <div class="post__tag" *ngFor="let tag of post?.tags">
-                <h4>#{{tag?.name}}</h4>
+                <a routerLink="/profile/posts-by-tag/{{tag.name}}"><h4>#{{tag?.name}}</h4></a>
             </div>
         </div>
         <div class="post__text">
@@ -45,23 +45,27 @@
                 <button type="submit" [disabled]="commentText==null || commentText.trim().length === 0">Add comment</button>
            </div>
         </form>
-		<ul id="comments-list" class="comments-list">
+		<ul *ngIf="comments?.length > 0;else commentNull" id="comments-list" class="comments-list">
 			<li>
                 <ng-container *ngFor="let comment of comments">
 				<div class="comment-main-level">
 					<div class="comment-avatar"><img [src]="comment?.user.avatar != null ? comment?.user.avatar :'../../assets/images/img_avatar.png'" [alt]="comment.user.firstName +' ' + comment.user.lastName"></div>
 					<div class="comment-box">
 						<div class="comment-head">
+                    
 							<div>
                                 <h6 class="comment-name by-author"><a routerLink="/profile/user/{{comment?.user.id}}">{{comment.user.firstName | titlecase}} {{comment.user.lastName | titlecase}}</a></h6>
 							    <span>{{comment.createdDate | date:'medium'}}</span>
                             </div>
-                            <div>
+                            <div class="icons__size">
                                 <span class="material-icons">
                                     reply
                                     </span>
                                     <span class="material-icons">
                                         favorite
+                                    </span>
+                                    <span (click)="removeComment(comment.id)" *ngIf="comment.user.id == user.id" class="material-icons">
+                                        delete
                                     </span>
                             </div>
 						</div>
@@ -90,9 +94,14 @@
                 </ng-container>
             </ng-container>
 			</li>
-		</ul>
+        </ul>
+        <button (click)="showMore()" *ngIf="totalPages > 1">Show more</button>
 	</div>
 
 
 
 </section>
+
+<ng-template #commentNull>
+    <h2>Let's create your first comment</h2>
+</ng-template>

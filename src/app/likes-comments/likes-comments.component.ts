@@ -47,10 +47,10 @@ export class LikesCommentsComponent implements OnInit {
       res=>{
         if(res != null){
          
-              this.post.likesCounter = res.likesCounter;
-         this.postService.currentUserId.subscribe(
+          this.postService.currentUserId.subscribe(
            id=>{
-            if(res != null && this.currentUser.id === id){
+            if(res != null && res.id == this.post.id && this.currentUser.id === id){
+              this.post.likesCounter = res.likesCounter;    
               this.post.meLiked = res.meLiked;
             }
           }

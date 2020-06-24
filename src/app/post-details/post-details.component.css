@@ -234,10 +234,14 @@
     background: #FCFCFC;
     padding: 10px 12px;
     border-bottom: 1px solid #E5E5E5;
-    overflow: hidden;
-    display: flex;
-    border-radius: 4px 4px 0 0;
+	display: flex;
+	position: relative;
+	border-radius: 4px 4px 0 0;
     justify-content: space-between;
+}
+.remove__comment > button{
+
+
 }
 
 .comment-box .comment-head span {
@@ -278,6 +282,9 @@
 .comment-main-level{
     margin-top: 1em;
     margin-bottom: 1em;
+}
+.icons__size span{
+	font-size: 18px !important;
 }
 .comment-box .comment-content {
 	background: #FFF;

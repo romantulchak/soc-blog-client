@@ -23,4 +23,7 @@ export class CommentService{
     addComments(comment:Comment, userId: number, postId: number): Observable<Comment>{
         return this.http.post<Comment>(API_URL + 'comments/createComment/' + userId + '/' + postId, comment);
     }
+    deleteComment(commentId: number){
+        return this.http.delete(API_URL + 'comments/deleteComment/' + commentId, {responseType:'text'});
+    }
 }

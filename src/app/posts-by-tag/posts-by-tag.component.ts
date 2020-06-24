@@ -15,6 +15,7 @@ export class PostsByTagComponent implements OnInit {
   private tagName: string;
   public posts: Post[];
   public currentUser: User;
+  public page: number = 0;
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private tokenStorage: TokenStorageService) {
     this.tagName = this.activatedRoute.snapshot.paramMap.get('name');
 
@@ -27,9 +28,26 @@ export class PostsByTagComponent implements OnInit {
   }
 
   private getPostsByTag(){
-    this.postService.getPostsByTag(this.tagName, 0, this.currentUser.id).subscribe(
+    this.postService.getPostsByTag(this.tagName, this.page, this.currentUser.id).subscribe(
       res=>{
+        console.log(res.posts);
+        
         this.posts = res.posts;
+      }
+    );
+  }
+
+  public onScroll() {
+    this.postService.getPostsByTag(this.tagName, this.page + 1, this.currentUser.id).subscribe(
+      posts=>{
+        if(posts != null){
+          this.page = posts.currentPage;
+          posts.posts.forEach(
+            el=>{
+              this.posts.push(el);
+            }
+          );
+        }
       }
     );
   }
