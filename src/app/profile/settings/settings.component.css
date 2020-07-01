@@ -58,3 +58,13 @@
     font-weight: 900;
     margin-top: .5em;
 }
+.remove__account > button{
+  background: #ef5350;
+  font-weight: bold;
+  padding-left: 2px;
+  border: none;
+  padding: 1em;
+  color: #fff;
+  border-radius: 5px;
+  margin-left: 1em;
+}

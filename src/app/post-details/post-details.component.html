@@ -47,7 +47,7 @@
         </form>
 		<ul *ngIf="comments?.length > 0;else commentNull" id="comments-list" class="comments-list">
 			<li>
-                <ng-container *ngFor="let comment of comments">
+                <ng-container *ngFor="let comment of comments;trackBy:trackByFn">
 				<div class="comment-main-level">
 					<div class="comment-avatar"><img [src]="comment?.user.avatar != null ? comment?.user.avatar :'../../assets/images/img_avatar.png'" [alt]="comment.user.firstName +' ' + comment.user.lastName"></div>
 					<div class="comment-box">
@@ -95,7 +95,7 @@
             </ng-container>
 			</li>
         </ul>
-        <button (click)="showMore()" *ngIf="totalPages > 1">Show more</button>
+        <button (click)="showMore()" *ngIf="totalPages > 1 && page != totalPages">Show more</button>
 	</div>
 
 

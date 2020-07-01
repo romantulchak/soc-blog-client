@@ -45,7 +45,6 @@ export class NavbarComponent implements OnInit {
     this.profilerService.getNotificationsForUser(this.user.id).subscribe(
       res=>{
         if(res != null){
-          console.log(res);
           
           this.notifications = res.notificationDTOS;
           this.notificationBox = res;
@@ -71,6 +70,7 @@ export class NavbarComponent implements OnInit {
   public getNotificationsForUser(){
     this.profileService.getNotificationsForUser(this.user.id).subscribe(
       res=>{
+        console.log(res.notificationDTOS);
         
         this.notificationCounter = res.notificationCounter;
 
@@ -79,11 +79,8 @@ export class NavbarComponent implements OnInit {
   } 
   readNotification(notification: Notification){
     if(!notification.isRead && notification != null){
-      console.log(notification);
-      
       this.profilerService.readNotification(this.notificationBox.id, notification.id).subscribe(
         res=>{
-          //this.notifications = res.notificationDTOS;
           this.profilerService.notificationCounter.next(res.notificationCounter);
         }
       );

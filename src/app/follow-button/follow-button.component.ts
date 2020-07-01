@@ -10,7 +10,7 @@ import { FollowButton } from '../model/followButton.model';
   templateUrl: './follow-button.component.html',
   styleUrls: ['./follow-button.component.css'],
 })
-export class FollowButtonComponent implements OnInit, OnChanges {
+export class FollowButtonComponent implements OnInit {
 
   @Input() thisUser: User;
   @Input() currentUser: User;
@@ -27,9 +27,7 @@ export class FollowButtonComponent implements OnInit, OnChanges {
       }
     );
   }
-  ngOnChanges(changes: SimpleChanges){
 
-  }
   public startFollowing(){
   
     this.profileService.startFollowing(this.currentUser.id, this.thisUser.id).subscribe(

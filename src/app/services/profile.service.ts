@@ -76,4 +76,7 @@ export class ProfileService{
         params = params.append('userId', userId.toString()).append('imageId', imageId.toString());
         return this.http.delete(API_URL + 'profile/deleteImage', {responseType: 'text', params:params});
     }
+    deleteAccount(userId:number){
+        return this.http.delete(API_URL + 'profile/removeAccount/' + userId);
+    }
 }

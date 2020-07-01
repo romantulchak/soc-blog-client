@@ -51,7 +51,6 @@ export class PostDetailsComponent implements OnInit {
       res=>{
         
         if(res != null){
-          console.log(res.comments);
           
             this.totalPages = res.totalPages;
             this.page = res.currentPage;
@@ -66,7 +65,6 @@ export class PostDetailsComponent implements OnInit {
     this.comment.text = this.commentText.trim();
     this.commentService.addComments(this.comment, this.user.id, this.post.id).subscribe(
      res=>{
-
        this.commentText = '';
        this.rxService.publish({destination:'/app/updateComments', body:res.id.toString()});
       }
@@ -93,8 +91,6 @@ export class PostDetailsComponent implements OnInit {
       res=>{
         if(res != null){
           let data = JSON.parse(res.body).body;
-        
-          
           if(data.postId === this.post.id){  
             this.comments = this.comments.filter(x=>x.id != data.commentId);
           }
@@ -108,6 +104,7 @@ export class PostDetailsComponent implements OnInit {
     this.commentService.getCommentsForPost(this.post.id, this.page+1).subscribe(
       res=>{
         if(res != null){
+          this.page = res.currentPage;
           res.comments.forEach(x=>{
               this.comments.push(x);
           });
@@ -118,12 +115,13 @@ export class PostDetailsComponent implements OnInit {
   public removeComment(commentId: number){
     this.commentService.deleteComment(commentId).subscribe(
       res=>{
-        console.log(res);
-        
           this.rxService.publish({destination:`/app/deleteComments/${commentId}/${this.post.id}`, body:null});
        
       }
     );
+  }
+  trackByFn(index, item) {
+    return index; 
   }
 }
 

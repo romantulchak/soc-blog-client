@@ -53,6 +53,9 @@
                                     <ng-container *ngIf="notification.eNotification === 'START_FOLLOWING'">
                                         <app-follow-button [thisUser]="user" [currentUser]="notification.user"></app-follow-button>
                                     </ng-container>
+                                    <ng-container *ngIf="notification.eNotification === 'SET_LIKE'">
+                                        <a class="post__image_link" routerLink="/post/{{notification.post.id}}"><img [src]="notification.post.imagePath" alt=""></a>
+                                    </ng-container>
                                 </div>
                             </div>
                         </ng-container>

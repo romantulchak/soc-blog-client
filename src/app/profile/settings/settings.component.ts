@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Tag } from 'src/app/model/tag.model';
 import { TagService } from 'src/app/services/tag.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SettingsComponent implements OnInit {
   public cityName: string = 'Herat';
   public userId: number;
   public tags: Tag[];
-  constructor(private activatedRouter: ActivatedRoute, private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, private tagService: TagService ) { 
+  constructor(private activatedRouter: ActivatedRoute,private tokenStorage: TokenStorageService,  private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, private tagService: TagService ) { 
     this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
   }
   
@@ -141,5 +142,14 @@ export class SettingsComponent implements OnInit {
         }
       );
     }
+  }
+
+  deleteUserAccount(){
+    this.profileService.deleteAccount(this.userId).subscribe(
+      res=>{
+        this.tokenStorage.signOut();
+        window.location.reload();
+      }
+    );
   }
 }
