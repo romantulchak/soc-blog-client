@@ -15,7 +15,7 @@ const API_URL = environment.apiUrl;
 })
 export class ProfileService{
     public user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-   
+
     public redirectAfterLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public notificationCounter: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     public isOnline: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -63,13 +63,11 @@ export class ProfileService{
     explorePeople(userId:number):Observable<User[]>{
         return this.http.get<User[]>(API_URL + 'profile/explore/' + userId);
     }
-    addInterests(tag: Tag, userId: number){
-        return this.http.put(API_URL + 'profile/addInterests/' + userId, tag, {responseType:'text'});
+    addInterests(tag: Tag){
+        return this.http.put(API_URL + 'profile/addInterests', tag, {responseType:'text'});
     }
-    changePassword(oldPassword:string, newPassword:string, userId: number){
-        let params = new HttpParams();
-        params = params.append('old', oldPassword).append('new', newPassword);
-        return this.http.put(API_URL + 'profile/changePassword/' + userId, null, {params: params, responseType:'text'});
+    changePassword(newUserPassword:any){
+        return this.http.put(API_URL + 'profile/changePassword', newUserPassword, {responseType:'text'});
     }
     deleteUserPhoto(userId: number, imageId: number){
         let params = new HttpParams();

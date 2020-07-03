@@ -6,6 +6,7 @@ import { ProfileService } from '../services/profile.service';
 import { DialogService } from '../services/dialog.service';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { PostService } from '../services/post.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,9 +14,9 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  
 
-  constructor(private tokenStorage: TokenStorageService,private postService: PostService, private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
+
+  constructor(private searchService: SearchService, private tokenStorage: TokenStorageService,private postService: PostService, private activeRouter: ActivatedRoute, private router:Router, private profileService: ProfileService, private dialogService: DialogService, private rxStompService: RxStompService) {
 
       this.activeRouter.params.subscribe(
         res=>{
@@ -33,42 +34,20 @@ export class ProfileComponent implements OnInit {
     if(this.currentUser != null){
       this.getUserData();
     }
-  //  this.checkLikes();
-
   }
-
-
-
-  private checkLikes(){
-    /*this.rxStompService.watch('/topic/like/').subscribe(
-      res=>{
-        if(res != null){
-          this.postService.updatePost.next(JSON.parse(res.body));
-        }
-      }
-    );
-    this.rxStompService.watch('/topic/myLike/').subscribe(
-      res=>{
-        if(res != null){
-          this.postService.currentUserId.next(Number.parseInt(res.body)); 
-        }
-      }
-    );*/
-  }
- 
 
 
 
   private getUserData(){
     this.loaded = false;
     if(this.userLoggedIn != null){
-      
+
       this.profileService.getUserData(this.userLoggedIn.id).subscribe(
         res=>{
           this.currentUser = res;
           this.tokenStorage.globalCurrentUser = res;
           //this.profileService.user.next(res);
-          
+
           if(res.isNew){
             this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
           }
@@ -77,7 +56,7 @@ export class ProfileComponent implements OnInit {
           }, 2000);
         }
       );
-  
+
     }
   }
 

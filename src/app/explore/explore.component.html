@@ -6,7 +6,7 @@
     <div *ngFor="let user of users" class="fl" appSliderItem>
         <app-user-card class="user__card_explore" [user]="user" [slider]="true"></app-user-card>
     </div>
-  
+
 
 </app-slider>
 <div
@@ -18,8 +18,11 @@ infiniteScroll
 >
 <app-post [posts]="posts" [exploer]="true"></app-post>
 </div>
-<div style="margin: 0 auto;" *ngIf="loading">
+<div *ngIf="loading">
     <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="showMessage">
+  <h3>If you want to see more posts you need to add you interests in Settings</h3>
 </div>
 
 
@@ -28,5 +31,3 @@ infiniteScroll
 
 
 
-
- 

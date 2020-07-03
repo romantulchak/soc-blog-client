@@ -7,7 +7,7 @@ import { Country } from '../model/country.model';
 
 const API_URL = environment.apiUrl;
 const httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json' }),
 }
 @Injectable({
     providedIn:'root'

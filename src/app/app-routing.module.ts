@@ -31,10 +31,10 @@ const routes: Routes = [
       {path: 'gallery', component: GalleryComponent},
     ] },
     {path: 'create-post', component: CreatePostComponent, data:{animation: 'isLeft'}},
-    {path: 'settings/:id', component: SettingsComponent, data:{animation: 'isRight'}},
+    {path: 'settings', component: SettingsComponent, data:{animation: 'isRight'}},
     {path: 'user/:id/subscriptions', component: SubscribtionsComponent, data:{animation: 'isRight'}},
     {path: 'user/:id/subscribers', component: SubscribersComponent, data:{animation: 'isRight'}},
-    
+
     {path: 'posts-by-tag/:name', component: PostsByTagComponent},
     {path: 'news', component: NewsComponent},
     {path: 'explore', component: ExploreComponent},

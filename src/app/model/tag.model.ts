@@ -7,4 +7,5 @@ export class Tag{
     posts: Post[];
     user: User;
     myInterest: boolean;
+    postsCounter:number;
 }

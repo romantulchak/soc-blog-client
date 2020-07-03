@@ -44,13 +44,13 @@
     align-items: center;
 }
 
-.input-icons span { 
+.input-icons span {
     position: absolute;
     height: 100%;
     display: flex;
     align-items: center;
-} 
-.icon { 
+}
+.icon {
     position: absolute;
     height: 100%;
     display: flex;
@@ -58,12 +58,12 @@
     color: #8e8e8e;
     align-items: center;
     padding-left: 8px;
-} 
-  
-.input-icons { 
+}
+
+.input-icons {
     position: relative;
-    width: 100%; 
-} 
+    width: 100%;
+}
 .news__input_search{
     border: solid 1px #dbdbdb;
     border: solid 1px rgba(var(--b6a,219,219,219),1);
@@ -78,6 +78,37 @@
     font-size: 14px;
     background: #fafafa;
     background: rgba(var(--b3f,250,250,250),1);
+}
+
+.search__results{
+  position: absolute;
+  background: white;
+  border: 1px solid #cac4c47d;
+  width: 247px;
+  box-sizing: border-box;
+  top: 20px;
+  min-height: 70px;
+  overflow-x: hidden;
+  max-height: 300px;
+}
+.search_tag .avatar__min{
+  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9b9b9b;
+    font-weight: 400;
+    font-size: 28px;
+    margin-right: .5em;
+}
+.search__block_result{
+    position: relative;
+}
+.search__block_result .rectangle{
+    top: 13px;
+    left: 48%;
+    width: 15px;
+    height: 15px;
 }
 .active{
     border: 1px solid;
@@ -158,7 +189,7 @@
     display: flex;
     align-items: center;
 }
-.notification__card_details > img{
+.avatar__min{
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -196,6 +227,38 @@
     width: 32px;
     height: 32px;
 }
+.user__card{
+  display: flex;
+    padding: 1em;
+    border-bottom: solid 1px #dbdbdb;
+    align-items: center;
+    cursor: pointer;
+}
+.user__card:hover{
+  background-color: silver;
+}
+.user__card .avatar__min{
+  width: 30px;
+  height: 30px;
+  margin-right: .7em;
+}
+.user__data_search h4{
+  font-family: sans-serif;
+
+}
+.search__username{
+  color: rgb(38, 38, 38);
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: .3em;
+
+}
+.search__fullName{
+  color: rgb(142, 142, 142);
+  font-size: 13px;
+    font-weight: 400;
+}
 .notifications__null{
     display: flex;
     justify-content: center;
@@ -223,7 +286,7 @@
 	0% {
 		transform: rotate(0deg)
 	}
-	
+
 	to {
 		transform: rotate(360deg)
 	}

@@ -27,21 +27,20 @@ export class SettingsComponent implements OnInit {
   public cityName: string = 'Herat';
   public userId: number;
   public tags: Tag[];
-  constructor(private activatedRouter: ActivatedRoute,private tokenStorage: TokenStorageService,  private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, private tagService: TagService ) { 
-    this.userId = Number.parseInt(this.activatedRouter.snapshot.paramMap.get('id'));
+  constructor(private activatedRouter: ActivatedRoute,private tokenStorage: TokenStorageService,  private notificationSerivce: NotificationService, private profileService:ProfileService, public dialog: DialogService, private tagService: TagService ) {
   }
-  
+
   ngOnInit(): void {
     this.getUserData();
   }
   getUserData(){
-    this.profileService.getUserData(this.userId).subscribe(
+    this.profileService.getUserData(this.tokenStorage.getUser().id).subscribe(
       res=>{
         if(res != null){
           this.currentUser = res;
 
-          this.getInterests(); 
-          
+          this.getInterests();
+
           this.getCountries();
         }
       }
@@ -52,7 +51,7 @@ export class SettingsComponent implements OnInit {
       res=>{
         this.countries = res;
         this.getCityies();
-        
+
       }
     );
   }
@@ -92,7 +91,7 @@ export class SettingsComponent implements OnInit {
         break;
        case "2":
         this.currentUser.gender = 'Male';
-         break; 
+         break;
     }
   }
 
@@ -102,7 +101,7 @@ export class SettingsComponent implements OnInit {
   private getInterests(){
     this.tagService.getTags().subscribe(
       res=>{
-        
+
         if(res != null){
           this.tags = res;
          if(this.currentUser != null){
@@ -112,20 +111,20 @@ export class SettingsComponent implements OnInit {
                  el.myInterest = true;
                  break;
                }
-               
+
              }
            })
-           
+
          }
-          
-         
+
+
         }
       }
     );
   }
 
   public addToInterests(event:MatCheckboxChange, tag: Tag){
-    this.profileService.addInterests(tag, this.userId).subscribe(
+    this.profileService.addInterests(tag).subscribe(
       res=>{
         this.notificationSerivce.success(res);
       }
@@ -133,12 +132,16 @@ export class SettingsComponent implements OnInit {
   }
 
   changePassword(oldPassword: string, newPassword: string, newPasswordRepeat:string){
-    
+
     if(newPassword === newPasswordRepeat){
-      this.profileService.changePassword(oldPassword, newPassword, this.userId).subscribe(
+      let newUserPassword = {
+        oldPassword: oldPassword,
+        newPassword: newPassword
+      }
+      this.profileService.changePassword(newUserPassword).subscribe(
         res=>{
           this.notificationSerivce.success(res);
-          
+
         }
       );
     }

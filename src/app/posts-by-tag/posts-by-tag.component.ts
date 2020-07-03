@@ -18,20 +18,24 @@ export class PostsByTagComponent implements OnInit {
   public page: number = 0;
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private tokenStorage: TokenStorageService) {
     this.tagName = this.activatedRoute.snapshot.paramMap.get('name');
+    this.activatedRoute.params.subscribe(
+      res=>{
+        this.currentUser = this.tokenStorage.getUser();
 
+        this.getPostsByTag(res.name);
+      }
+    );
    }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-    this.getPostsByTag();
-  
+    this.getPostsByTag(this.tagName);
+
   }
 
-  private getPostsByTag(){
-    this.postService.getPostsByTag(this.tagName, this.page, this.currentUser.id).subscribe(
+  private getPostsByTag(tagName:string){
+    this.postService.getPostsByTag(tagName, this.page, this.currentUser.id).subscribe(
       res=>{
-        console.log(res.posts);
-        
         this.posts = res.posts;
       }
     );
