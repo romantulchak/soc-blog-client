@@ -1,10 +1,15 @@
 <ng-container *ngIf="!exploer">
 <div class="post__card" *ngFor="let post of posts">
-    <div class="post__remove_btn" (click)="deletePost(post)" *ngIf="post.user.id == currentUser.id">
+    <div class="post__btn post__remove_btn" (click)="deletePost(post)" *ngIf="post.user.id == currentUser.id">
       <span>X</span>
     </div>
+    <div class="post__btn post__edit_btn" (click)="editPost(post)">
+      <span class="material-icons">
+        edit
+        </span>
+    </div>
     <div class="post__image" [ngStyle]="{'background-image':post.image != null ? 'url( '+ post.image +'  )' : 'url(' + '../../../assets/images/img_avatar.png' +' )'  }">
-      
+
       <div *ngIf="post.user.id != currentUser.id" class="post__author">
         <img [src]="post.user?.avatar != null ? post.user.avatar :'../../../assets/images/img_avatar.png'" alt="">
         <h3>{{post.user.firstName | titlecase}} {{post.user.lastName | titlecase}}</h3>
@@ -17,7 +22,7 @@
     <div>
       <ng-container *ngFor="let tag of post.tags">
           <span> <a class="tag__link" routerLink="/profile/posts-by-tag/{{tag.name}}">#{{tag.name}}</a></span>
-      </ng-container>  
+      </ng-container>
     </div>
     <div class="post__text"> {{post.smallDescription}}</div>
 
@@ -34,7 +39,7 @@
 
 <ng-container *ngIf="exploer">
   <div class="content-wrapper">
-  
+
     <div class="news-card" *ngFor="let post of posts">
       <span class="news-card__card-link"></span>
       <img  [src]="post.image" alt="" class="news-card__image">
@@ -43,16 +48,16 @@
         <div class="news-card__post-date">{{post.createdDate | date}}</div>
         <div class="news-card__details-wrapper">
           <p class="news-card__excerpt">{{post.smallDescription}}</p>
-          
+
          <div class="likes__read_btn">
-         
+
             <app-likes-comments [post]="post"></app-likes-comments>
             <a routerLink="/post/{{post.id}}" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
          </div>
-          
+
         </div>
       </div>
     </div>
-  
+
   </div>
 </ng-container>

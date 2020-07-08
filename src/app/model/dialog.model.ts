@@ -1,10 +1,12 @@
+import { Post } from './post.model';
+
 export class DialogModel{
-    postId: number;
+    post: Post;
     action: string;
     postName: string;
-    constructor(postId: number, action: string, postName: string){
-        this.postId = postId;
+    constructor(post: Post, action: string, postName: string){
+        this.post = post;
         this.action = action;
         this.postName = postName;
     }
-} 
+}

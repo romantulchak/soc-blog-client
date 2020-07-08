@@ -74,11 +74,11 @@ export class SettingsComponent implements OnInit {
   onDateChange(date: Date){
     this.currentUser.birthDay = date;
   }
-  updateProfile(username: string){
+  updateProfile(){
     this.currentUser.country = this.countryName;
     this.currentUser.city = this.cityName;
     this.currentUser.isNew = false;
-    this.profileService.updateUserData(this.currentUser, username).subscribe(
+    this.profileService.updateUserData(this.currentUser, this.currentUser.username).subscribe(
       res=>{
         this.notificationSerivce.success(res);
       }
@@ -113,7 +113,7 @@ export class SettingsComponent implements OnInit {
                }
 
              }
-           })
+           });
 
          }
 

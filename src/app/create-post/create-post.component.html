@@ -1,8 +1,6 @@
 <section class="create__post_section">
-
-
+<ng-container *ngIf="editPost == null">
   <form method="POST" (ngSubmit)="createPost()" enctype="multipart/form-data" novalidate>
-  
     <div class="btn__upload_file">
         <div class="upload__btn">
           <h4>Preview image</h4>
@@ -10,7 +8,6 @@
         </div>
      </div>
       <img [src]="imagePathPreview" class="image__preview"  accept='image/*' alt="" >
-    
     <div class="form__shadows">
       <div class="post__title">
         <mat-form-field appearance="outline">
@@ -18,20 +15,16 @@
           <input matInput placeholder="Post title" name="name" [(ngModel)]="post.name">
         </mat-form-field>
     </div>
-
     <div class="post__description">
         <h2>Text</h2>
         <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [(ngModel)]="post.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools' (change)="setSmallDescription()" required></ejs-richtexteditor>
      </div>
-
-
     <div>
       <mat-form-field class="example-full-width">
         <mat-label>Small description</mat-label>
         <textarea matInput placeholder="Something that clearly describes your post" maxlength="250" [disabled]="!allowChangeSmallDescription" name="smallDescription" [(ngModel)]="post.smallDescription"></textarea>
       </mat-form-field>
     </div>
-  
     <mat-form-field class="example-chip-list">
         <mat-chip-list #chipList aria-label="Fruit selection">
           <mat-chip
@@ -58,12 +51,46 @@
         </mat-autocomplete>
       </mat-form-field>
     </div>
-
     <button type="submit">Create</button>
 </form>
+</ng-container>
+<ng-container *ngIf="editPost != null">
+    <form method="POST" (ngSubmit)="edit()" enctype="multipart/form-data" novalidate>
+      <div class="btn__upload_file">
+          <div class="upload__btn">
+            <h4>Preview image</h4>
+            <input class="choose__photo" type="button" name="image" (click)="fileUpload($event)" value="Choose a photo" required>
+          </div>
+       </div>
+        <img [src]="imagePathPreview" class="image__preview"  accept='image/*' alt="" >
+      <div class="form__shadows">
+        <div class="post__title">
+          <mat-form-field appearance="outline">
+            <mat-label>Post title</mat-label>
+            <input matInput placeholder="Post title" name="name" [value]="editPost.name" [(ngModel)]="editPost.name">
+          </mat-form-field>
+      </div>
+      <div class="post__description">
+          <h2>Text</h2>
+          <ejs-richtexteditor id='iframeRTE' name="text" placeholder="Put your text" [value]="editPost.text" [(ngModel)]="editPost.text" [insertImageSettings]="imageSettings" [toolbarSettings]='tools' (change)="setSmallDescription()" required></ejs-richtexteditor>
+       </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Small description</mat-label>
+          <textarea matInput placeholder="Something that clearly describes your post" maxlength="250" [disabled]="!allowChangeSmallDescription || editPost == null" name="smallDescription" [value]="editPost.smallDescription" [(ngModel)]="editPost.smallDescription"></textarea>
+        </mat-form-field>
+      </div>
+   <!--     <ng-container *ngFor="let tag of tags">
+           <mat-checkbox class="example-margin" [checked]="tag.myInterest">{{tag.name}}</mat-checkbox>
+        </ng-container>-->
+      </div>
+      <button type="submit">Edit</button>
+  </form>
+</ng-container>
 
 
-<div *ngIf="user.accountLvl >= 10;else mustBe10">
+
+<div *ngIf="user.accountLvl >= 10 && editPost == null;">
   <h2>Didn't you find the tag you need? You can create your own</h2>
   <form (ngSubmit)="createTag()">
     <div>

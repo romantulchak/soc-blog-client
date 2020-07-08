@@ -7,6 +7,10 @@
 }
 .image__preview{
     width: 100%;
+
+}
+::ng-deep .cdk-overlay-pane {
+    overflow-y: scroll;
 }
 .btn__upload_file{
     position: relative;
@@ -31,7 +35,7 @@
 
 }
 mat-form-field{
-    width: 100% !important; 
+    width: 100% !important;
 }
 .choose__photo{
     background: white;

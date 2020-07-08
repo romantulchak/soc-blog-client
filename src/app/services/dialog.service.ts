@@ -26,10 +26,16 @@ export class DialogService{
         );
     }
 
-    
+
     deletePost(post: Post){
         this.dialog.open(PostDialogComponent, {
-            data:new DialogModel(post.id, 'delete', post.name)
-          })
+            data:new DialogModel(post, 'delete', post.name)
+          });
+    }
+
+    editPost(post: Post){
+      this.dialog.open(PostDialogComponent,{
+        data: new DialogModel(post, 'edit', post.name)
+      });
     }
 }

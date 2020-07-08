@@ -42,6 +42,8 @@ export class ProfileService{
     updateUserData(user: User, username: string){
         let params = new HttpParams();
         params = params.append('username', username);
+        console.log(user);
+
         return this.http.put(API_URL + 'profile/updateUserData', user, {responseType:'text', params: params});
     }
 

@@ -20,7 +20,7 @@ export class PostComponent implements OnInit {
   @Input() posts: Post[];
 
   @Input() exploer: boolean = false;
-  
+
   public currentUser: User;
   constructor(private tokenService: TokenStorageService,private postService: PostService,  private rxStompService: RxStompService, private dialogService: DialogService) { }
   ngOnInit(): void {
@@ -51,7 +51,10 @@ export class PostComponent implements OnInit {
 
   public deletePost(post: Post){
     this.dialogService.deletePost(post);
-   
   }
- 
+
+  public editPost(post: Post){
+      this.dialogService.editPost(post);
+  }
+
 }

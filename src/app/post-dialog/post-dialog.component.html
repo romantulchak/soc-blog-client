@@ -8,6 +8,6 @@
 </ng-container>
 
 <ng-container *ngIf="dialogData.action == 'edit'">
-    <h1>Edit</h1>
+    <app-create-post [editPost]="dialogData.post"></app-create-post>
 </ng-container>
 

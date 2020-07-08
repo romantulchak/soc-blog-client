@@ -20,13 +20,17 @@ export class PostDialogComponent implements OnInit {
   }
 
   public deletePost(){
-    this.postService.deletePost(this.dialogData.postId, this.currentUser.id).subscribe(
+    this.postService.deletePost(this.dialogData.post.id, this.currentUser.id).subscribe(
       res=>{
         this.rxStompService.publish({destination:'/app/updatePost/', body: this.currentUser.id.toString()});
-        
+
         this.dialog.closeAll();
       }
     );
+  }
+
+  public updatePost(){
+
   }
 
 }

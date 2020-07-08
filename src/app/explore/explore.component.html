@@ -1,23 +1,22 @@
-
-
-<app-slider>
-
-
+<ng-container *ngIf="users.length != 0">
+  <app-slider>
     <div *ngFor="let user of users" class="fl" appSliderItem>
         <app-user-card class="user__card_explore" [user]="user" [slider]="true"></app-user-card>
     </div>
-
-
 </app-slider>
-<div
-class="search-results"
-infiniteScroll
-[infiniteScrollDistance]="25"
-[infiniteScrollThrottle]="15"
-(scrolled)="onScroll()"
->
-<app-post [posts]="posts" [exploer]="true"></app-post>
-</div>
+</ng-container>
+
+<ng-container *ngIf="posts.length != 0">
+    <div
+  class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="25"
+  [infiniteScrollThrottle]="15"
+  (scrolled)="onScroll()"
+  >
+    <app-post [posts]="posts" [exploer]="true"></app-post>
+  </div>
+</ng-container>
 <div *ngIf="loading">
     <mat-spinner></mat-spinner>
 </div>

@@ -1,24 +1,21 @@
 <section>
-    <mat-tab-group animationDuration="0ms"> 
+    <mat-tab-group animationDuration="0ms">
         <mat-tab label="Edit Profile">
             <div class="user__profile_loader">
                 <div *ngIf="currentUser != null" class="settings">
-                    <form (ngSubmit)="updateProfile(username.value)" enctype="multipart/form-data">
-                
+                    <form (ngSubmit)="updateProfile()" enctype="multipart/form-data">
+                      <input disabled class="settings__input" name="username" [value]="currentUser?.username" #username>
+
                         <div>
                             <h3>First Name</h3>
                             <input class="settings__input" type="text" name="firstName" [value]="currentUser?.firstName" [(ngModel)]="currentUser.firstName">
                         </div>
-                    
+
                         <div>
                             <h3>Last Name</h3>
                             <input class="settings__input" type="text" name="lastName" [value]="currentUser?.lastName" [(ngModel)]="currentUser.lastName">
                         </div>
-                        <div>
-                            <h3>Username</h3>
-                            <input class="settings__input" type="text" name="username" [value]="currentUser?.username" #username>
-                        </div>
-                        <div>
+                       <div>
                             <h3>Email</h3>
                             <input class="settings__input" type="email" name="email" [value]="currentUser?.email" [(ngModel)]="currentUser.email">
                         </div>
@@ -28,7 +25,7 @@
                                 <option *ngFor="let country of countries" value="{{country.name}}">{{country.name}}</option>
                             </select>
                         </div>
-                        
+
                         <div>
                             <h3>Choose your city</h3>
                             <select class="settings__input" name="city" [(ngModel)]="cityName" >
@@ -52,11 +49,11 @@
                             <input class="settings__input" type="text" name="placeOfWork" [(ngModel)]="currentUser.placeOfWork">
                           </div>
                           <button class="settings__btn" type="submit">Update</button>
-            
+
                     </form>
                 </div>
                </div>
-                
+
         </mat-tab>
         <mat-tab label="Change Password">
             <div class="settings">
@@ -80,7 +77,7 @@
         <mat-tab label="Interests">
             <div class="settings">
                 <div *ngFor="let tag of tags">
-            
+
                     <mat-checkbox [checked]="tag.myInterest" (change)="addToInterests($event,tag)">{{tag.name}}</mat-checkbox>
                   </div>
             </div>
@@ -92,5 +89,5 @@
           </mat-tab>
     </mat-tab-group>
 
-    
+
 </section>

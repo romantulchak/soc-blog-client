@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
           //this.profileService.user.next(res);
 
           if(res.isNew){
-            this.router.navigateByUrl('/profile/settings/'+this.currentUser.id);
+            this.router.navigateByUrl('/profile/settings');
           }
           setTimeout(() => {
             this.loaded = true;

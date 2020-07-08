@@ -12,7 +12,7 @@ const API_URL = environment.apiUrl;
 })
 export class PostService{
     constructor(private http:HttpClient){}
-    
+
     public updatePost: BehaviorSubject<Post> = new BehaviorSubject<Post>(null);
     public currentUserId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     createPost(post: Post, image: File){
@@ -62,5 +62,13 @@ export class PostService{
         param = param.append('page', currentPage.toString());
         return this.http.get<PostPageable>(API_URL + 'posts/explorePosts/' + userId, {params: param});
     }
-    
+    editPost(post:Post, image:File){
+      const data = new FormData();
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'multipart/form-data');
+      data.append('image', image);
+      data.append('postDTO', JSON.stringify(post));
+     return this.http.put(API_URL + 'posts/editPost', data, {responseType:'text', headers: headers});
+    }
+
 }
